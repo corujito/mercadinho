@@ -1,4 +1,4 @@
-<h1>Lista de clientes</h1>
+<h1>Lista de Clientes</h1>
 
 <table class="table table-striped">
   <thead>
@@ -24,7 +24,7 @@
         <td><%= client.active %></td>
         <td><%= link_to 'Exibir', client %></td>
         <td><%= link_to 'Editar', edit_client_path(client) %></td>
-        <td><%= link_to 'Remover', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remover', client, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -6,9 +6,13 @@ Mercadinho::Application.routes.draw do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'
   end
+
+  get "dashboard/index"
+  resources :products
+  resources :vendors
   resources :clients
 
-  root 'clients#index'
+  root 'dashboard#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
