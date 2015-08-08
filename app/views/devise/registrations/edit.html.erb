@@ -14,5 +14,6 @@
 
   <%= f.input :current_password, label: 'Senha Atual', autocomplete: "off" %>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, "Atualizar Conta", class: 'btn btn-primary' %>
+  <%= link_to "Cancelar", root_url, {:class=>"btn btn-danger"} %>
 <% end %>

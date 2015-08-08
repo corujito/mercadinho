@@ -1,6 +1,6 @@
 <%= simple_form_for(@product) do |f| %>
     <%= f.input :full_name, label: 'Nome', autofocus: true %>
-    <%= f.input :unity, label: 'Unidade' %>
-    <%= f.button :submit, "Criar Novo Produto", class: 'btn btn-primary' %>
+    <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
     <%= link_to "Cancelar", products_url, {:class=>"btn btn-danger"} %>
 <% end %>
