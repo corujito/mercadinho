@@ -5,7 +5,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :email
       t.string :phone
       t.string :address
-      t.boolean :active
+      t.boolean :active, :default => true
 
       t.timestamps
     end

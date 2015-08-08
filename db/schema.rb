@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20150808115900) do
     t.string   "email"
     t.string   "phone"
     t.string   "address"
-    t.boolean  "active"
+    t.boolean  "active",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

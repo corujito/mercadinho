@@ -5,6 +5,7 @@ gem 'rails', '4.0.3'
 
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+gem 'simple_form'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
