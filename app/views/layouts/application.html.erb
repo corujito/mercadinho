@@ -7,6 +7,9 @@
     <title>Mercadinho</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <style>
+    body { padding-top: 60px; }
+    </style>
 
     <%= csrf_meta_tags %>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -18,11 +21,10 @@
   </head>
   <body>
 	<%= render 'shared/navigation_bar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
-	<div class='container'>
-    <%= yield %>
+    <div class='container'>
+      <%= flash_messages %>
+      <%= yield %>
 	</div>
 
   </body>
