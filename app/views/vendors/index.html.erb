@@ -22,8 +22,8 @@
         <td><%= vendor.email %></td>
         <td><%= vendor.address %></td>
         <!--<td><%= link_to 'Exibir', vendor %></td>-->
-        <td><%= link_to 'Editar', edit_vendor_path(vendor) %></td>
-        <td><%= link_to 'Remover', vendor, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+        <td><%= link_to edit_vendor_path(vendor) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+        <td><%= link_to vendor, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>

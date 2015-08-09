@@ -20,6 +20,8 @@ module Mercadinho
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :'pt-BR'
     config.app_generators.scaffold_controller = :scaffold_controller
+    # config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    # config.assets.precompile = config.assets.precompile + %w(*.png *.jpg *.jpeg *.gif *.woff *.ttf *.svg *.eot)
     config.to_prepare do
       Devise::SessionsController.layout "login_layout"
       Devise::RegistrationsController.layout "application"
