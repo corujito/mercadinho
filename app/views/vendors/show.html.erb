@@ -1,24 +1,21 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Full name:</strong>
-  <%= @vendor.full_name %>
-</p>
+<h1><%= @vendor.full_name %></h1>
+<hr>
+<style>
+    .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+        border: none;
+    }
+</style>
+<div class="table-responsive">
+  <table class='table borderless'>
+    <tbody>
+    <tr><td class="col-md-2"><b>Email:</b></td><td><%= @vendor.email %></td></tr>
+    <tr><td class="col-md-2"><b>Telefone:</b></td><td><%= @vendor.phone %></td></tr>
+    <tr><td class="col-md-2"><b>Endereço:</b></td><td><%= @vendor.address %></td></tr>
+    </tbody>
+  </table>
+</div>
+<br>
 
-<p>
-  <strong>Email:</strong>
-  <%= @vendor.email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @vendor.phone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @vendor.address %>
-</p>
-
-<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
-<%= link_to 'Back', vendors_path %>
+<%= link_to 'Editar', edit_vendor_path(@vendor), class: "btn btn-primary" %>
+<%= link_to 'Voltar', vendors_path, class: "btn btn-default" %>

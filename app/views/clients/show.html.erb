@@ -1,27 +1,22 @@
-<p>
-  <strong>Full name:</strong>
-  <%= @client.full_name %>
-</p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @client.email %>
-</p>
+<h1><%= @client.full_name %></h1>
+<hr>
+<style>
+    .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+        border: none;
+    }
+</style>
+<div class="table-responsive">
+  <table class='table borderless'>
+    <tbody>
+    <tr><td class="col-md-2"><b>Email:</b></td><td><%= @client.email %></td></tr>
+    <tr><td class="col-md-2"><b>Telefone:</b></td><td><%= @client.phone %></td></tr>
+    <tr><td class="col-md-2"><b>Endereço:</b></td><td><%= @client.address %></td></tr>
+    <tr><td class="col-md-2"><b>Ativo:</b></td><td><%= @client.active %></td></tr>
+    </tbody>
+  </table>
+</div>
+<br>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @client.phone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @client.address %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @client.active %>
-</p>
-
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+<%= link_to 'Editar', edit_client_path(@client), class: "btn btn-primary" %>
+<%= link_to 'Voltar', clients_path, class: "btn btn-default" %>
