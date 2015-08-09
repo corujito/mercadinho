@@ -14,3 +14,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+.project
+/.settings
+/.idea
+/public/assets
+.DS_Store
