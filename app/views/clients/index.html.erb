@@ -1,35 +1,36 @@
 <h1>Lista de Clientes</h1>
 
+<div class="table-responsive">
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Nome</th>
-      <th>Email</th>
+      <th class="col-md-3">Nome</th>
       <th>Telefone</th>
+      <th>Email</th>
       <!--<th>Endereço</th>-->
       <th>Ativo</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <!--<th class="col-md-1"></th>-->
+      <th class="col-md-1"></th>
+      <th class="col-md-1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @clients.each do |client| %>
       <tr>
-        <td><%= client.full_name %></td>
-        <td><%= client.email %></td>
+        <td><%= link_to client.full_name, client %></td>
         <td><%= client.phone %></td>
+        <td><%= client.email %></td>
         <!--<td><%= client.address %></td>-->
         <td><%= client.active %></td>
-        <td><%= link_to 'Exibir', client %></td>
+        <!--<td><%= link_to 'Exibir', client %></td>-->
         <td><%= link_to 'Editar', edit_client_path(client) %></td>
         <td><%= link_to 'Remover', client, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'Novo Cliente', new_client_path, class: "btn btn-primary" %>

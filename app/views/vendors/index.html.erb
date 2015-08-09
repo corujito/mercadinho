@@ -1,32 +1,34 @@
 <h1>Lista de Fornecedores</h1>
 
+<div class="table-responsive">
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Nome</th>
-      <th>Email</th>
+      <th class="col-md-3">Nome</th>
       <th>Telefone</th>
+      <th>Email</th>
       <th>Endereço</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <!--<th class="col-md-1"></th>-->
+      <th class="col-md-1"></th>
+      <th class="col-md-1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @vendors.each do |vendor| %>
       <tr>
-        <td><%= vendor.full_name %></td>
-        <td><%= vendor.email %></td>
+        <td><%= link_to vendor.full_name, vendor %></td>
         <td><%= vendor.phone %></td>
+        <td><%= vendor.email %></td>
         <td><%= vendor.address %></td>
-        <td><%= link_to 'Exibir', vendor %></td>
+        <!--<td><%= link_to 'Exibir', vendor %></td>-->
         <td><%= link_to 'Editar', edit_vendor_path(vendor) %></td>
         <td><%= link_to 'Remover', vendor, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
