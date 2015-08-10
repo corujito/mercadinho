@@ -1,0 +1,39 @@
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1>Lista dos últimos cartões<small></small></h1>
+  </div>
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= link_to 'Novo Cartão', new_card_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Nome</th>
+      <th>Identificação</th>
+      <th>Valor</th>
+      <th>Desconto</th>
+      <th class="col-md-1"></th>
+      <th class="col-md-1"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @cards.each do |card| %>
+        <tr>
+          <td><%= link_to card.full_name, card %></td>
+          <td><%= card.identification %></td>
+          <td>R$ <%= card.value %></td>
+          <td><%= card.discount %></td>
+          <td><%= link_to edit_card_path(card) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+          <td><%= link_to card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>

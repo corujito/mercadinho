@@ -1,0 +1,22 @@
+
+<h1><%= @card.full_name %></h1>
+<hr>
+<style>
+    .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+        border: none;
+    }
+</style>
+<div class="table-responsive">
+  <table class='table borderless'>
+    <tbody>
+    <tr><td class="col-md-2"><b>Identificação:</b></td><td><%= @card.identification %></td></tr>
+    <tr><td class="col-md-2"><b>Senha:</b></td><td><%= @card.password %></td></tr>
+    <tr><td class="col-md-2"><b>Valor:</b></td><td><%= @card.value %></td></tr>
+    <tr><td class="col-md-2"><b>Desconto:</b></td><td><%= @card.discount %></td></tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'Editar', edit_card_path(@card), class: "btn btn-primary" %>
+<%= link_to 'Voltar', cards_path, class: "btn btn-default" %>
