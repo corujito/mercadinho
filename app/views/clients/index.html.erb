@@ -19,8 +19,8 @@
       <!--<th>Endereço</th>-->
       <th>Ativo</th>
       <!--<th class="col-md-1"></th>-->
-      <th class="col-md-1"></th>
-      <th class="col-md-1"></th>
+      <th class="col-md-1 text-center">Editar</th>
+      <th class="col-md-1 text-center">Remover</th>
     </tr>
   </thead>
 
@@ -33,8 +33,8 @@
         <!--<td><%= client.address %></td>-->
         <td><%= client.active %></td>
         <!--<td><%= link_to 'Exibir', client %></td>-->
-        <td><%= link_to edit_client_path(client) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
-        <td><%= link_to client, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        <td class="text-center"><%= link_to edit_client_path(client) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+        <td class="text-center"><%= link_to client, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>

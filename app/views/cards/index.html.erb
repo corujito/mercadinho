@@ -17,8 +17,8 @@
       <th>Identificação</th>
       <th>Valor</th>
       <th>Desconto</th>
-      <th class="col-md-1"></th>
-      <th class="col-md-1"></th>
+      <th class="col-md-1 text-center">Editar</th>
+      <th class="col-md-1 text-center">Remover</th>
     </tr>
     </thead>
 
@@ -29,8 +29,8 @@
           <td><%= card.identification %></td>
           <td>R$ <%= card.value %></td>
           <td><%= card.discount %></td>
-          <td><%= link_to edit_card_path(card) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
-          <td><%= link_to card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><%= link_to edit_card_path(card) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><%= link_to card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
     <% end %>
     </tbody>

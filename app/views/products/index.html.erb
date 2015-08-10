@@ -16,8 +16,8 @@
       <th class="col-md-3">Nome</th>
       <th>Unidade</th>
       <!--<th class="col-md-1"></th>-->
-      <th class="col-md-1"></th>
-      <th class="col-md-1"></th>
+      <th class="col-md-1 text-center">Editar</th>
+      <th class="col-md-1 text-center">Remover</th>
     </tr>
   </thead>
 
@@ -27,8 +27,8 @@
         <td><%= link_to product.full_name, product %></td>
         <td><%= product.unity %></td>
         <!--<td><%= link_to 'Exibir', product %></td>-->
-        <td><%= link_to edit_product_path(product) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
-        <td><%= link_to product, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        <td class="text-center"><%= link_to edit_product_path(product) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+        <td class="text-center"><%= link_to product, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
       </tr>
     <% end %>
   </tbody>
