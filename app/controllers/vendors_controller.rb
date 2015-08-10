@@ -5,7 +5,7 @@ class VendorsController < ApplicationController
   # GET /vendors
   # GET /vendors.json
   def index
-    @vendors = Vendor.all
+    @vendors = Vendor.order(:full_name).page params[:page]
   end
 
   # GET /vendors/1
