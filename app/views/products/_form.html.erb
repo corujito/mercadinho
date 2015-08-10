@@ -1,4 +1,4 @@
-<%= simple_form_for(@product) do |f| %>
+<%= simple_form_for(@product, html: { class: 'form-vertical' }) do |f| %>
     <%= f.input :full_name, label: 'Nome', autofocus: true %>
     <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
     <%= f.button :submit, class: 'btn btn-primary' %>

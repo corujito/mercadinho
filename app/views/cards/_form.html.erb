@@ -1,13 +1,18 @@
-<%= simple_form_for(@card, html: { class: 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@card, html: { class: 'form-vertical' }) do |f| %>
 
   <div class="form-inputs">
     <%= f.input :full_name, label: 'Nome', autofocus: true %>
     <%= f.input :phone, label: "Telefone" %>
     <%= f.input :email %>
-    <%= f.input :identification %>
-    <%= f.input :password %>
-    <%= f.input :value %>
-    <%= f.input :discount %>
+    <%= f.input :identification, label: "Identificação" %>
+    <%= f.input :password, label: "Senha" %>
+    <div class="form-inputs">
+      <%= f.input :value, label: "Valor", wrapper: :vertical_input_group do %>
+          <span class="input-group-addon">R$</span>
+          <%= f.input_field :value, class: "form-control" %>
+      <% end %>
+    </div>
+    <%= f.input :discount, label: "Desconto" %>
   </div>
 
   <div class="form-actions">

@@ -1,11 +1,4 @@
-<%= simple_form_for(@purchase, html: { class: 'form-vertical' },
-                    wrapper: :vertical_input_group,
-                    wrapper_mappings: {
-                            check_boxes: :vertical_radio_and_checkboxes,
-                            radio_buttons: :vertical_radio_and_checkboxes,
-                            file: :vertical_file_input,
-                            boolean: :vertical_boolean
-                    }) do |f| %>
+<%= simple_form_for(@purchase, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
       <div class="col-md-8">
         <%= f.association :vendor, label: "Fornecedor", label_method: :full_name, value_method: :id, collection: Vendor.all.order(:full_name), prompt: "Escolha o fornecedor" %>
