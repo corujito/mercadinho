@@ -6,6 +6,8 @@ class CreateCards < ActiveRecord::Migration
       t.string :password
       t.decimal :value
       t.decimal :discount
+      t.string :email
+      t.string :phone
 
       t.timestamps
     end

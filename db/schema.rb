@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20150810012808) do
     t.string   "password"
     t.decimal  "value"
     t.decimal  "discount"
+    t.string   "email"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
