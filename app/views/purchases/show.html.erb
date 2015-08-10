@@ -1,0 +1,30 @@
+
+<h1><%= @purchase.vendor.full_name %></h1>
+R$ <%= @purchase.total_price %>
+<hr>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Items</th>
+      <th>Produto</th>
+      <th>Quantidade</th>
+      <th>Preço Unitário</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @purchase.items.each_with_index do |item, index| %>
+    <tr>
+      <td class="col-md-2"><b><%= index+1 %></b></td>
+      <td><%= item.product.full_name %></td>
+      <td><%= item.quantity %></td>
+      <td>R$ <%= item.unit_price %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'Editar', edit_purchase_path(@purchase), class: "btn btn-primary" %>
+<%= link_to 'Voltar', purchases_path, class: "btn btn-default" %>

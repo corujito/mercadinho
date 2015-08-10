@@ -1,0 +1,34 @@
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1>Lista das últimas compras<small></small></h1>
+  </div>
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= link_to 'Nova Compra', new_purchase_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Fornecedor</th>
+      <th>Preço Total</th>
+      <th class="col-md-1"></th>
+      <th class="col-md-1"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @purchases.each do |purchase| %>
+        <tr>
+          <td><%= link_to(purchase.vendor.full_name, purchase) if purchase.vendor %></td>
+          <td><%= purchase.total_price %></td>
+          <td><%= link_to edit_purchase_path(purchase) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+          <td><%= link_to purchase, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
