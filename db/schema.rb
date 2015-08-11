@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150810012808) do
     t.string   "phone"
     t.string   "address"
     t.boolean  "active",     default: true
+    t.decimal  "balance",    default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

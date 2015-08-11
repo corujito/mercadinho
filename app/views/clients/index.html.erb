@@ -14,6 +14,7 @@
   <thead>
     <tr>
       <th class="col-md-3">Nome</th>
+      <th>Saldo</th>
       <th>Telefone</th>
       <th>Email</th>
       <!--<th>Endereço</th>-->
@@ -28,6 +29,7 @@
     <% @clients.each do |client| %>
       <tr>
         <td><%= link_to client.full_name, client %></td>
+        <td>R$ <%= client.balance %></td>
         <td><%= client.phone %></td>
         <td><%= client.email %></td>
         <!--<td><%= client.address %></td>-->
