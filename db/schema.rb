@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20150810012808) do
   create_table "products", force: true do |t|
     t.string   "full_name"
     t.integer  "unity"
-    t.integer  "quantity"
+    t.integer  "in_stock",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
