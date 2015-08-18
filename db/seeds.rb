@@ -38,9 +38,9 @@ if Product.count == 0
 end
 
 if Card.count == 0
-  Card.create!(full_name: "Antonio da Costa", identification: "1123-123-23-23-133", password: "123", value: 123.123, discount: 12, phone: "4588-8898", email: "antoniocosta@naoexiste.com.brk")
-  Card.create!(full_name: "Edson Ramos", identification: "23132112312", password: "123", value: 33, discount: 12, phone: "", email: "edson@naoexiste.com.brk")
-  Card.create!(full_name: "Fabiana Salve", identification: "", password: "123", value: 1123, discount: 12, phone: "", email: "")
-  Card.create!(full_name: "João da Vila", identification: "7777", password: "123", value: 100, discount: 12, phone: "1234-1234", email: "")
-  Card.create!(full_name: "Marcos Cunha", identification: "33.2321 1231", password: "123", value: 123, discount: 10, phone: "", email: "marcoscunha@naoexiste.com.brk")
+  Card.create!(full_name: "Antonio da Costa", identification: "1123-123-23-23-133", password: "123", cpf: "", phone: "4588-8898", email: "antoniocosta@naoexiste.com.brk")
+  Card.create!(full_name: "Edson Ramos", identification: "23132112312", password: "123", cpf: "", phone: "", email: "edson@naoexiste.com.brk")
+  Card.create!(full_name: "Fabiana Salve", identification: "", password: "123", cpf: "", phone: "", email: "")
+  Card.create!(full_name: "João da Vila", identification: "7777", password: "123", cpf: "", phone: "1234-1234", email: "")
+  Card.create!(full_name: "Marcos Cunha", identification: "33.2321 1231", password: "123", cpf: "", phone: "", email: "marcoscunha@naoexiste.com.brk")
 end

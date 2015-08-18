@@ -1,7 +1,8 @@
 
 <h1><%= @card.full_name %></h1>
+CPF: <%= @card.cpf %><br>
 Telefone: <%= @card.phone %><br>
-Email: <%= @card.email %>
+Email: <%= @card.email %><br>
 <hr>
 <style>
     .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
@@ -13,8 +14,6 @@ Email: <%= @card.email %>
     <tbody>
     <tr><td class="col-md-2"><b>Identificação:</b></td><td><%= @card.identification %></td></tr>
     <tr><td class="col-md-2"><b>Senha:</b></td><td><%= @card.password %></td></tr>
-    <tr><td class="col-md-2"><b>Valor:</b></td><td><%= @card.value %></td></tr>
-    <tr><td class="col-md-2"><b>Desconto:</b></td><td><%= @card.discount %></td></tr>
     </tbody>
   </table>
 </div>

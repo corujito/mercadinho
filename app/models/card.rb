@@ -1,4 +1,4 @@
 class Card < ActiveRecord::Base
-  validates :password, :value, :discount, presence: true
+  validates :password, presence: true
   paginates_per 20
 end

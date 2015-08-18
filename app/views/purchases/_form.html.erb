@@ -1,7 +1,10 @@
 <%= simple_form_for(@purchase, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <%= f.association :vendor, label: "Fornecedor", label_method: :full_name, value_method: :id, collection: Vendor.all.order(:full_name), prompt: "Escolha o fornecedor" %>
+      </div>
+      <div class="col-md-1">
+        <%= f.input :discount, label: "Desconto" %>
       </div>
       <div class="form-inputs col-md-2">
         <%= f.input :total_price, label: "Preço Total", wrapper: :vertical_input_group do %>
@@ -16,7 +19,7 @@
             <%= i.association :product, label: "Produto", label_method: :full_name, value_method: :id, collection: Product.all.order(:full_name), prompt: "Escolha o produto" %>
           </div>
           <div class="col-md-1">
-            <%= i.input :quantity %>
+            <%= i.input :quantity, label: "Quantidade" %>
           </div>
           <div class="form-inputs col-md-2">
             <%= i.input :unit_price, label: "Preço Unitário", wrapper: :vertical_input_group do %>
