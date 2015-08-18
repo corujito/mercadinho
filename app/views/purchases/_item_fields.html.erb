@@ -1,0 +1,13 @@
+<tr class="fields">
+  <td><%= f.association :product, label: false, label_method: :full_name, value_method: :id, collection: Product.all.order(:full_name), prompt: "Escolha o produto" %></td>
+  <td><%= f.input :quantity, label: false %></td>
+  <td>
+    <div class="form-inputs">
+      <%= f.input :unit_price, label: false, wrapper: :vertical_input_group do %>
+          <span class="input-group-addon">R$</span>
+          <%= f.input_field :unit_price, class: "form-control" %>
+      <% end %>
+    </div>
+  </td>
+  <td> <%= f.hidden_field :_destroy %> <%= link_to_function "Remover", "remove_fields(this)" %></td>
+</tr>

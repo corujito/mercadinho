@@ -13,22 +13,27 @@
         <% end %>
       </div>
     </div>
-    <%= f.simple_fields_for :items do |i| %>
-        <div class="row">
-          <div class="col-md-7">
-            <%= i.association :product, label: "Produto", label_method: :full_name, value_method: :id, collection: Product.all.order(:full_name), prompt: "Escolha o produto" %>
-          </div>
-          <div class="col-md-1">
-            <%= i.input :quantity, label: "Quantidade" %>
-          </div>
-          <div class="form-inputs col-md-2">
-            <%= i.input :unit_price, label: "Preço Unitário", wrapper: :vertical_input_group do %>
-                <span class="input-group-addon">R$</span>
-                <%= i.input_field :unit_price, class: "form-control" %>
-            <% end %>
-          </div>
-        </div>
-    <% end %>
+
+    <div class="table-responsive">
+      <table class="table table-striped" id="table_<%= f.object.id %>">
+        <thead>
+        <tr>
+          <th class="col-md-6">Produto</th>
+          <th class="col-md-1">Quantidade</th>
+          <th class="col-md-2">Preço da Unitário</th>
+          <th class="col-md-1"></th>
+        </tr>
+        </thead>
+
+        <tbody id="items">
+        <%= f.simple_fields_for :items do |item| %>
+            <%= render 'item_fields', f: item %>
+        <% end %>
+        </tbody>
+      </table>
+      <p><%= link_to_add_fields "Adicionar Item", f, :items %></p>
+    </div>
+
     <%= f.button :submit, class: 'btn btn-primary' %>
     <%= link_to "Cancelar", purchases_url, {:class=>"btn btn-danger"} %>
 <% end %>

@@ -15,4 +15,14 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 
+function remove_fields(link) {
+    $(link).parent().parent().find('input[type=hidden]').val("1");
+    $(link).parent().parent().hide();
+}
+
+function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g")
+    $("#"+link).append(content.replace(regexp, new_id))
+}
 
