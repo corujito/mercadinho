@@ -18,7 +18,7 @@ module ApplicationHelper
     onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
     href = html_options[:href] || '#'
 
-    content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
+    content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick, :class => args[1] || ""))
   end
 
   def link_to_add_fields(name, f, association)
@@ -26,6 +26,6 @@ module ApplicationHelper
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    link_to_function(name, "add_fields(\"table_#{f.object.id}\", \"#{association}\", \"#{escape_javascript(fields)}\")")
+    link_to_function(name, "add_fields(\"table_#{f.object.id}\", \"#{association}\", \"#{escape_javascript(fields)}\")", "btn btn-default")
   end
 end
