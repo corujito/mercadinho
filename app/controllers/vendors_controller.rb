@@ -8,6 +8,11 @@ class VendorsController < ApplicationController
     @vendors = Vendor.order(:full_name).page params[:page]
   end
 
+  def find_vendors
+    @vendors = Vendor.order(:full_name).where("lower(full_name) like ?", "%#{params[:term].downcase}%")
+    render json: @vendors.map(&:full_name)
+  end
+
   # GET /vendors/1
   # GET /vendors/1.json
   def show

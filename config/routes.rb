@@ -9,7 +9,11 @@ Mercadinho::Application.routes.draw do
 
   get "dashboard/index"
   resources :products
-  resources :vendors
+  resources :vendors do
+    collection do
+      get 'find_vendors' => 'vendors#find_vendors'
+    end
+  end
   resources :clients
   resources :cards
   resources :purchases

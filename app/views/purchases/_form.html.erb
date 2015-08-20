@@ -1,7 +1,7 @@
 <%= simple_form_for(@purchase, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
       <div class="col-md-6">
-        <%= f.association :vendor, label: "Fornecedor", label_method: :full_name, value_method: :id, collection: Vendor.all.order(:full_name), prompt: "Escolha o fornecedor" %>
+        <%= f.input :vendor_name, label: "Fornecedor", placeholder: 'Digite para buscar o fornecedor', input_html: { data: { autocomplete_source: find_vendors_vendors_path } } %>
       </div>
       <div class="col-md-2">
         <%= f.input :discount, label: "Desconto" %>

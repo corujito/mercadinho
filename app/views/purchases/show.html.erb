@@ -1,5 +1,5 @@
 
-<h1><%= @purchase.vendor.full_name %></h1>
+<h1><%= @purchase.vendor.full_name if @purchase.vendor %></h1>
 R$ <%= @purchase.total_price %><br>
 Desconto: <%= @purchase.discount %><br>
 <hr>
