@@ -1,13 +1,15 @@
 class Item < ActiveRecord::Base
+  after_save :update_stock
+  after_destroy :update_stock_destroy
+
   belongs_to :product
   belongs_to :purchase
 
+  usar_como_dinheiro :unit_price
   accepts_nested_attributes_for :product, :reject_if => :all_blank, :allow_destroy => false
   validates :product, :quantity, :unit_price, :product_name, presence: true
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
   validates :unit_price, numericality: { greater_than_or_equal_to: 0 }
-
-  after_save :update_stock
 
   def product_name
     product.try(:full_name)
@@ -31,5 +33,11 @@ class Item < ActiveRecord::Base
       end
       p.save
     end
+  end
+
+  def update_stock_destroy
+    p = self.product
+    p.in_stock -= self.quantity
+    p.save
   end
 end

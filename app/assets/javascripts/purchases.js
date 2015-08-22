@@ -1,3 +1,5 @@
+//= require "jquery.maskMoney.min"
+
 var ready;
 ready = function() {
     $('#purchase_vendor_name').autocomplete({
@@ -9,6 +11,8 @@ ready = function() {
         source: $('#purchase_items_attributes_0_product_name').data('autocomplete-source'),
         minLength: 2
     });
+
+    $('#purchase_items_attributes_0_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
 
     $("#new_purchase").on("keyup keypress", function(e) {
         var code;
@@ -38,4 +42,5 @@ function add_fields(link, association, content) {
         minLength: 2
     });
     $('#purchase_items_attributes_'+new_id+'_product_name').focus();
+    $('#purchase_items_attributes_'+new_id+'_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
 }

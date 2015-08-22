@@ -29,7 +29,7 @@
         <tr>
           <td><%= link_to purchase.id, purchase %></td>
           <td><%= purchase.vendor.full_name if purchase.vendor %></td>
-          <th><%= purchase.discount %>%</th>
+          <th><%= number_to_percentage(purchase.discount, precision: 2, strip_insignificant_zeros: true) %></th>
           <td><%= number_to_currency(purchase.total_price) %></td>
           <td><%= number_to_currency(purchase.total_price_with_discount) %></td>
           <td><%= l purchase.created_at, format: "%d/%m/%Y" %></td>

@@ -1,8 +1,8 @@
 
 <h1><%= @purchase.vendor.full_name if @purchase.vendor %></h1>
 Total: <%= number_to_currency(@purchase.total_price) %><br>
+Desconto: <%= number_to_percentage(@purchase.discount, precision: 2, strip_insignificant_zeros: true) %><br>
 Total com Desconto: <%= number_to_currency(@purchase.total_price_with_discount) %><br>
-Desconto: <%= @purchase.discount %>%<br>
 Data: <%= l @purchase.created_at, format: "%d/%m/%Y" %><br>
 <hr>
 <div class="table-responsive">

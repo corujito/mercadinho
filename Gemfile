@@ -13,6 +13,8 @@ gem 'rails_12factor', group: :production
 gem 'pg'
 gem 'kaminari'
 
+gem 'brazilian-rails'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

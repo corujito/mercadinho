@@ -1,6 +1,6 @@
 class Purchase < ActiveRecord::Base
   belongs_to :vendor
-  has_many :items
+  has_many :items, :dependent => :destroy
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
   validates :discount, :items, presence: true
   validates :discount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
