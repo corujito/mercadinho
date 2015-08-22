@@ -205,3 +205,13 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
+
+  activerecord:
+    models:
+      purchase: Compra
+      client: Cliente
+      vendor: Fornecedor
+      card: Cartão
+      product: Produto
+      user: Usuário
+      item: Item de Compra
