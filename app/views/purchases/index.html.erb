@@ -13,9 +13,12 @@
   <table class="table table-striped">
     <thead>
     <tr>
+      <th>Id</th>
       <th class="col-md-3">Fornecedor</th>
       <th>Desconto</th>
       <th>Preço Total</th>
+      <th>Preço Total com Desconto</th>
+      <th>Data</th>
       <th class="col-md-1 text-center">Editar</th>
       <th class="col-md-1 text-center">Remover</th>
     </tr>
@@ -24,9 +27,12 @@
     <tbody>
     <% @purchases.each do |purchase| %>
         <tr>
-          <td><%= link_to(purchase.vendor.full_name, purchase) if purchase.vendor %></td>
-          <th><%= purchase.discount %></th>
-          <td><%= purchase.total_price %></td>
+          <td><%= link_to purchase.id, purchase %></td>
+          <td><%= purchase.vendor.full_name if purchase.vendor %></td>
+          <th><%= purchase.discount %>%</th>
+          <td><%= number_to_currency(purchase.total_price) %></td>
+          <td><%= number_to_currency(purchase.total_price_with_discount) %></td>
+          <td><%= l purchase.created_at, format: "%d/%m/%Y" %></td>
           <td class="text-center"><%= link_to edit_purchase_path(purchase) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
           <td class="text-center"><%= link_to purchase, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
@@ -34,3 +40,6 @@
     </tbody>
   </table>
 </div>
+
+<br/>
+<%= paginate @purchases %>

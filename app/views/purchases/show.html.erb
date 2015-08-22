@@ -1,7 +1,9 @@
 
 <h1><%= @purchase.vendor.full_name if @purchase.vendor %></h1>
-R$ <%= @purchase.total_price %><br>
-Desconto: <%= @purchase.discount %><br>
+Total: <%= number_to_currency(@purchase.total_price) %><br>
+Total com Desconto: <%= number_to_currency(@purchase.total_price_with_discount) %><br>
+Desconto: <%= @purchase.discount %>%<br>
+Data: <%= l @purchase.created_at, format: "%d/%m/%Y" %><br>
 <hr>
 <div class="table-responsive">
   <table class="table table-striped">
@@ -11,15 +13,17 @@ Desconto: <%= @purchase.discount %><br>
       <th>Produto</th>
       <th>Quantidade</th>
       <th>Preço Unitário</th>
+      <th>Preço Unitário com Desconto</th>
     </tr>
     </thead>
     <tbody>
     <% @purchase.items.each_with_index do |item, index| %>
     <tr>
       <td class="col-md-2"><b><%= index+1 %></b></td>
-      <td><%= item.product.full_name %></td>
+      <td><%= item.product.full_name if item.product %></td>
       <td><%= item.quantity %></td>
-      <td>R$ <%= item.unit_price %></td>
+      <td><%= number_to_currency(item.unit_price) %></td>
+      <td><%= number_to_currency(item.unit_price_with_discount) %></td>
     </tr>
     <% end %>
     </tbody>

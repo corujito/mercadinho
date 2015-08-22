@@ -8,6 +8,11 @@ class ProductsController < ApplicationController
     @products = Product.order(:full_name).page params[:page]
   end
 
+  def find_products
+    @products = Product.order(:full_name).where("lower(full_name) like ?", "%#{params[:term].downcase}%")
+    render json: @products.map(&:full_name)
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show

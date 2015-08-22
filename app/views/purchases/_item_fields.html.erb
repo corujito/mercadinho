@@ -1,6 +1,6 @@
 <tr class="fields">
-  <td><%= f.association :product, label: false, label_method: :full_name, value_method: :id, collection: Product.all.order(:full_name), prompt: "Escolha o produto" %></td>
-  <td><%= f.input :quantity, label: false %></td>
+  <td><%= f.input :product_name, label: false, placeholder: 'Digite para buscar o produto', input_html: { data: { autocomplete_source: find_products_products_path } } %></td>
+  <td><%= f.input :quantity, label: false, input_html: {min: 1} %></td>
   <td>
     <div class="form-inputs">
       <%= f.input :unit_price, label: false, wrapper: :vertical_input_group do %>

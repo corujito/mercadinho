@@ -42,6 +42,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :local, :test do
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'bullet'
+  gem 'uniform_notifier'
+  gem "rails-erd"
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

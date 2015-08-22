@@ -74,8 +74,7 @@ ActiveRecord::Schema.define(version: 20150810012808) do
 
   create_table "items", force: true do |t|
     t.integer  "quantity"
-    t.decimal  "unit_price"
-    t.decimal  "discount"
+    t.decimal  "unit_price",  precision: 14, scale: 2
     t.integer  "product_id"
     t.integer  "purchase_id"
     t.datetime "created_at"
@@ -87,7 +86,7 @@ ActiveRecord::Schema.define(version: 20150810012808) do
 
   create_table "products", force: true do |t|
     t.string   "full_name"
-    t.integer  "unity"
+    t.integer  "unity",      default: 0
     t.integer  "in_stock",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,8 +94,7 @@ ActiveRecord::Schema.define(version: 20150810012808) do
 
   create_table "purchases", force: true do |t|
     t.integer  "vendor_id"
-    t.decimal  "total_price"
-    t.decimal  "discount"
+    t.decimal  "discount",   precision: 5, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

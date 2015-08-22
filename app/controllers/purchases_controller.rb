@@ -5,7 +5,7 @@ class PurchasesController < ApplicationController
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.all
+    @purchases = Purchase.order(created_at: :desc).page params[:page]
   end
 
   # GET /purchases/1
@@ -16,7 +16,7 @@ class PurchasesController < ApplicationController
   # GET /purchases/new
   def new
     @purchase = Purchase.new
-    # 2.times {@purchase.items.build}
+    1.times {@purchase.items.build}
   end
 
   # GET /purchases/1/edit
@@ -71,6 +71,6 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-      params.require(:purchase).permit(:vendor_id, :vendor_name, :total_price, :discount, items_attributes: [:id, :product_id, :quantity, :unit_price, :discount, :_destroy])
+      params.require(:purchase).permit(:vendor_id, :vendor_name, :total_price, :discount, items_attributes: [:id, :product_id, :product_name, :quantity, :unit_price, :_destroy])
     end
 end

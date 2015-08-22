@@ -4,7 +4,7 @@
         <%= f.input :vendor_name, label: "Fornecedor", placeholder: 'Digite para buscar o fornecedor', input_html: { data: { autocomplete_source: find_vendors_vendors_path } } %>
       </div>
       <div class="col-md-2">
-        <%= f.input :discount, label: "Desconto" %>
+        <%= f.input :discount, label: "Desconto", placeholder: '%', input_html: {min: 0, max: 100} %>
       </div>
     </div>
 

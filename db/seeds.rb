@@ -29,12 +29,12 @@ if Vendor.count == 0
 end
 
 if Product.count == 0
-  Product.create!(full_name: "Cerveja Itaipava", unity: 0)
-  Product.create!(full_name: "Cerveja Original", unity: 0)
-  Product.create!(full_name: "Coca Cola", unity: 0)
-  Product.create!(full_name: "Açucar União", unity: 2)
-  Product.create!(full_name: "Óleo de soja", unity: 0)
-  Product.create!(full_name: "Picanha", unity: 2)
+  Product.create!(full_name: "Cerveja Itaipava", unity: 1)
+  Product.create!(full_name: "Cerveja Original", unity: 1)
+  Product.create!(full_name: "Coca Cola", unity: 1)
+  Product.create!(full_name: "Açucar União", unity: 3)
+  Product.create!(full_name: "Óleo de soja", unity: 1)
+  Product.create!(full_name: "Picanha", unity: 3)
 end
 
 if Card.count == 0
