@@ -24,7 +24,19 @@ class Item < ActiveRecord::Base
   end
 
   def update_stock
-    if self.quantity_changed?
+    if self.product_id_changed? and self.product_id_was
+      old_p = Product.find(self.product_id_was)
+      new_p = self.product
+      if self.quantity_changed?
+        old_p.in_stock -= self.quantity_was
+        new_p.in_stock += self.quantity
+      else
+        old_p.in_stock -= self.quantity
+        new_p.in_stock += self.quantity
+      end
+      old_p.save
+      new_p.save
+    elsif self.quantity_changed?
       p = self.product
       if self.quantity_was
         p.in_stock += self.quantity - self.quantity_was
