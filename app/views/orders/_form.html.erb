@@ -1,0 +1,30 @@
+<%= simple_form_for(@order, html: { class: 'form-vertical' }) do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :client_name, label: "Cliente", placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped" id="table_<%= f.object.id %>">
+        <thead>
+        <tr>
+          <th class="col-md-6">Produto</th>
+          <th class="col-md-1">Quantidade</th>
+          <th class="col-md-2">Preço da Unitário</th>
+          <th class="col-md-1"></th>
+        </tr>
+        </thead>
+
+        <tbody id="items">
+        <%= f.simple_fields_for :order_items do |item| %>
+            <%= render 'order_item_fields', f: item %>
+        <% end %>
+        </tbody>
+      </table>
+      <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
+    </div>
+
+    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= link_to "Cancelar", orders_url, {:class=>"btn btn-danger"} %>
+<% end %>

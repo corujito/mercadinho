@@ -215,3 +215,5 @@ pt-BR:
       product: Produto
       user: Usuário
       item: Item de Compra
+      order: Pedido
+      order_item: Item de Pedido

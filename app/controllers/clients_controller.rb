@@ -8,6 +8,11 @@ class ClientsController < ApplicationController
     @clients = Client.order(:full_name).page params[:page]
   end
 
+  def find_clients
+    @clients = Client.order(:full_name).where("lower(full_name) like ?", "%#{params[:term].downcase}%")
+    render json: @clients.map(&:full_name)
+  end
+
   # GET /clients/1
   # GET /clients/1.json
   def show

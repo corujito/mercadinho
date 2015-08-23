@@ -1,0 +1,31 @@
+
+<h1><%= @order.client.full_name if @order.client %></h1>
+Total: <%= number_to_currency(@order.total_price) %><br>
+Data: <%= l @order.created_at, format: "%d/%m/%Y" %><br>
+<hr>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Items</th>
+      <th>Produto</th>
+      <th>Quantidade</th>
+      <th>Preço Unitário</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @order.order_items.each_with_index do |item, index| %>
+        <tr>
+          <td class="col-md-2"><b><%= index+1 %></b></td>
+          <td><%= item.product.full_name if item.product %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.unit_price) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'Editar', edit_order_path(@order), class: "btn btn-primary" %>
+<%= link_to 'Voltar', orders_path, class: "btn btn-default" %>

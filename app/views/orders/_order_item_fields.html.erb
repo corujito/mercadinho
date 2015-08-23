@@ -1,0 +1,13 @@
+<tr class="fields">
+  <td><%= f.input :product_name, label: false, placeholder: 'Digite para buscar o produto', input_html: { data: { autocomplete_source: find_products_products_path } } %></td>
+  <td><%= f.input :quantity, label: false, input_html: {min: 1} %></td>
+  <td>
+    <div class="form-inputs">
+      <%= f.input :unit_price, label: false, wrapper: :vertical_input_group do %>
+          <span class="input-group-addon">R$</span>
+          <%= f.text_field :unit_price, class: "form-control", value: f.object.unit_price.real %>
+      <% end %>
+    </div>
+  </td>
+  <td> <%= f.hidden_field :_destroy %> <%= link_to_function "Remover", "remove_fields(this)" %></td>
+</tr>

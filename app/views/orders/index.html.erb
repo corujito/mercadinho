@@ -1,0 +1,41 @@
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1>Lista dos últimos pedidos<small></small></h1>
+  </div>
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= link_to 'Novo Pedido', new_order_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th class="col-md-3">Cliente</th>
+      <th>Preço Total</th>
+      <th>Data</th>
+      <th class="col-md-1 text-center">Editar</th>
+      <th class="col-md-1 text-center">Remover</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.id, order %></td>
+          <td><%= order.client.full_name if order.client %></td>
+          <td><%= number_to_currency(order.total_price) %></td>
+          <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+          <td class="text-center"><%= link_to edit_order_path(order) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><%= link_to order, method: :delete, data: { confirm: 'Tem certeza que deseja remover?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+<%= paginate @orders %>
