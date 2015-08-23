@@ -1,7 +1,7 @@
 <%= simple_form_for(@order, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
       <div class="col-md-6">
-        <%= f.input :client_name, label: "Cliente", placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
+        <%= f.input :client_name,:readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
       </div>
     </div>
 

@@ -1,6 +1,8 @@
 class OrderItem < ActiveRecord::Base
   after_save :update_stock
+  after_save :update_client_balance
   after_destroy :update_stock_destroy
+  after_destroy :update_client_balance_destroy
 
   belongs_to :product
   belongs_to :order
@@ -43,21 +45,31 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-  def update_stock
-    if self.quantity_changed?
-      p = self.product
-      if self.quantity_was
-        p.in_stock -= self.quantity - self.quantity_was
-      else
-        p.in_stock -= self.quantity
-      end
-      p.save
-    end
-  end
-
   def update_stock_destroy
     p = self.product
     p.in_stock += self.quantity
     p.save
+  end
+
+  def update_client_balance
+    if self.changed?
+      c = self.order.client
+      if self.quantity_was and self.unit_price_was
+        c.balance -= (self.quantity * self.unit_price) - (self.quantity_was * self.unit_price_was)
+      elsif self.quantity_was
+        c.balance -= (self.quantity * self.unit_price) - (self.quantity_was * self.unit_price)
+      elsif self.unit_price_was
+        c.balance -= (self.quantity * self.unit_price) - (self.quantity * self.unit_price_was)
+      else
+        c.balance -= self.quantity * self.unit_price
+      end
+      c.save
+    end
+  end
+
+  def update_client_balance_destroy
+    c = self.order.client
+    c.balance += self.quantity * self.unit_price
+    c.save
   end
 end
