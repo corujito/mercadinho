@@ -8,6 +8,7 @@
 
 if User.count == 0
   User.create!(username: 'corujito', email: "corujito@example.com", password: 'corujito', password_confirmation: 'corujito')
+  User.create!(username: 'reinaldo', email: "reinaldo@example.com", password: 'reinaldo', password_confirmation: 'reinaldo')
 end
 
 if Client.count == 0
