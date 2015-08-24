@@ -3,6 +3,8 @@
       <div class="col-md-6">
         <%= f.input :client_name,:readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
       </div>
+      <div id="client_info" class="col-md-2">
+      </div>
     </div>
 
     <div class="table-responsive">

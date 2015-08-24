@@ -4,6 +4,7 @@ var ready;
 ready = function() {
     $('#order_client_name').autocomplete({
         source: $('#order_client_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_client_info(ui.item.value) },
         minLength: 2
     });
 
@@ -26,6 +27,16 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
+
+function get_client_info(full_name) {
+    return $.ajax({
+        type: "GET",
+        url: "/clients/find_client_by_full_name",
+        data: {
+            full_name: full_name
+        }
+    });
+}
 
 function remove_fields(link) {
     $(link).parent().parent().find('input[type=hidden]').val("1");

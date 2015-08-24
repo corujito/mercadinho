@@ -21,6 +21,7 @@ Mercadinho::Application.routes.draw do
   resources :clients do
     collection do
       get 'find_clients' => 'clients#find_clients'
+      get 'find_client_by_full_name' => 'clients#find_client_by_full_name'
     end
   end
   resources :cards

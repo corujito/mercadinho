@@ -13,6 +13,13 @@ class ClientsController < ApplicationController
     render json: @clients.map(&:full_name)
   end
 
+  def find_client_by_full_name
+    @client = Client.find_by(full_name: params[:full_name])
+    respond_to do |format|
+      format.js   {}
+    end
+  end
+
   # GET /clients/1
   # GET /clients/1.json
   def show
