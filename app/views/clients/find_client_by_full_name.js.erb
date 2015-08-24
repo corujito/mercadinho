@@ -1,1 +1,1 @@
-$('#client_info').replaceWith("<div id='client_info'><b>Saldo Financeiro Atual:</b> <%= number_to_currency(@client.balance) %></div>");
+$('#client_info').replaceWith("<div id='client_info'><b>Saldo Atual de <%= @client.full_name %>:</b> <%= number_to_currency(@client.balance) %></div>");
