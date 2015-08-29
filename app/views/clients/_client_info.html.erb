@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-xs-5 col-sm-5 col-md-5">
         <div>
-          <b>Saldo Atual:</b> <%= number_to_currency(@client.balance) %>
+          <b>Saldo Atual:</b> <span style="<% if @client.balance and @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@client.balance) %></span>
         </div>
         <div>
           <% if @client.orders.any? %>
