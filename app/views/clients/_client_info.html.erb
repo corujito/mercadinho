@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-xs-5 col-sm-5 col-md-5">
+    <div>
+      <b>Nome:</b> <%= @client.full_name %>
+    </div>
+    <div>
+      <b>Saldo Atual:</b> <%= number_to_currency(@client.balance) %>
+    </div>
+    <div>
+      <% if @client.orders.any? %>
+          <b>Última compra em:</b> <%= l @client.orders.last.created_at, format: "%d/%m/%Y" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-xs-7 col-sm-7 col-md-7">
+    <% if @client.orders.any? %>
+        <ul>
+          <% @client.orders.last.order_items.each do |ordered_item| %>
+              <li>
+                <div class=""><%= ordered_item.product.full_name %> - <%= number_to_currency(ordered_item.unit_price) %></div>
+              </li>
+          <% end %>
+        </ul>
+    <% else %>
+        Nenhuma compra registrada.
+    <% end %>
+  </div>
+</div>

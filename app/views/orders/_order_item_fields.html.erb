@@ -9,5 +9,5 @@
       <% end %>
     </div>
   </td>
-  <td> <%= f.hidden_field :_destroy %> <%= link_to_function "Remover", "remove_fields(this)" %></td>
+  <td> <%= f.hidden_field :_destroy %> <%= link_to_function "<span class='glyphicon glyphicon-trash' aria-hidden='true'></span>".html_safe, "remove_fields(this)" %></td>
 </tr>

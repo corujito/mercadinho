@@ -1,30 +1,35 @@
 <%= simple_form_for(@order, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-xs-12 col-sm-6 col-md-4">
         <%= f.input :client_name,:readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
       </div>
-      <div id="client_info" class="col-md-2">
+      <div id="client_info" class="col-xs-12 col-sm-6 col-md-8 bg-info" style="display:none;">
       </div>
     </div>
 
-    <div class="table-responsive">
-      <table class="table table-striped" id="table_<%= f.object.id %>">
-        <thead>
-        <tr>
-          <th class="col-md-6">Produto</th>
-          <th class="col-md-1">Quantidade</th>
-          <th class="col-md-2">Preço da Unitário</th>
-          <th class="col-md-1"></th>
-        </tr>
-        </thead>
+    <div class="row">
+      <div class="table-responsive col-xs-12 col-sm-8 col-md-8">
+        <table class="table table-striped" id="table_<%= f.object.id %>">
+          <thead>
+          <tr>
+            <th class="col-xs-8 col-sm-6 col-md-6">Produto</th>
+            <th class="col-xs-1 col-sm-2 col-md-2">Quantidade</th>
+            <th class="col-xs-2 col-sm-3 col-md-3">Preço da Unitário</th>
+            <th class="col-xs-1 col-sm-1 col-md-1"></th>
+          </tr>
+          </thead>
 
-        <tbody id="items">
-        <%= f.simple_fields_for :order_items do |item| %>
-            <%= render 'order_item_fields', f: item %>
-        <% end %>
-        </tbody>
-      </table>
-      <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
+          <tbody id="items">
+          <%= f.simple_fields_for :order_items do |item| %>
+              <%= render 'order_item_fields', f: item %>
+          <% end %>
+          </tbody>
+        </table>
+        <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4" style="display:none;">
+        Preço
+      </div>
     </div>
 
     <%= f.button :submit, class: 'btn btn-primary' %>

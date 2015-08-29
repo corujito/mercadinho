@@ -1,1 +1,3 @@
-$('#client_info').replaceWith("<div id='client_info'><b>Saldo Atual de <%= @client.full_name %>:</b> <%= number_to_currency(@client.balance) %></div>");
+$('#client_info').hide();
+$('#client_info').html("<%= j (render 'clients/client_info') %>");
+$('#client_info').slideDown(350);

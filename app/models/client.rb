@@ -3,4 +3,6 @@ class Client < ActiveRecord::Base
   paginates_per 20
 
   usar_como_dinheiro :balance
+
+  has_many :orders
 end
