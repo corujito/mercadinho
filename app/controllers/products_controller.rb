@@ -13,6 +13,13 @@ class ProductsController < ApplicationController
     render json: @products.map(&:full_name)
   end
 
+  def find_product_by_full_name
+    @product = Product.find_by(full_name: params[:full_name])
+    respond_to do |format|
+      format.js   {}
+    end
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show

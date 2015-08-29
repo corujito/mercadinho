@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">PRODUTO: <%= @product.full_name %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-5 col-sm-5 col-md-5">
+        <div>
+          <b>Estoque Atual:</b> <%= @product.in_stock %>
+        </div>
+      </div>
+      <div class="col-xs-7 col-sm-7 col-md-7">
+        <% if @product.order_items.any? %>
+            <b>Últimos preços praticados:</b>
+            <ul>
+              <% @product.order_items.last(5).reverse.each do |ordered_item| %>
+                  <li>
+                    <div class=""><%= number_to_currency(ordered_item.unit_price) %></div>
+                  </li>
+              <% end %>
+            </ul>
+        <% else %>
+            Nenhuma compra registrada.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

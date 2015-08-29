@@ -1,0 +1,24 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">ÚLTIMAS VENDAS</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <% if Order.last(5).any? %>
+            <ul>
+              <% Order.last(5).reverse.each do |order| %>
+                  <% order.order_items.each do |ordered_item| %>
+                      <li>
+                        <div class=""><%= ordered_item.product.full_name %> - <%= number_to_currency(ordered_item.unit_price) %></div>
+                      </li>
+                  <% end %>
+              <% end %>
+            </ul>
+        <% else %>
+            Nenhuma compra registrada.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
