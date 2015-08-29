@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150823203646) do
   end
 
   create_table "items", force: true do |t|
-    t.integer  "quantity"
+    t.decimal  "quantity"
     t.decimal  "unit_price",  precision: 14, scale: 2
     t.integer  "product_id"
     t.integer  "purchase_id"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 20150823203646) do
   add_index "items", ["purchase_id"], name: "index_items_on_purchase_id", using: :btree
 
   create_table "order_items", force: true do |t|
-    t.integer  "quantity"
-    t.integer  "unit_price"
+    t.decimal  "quantity"
+    t.decimal  "unit_price", precision: 14, scale: 2
     t.integer  "product_id"
     t.integer  "order_id"
     t.datetime "created_at"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20150823203646) do
   create_table "products", force: true do |t|
     t.string   "full_name"
     t.integer  "unity",      default: 0
-    t.integer  "in_stock",   default: 0
+    t.decimal  "in_stock",   default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

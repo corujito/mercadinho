@@ -8,6 +8,9 @@
         <div>
           <b>Estoque Atual:</b> <%= @product.in_stock %>
         </div>
+        <div>
+          <b>Última compra:</b> <%= number_to_currency(@product.items.last.unit_price) if @product.items.any? %>
+        </div>
       </div>
       <div class="col-xs-7 col-sm-7 col-md-7">
         <% if @product.order_items.any? %>
@@ -20,7 +23,7 @@
               <% end %>
             </ul>
         <% else %>
-            Nenhuma compra registrada.
+            Nenhuma venda registrada.
         <% end %>
       </div>
     </div>

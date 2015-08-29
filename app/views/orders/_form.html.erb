@@ -27,9 +27,11 @@
         </table>
         <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
       </div>
-      <div id="product_info" class="col-xs-12 col-sm-4 col-md-4" style="display:none;"></div>
-      <div id="ultimas_vendas_info" class="col-xs-12 col-sm-4 col-md-4">
-        <%= render "orders/ultimas_vendas_info" %>
+      <div id="infos" class="col-xs-12 col-sm-4 col-md-4">
+        <div id="product_info" class="col-xs-12 col-sm-12 col-md-12" style="display:none;"></div>
+        <div id="ultimas_vendas_info" class="col-xs-12 col-sm-12 col-md-12">
+          <%= render "orders/ultimas_vendas_info" %>
+        </div>
       </div>
     </div>
 

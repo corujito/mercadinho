@@ -11,6 +11,7 @@ Mercadinho::Application.routes.draw do
   resources :products do
     collection do
       get 'find_products' => 'products#find_products'
+      get 'find_product_by_full_name' => 'products#find_product_by_full_name'
     end
   end
   resources :vendors do

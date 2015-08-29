@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :full_name
       t.integer :unity, default: 0
-      t.integer :in_stock, default: 0
+      t.decimal :in_stock, default: 0
 
       t.timestamps
     end
