@@ -1,31 +1,33 @@
 <%= simple_form_for(@purchase, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-xs-8 col-sm-6 col-md-6">
         <%= f.input :vendor_name, label: "Fornecedor", autofocus: true, placeholder: 'Digite para buscar o fornecedor', input_html: { data: { autocomplete_source: find_vendors_vendors_path } } %>
       </div>
-      <div class="col-md-2">
+      <div class="col-xs-4 col-sm-2 col-md-2">
         <%= f.input :discount, label: "Desconto", placeholder: '%', input_html: {min: 0, max: 100} %>
       </div>
     </div>
 
-    <div class="table-responsive">
-      <table class="table table-striped" id="table_<%= f.object.id %>">
-        <thead>
-        <tr>
-          <th class="col-md-6">Produto</th>
-          <th class="col-md-1">Quantidade</th>
-          <th class="col-md-2">Preço da Unitário</th>
-          <th class="col-md-1"></th>
-        </tr>
-        </thead>
+    <div class="row">
+      <div class="table-responsive col-xs-12 col-sm-12 col-md-12">
+        <table class="table table-striped" id="table_<%= f.object.id %>">
+          <thead>
+          <tr>
+            <th class="col-xs-8 col-sm-6 col-md-6">Produto</th>
+            <th class="col-xs-1 col-sm-2 col-md-2">Quantidade</th>
+            <th class="col-xs-2 col-sm-3 col-md-3">Preço da Unitário</th>
+            <th class="col-xs-1 col-sm-1 col-md-1"></th>
+          </tr>
+          </thead>
 
-        <tbody id="items">
-        <%= f.simple_fields_for :items do |item| %>
-            <%= render 'item_fields', f: item %>
-        <% end %>
-        </tbody>
-      </table>
-      <p class="pull-right"><%= link_to_add_fields "+", f, :items %></p>
+          <tbody id="items">
+          <%= f.simple_fields_for :items do |item| %>
+              <%= render 'item_fields', f: item %>
+          <% end %>
+          </tbody>
+        </table>
+        <p class="pull-right"><%= link_to_add_fields "+", f, :items %></p>
+      </div>
     </div>
 
     <%= f.button :submit, class: 'btn btn-primary' %>
