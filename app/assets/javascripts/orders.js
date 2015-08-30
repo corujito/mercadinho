@@ -17,6 +17,27 @@ ready = function() {
     $('#order_order_items_attributes_0_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     //$('#order_order_items_attributes_0_quantity').maskMoney({thousands:'.', decimal:',', allowNegative:false});
 
+    // gambis igual do purchase.js
+    $('#order_order_items_attributes_1_product_name').autocomplete({
+        source: $('#order_order_items_attributes_1_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "1") },
+        minLength: 2
+    });
+    $('#order_order_items_attributes_1_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    $('#order_order_items_attributes_2_product_name').autocomplete({
+        source: $('#order_order_items_attributes_2_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "2") },
+        minLength: 2
+    });
+    $('#order_order_items_attributes_2_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    $('#order_order_items_attributes_3_product_name').autocomplete({
+        source: $('#order_order_items_attributes_3_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "3") },
+        minLength: 2
+    });
+    $('#order_order_items_attributes_3_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    // fim da gambis
+
     $("#new_order").on("keyup keypress", function(e) {
         var code;
         code = e.keyCode || e.which;

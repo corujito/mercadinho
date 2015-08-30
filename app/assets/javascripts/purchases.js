@@ -19,6 +19,27 @@ ready = function() {
     $('#purchase_items_attributes_0_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     //$('#purchase_items_attributes_0_quantity').inputmask("decimal", {radixPoint: ","});
 
+    // quando invalida formulario com mais de 2 itens ele cria esses kras
+    $('#purchase_items_attributes_1_product_name').autocomplete({
+        source: $('#purchase_items_attributes_1_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "1") },
+        minLength: 2
+    });
+    $('#purchase_items_attributes_1_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    $('#purchase_items_attributes_2_product_name').autocomplete({
+        source: $('#purchase_items_attributes_2_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "2") },
+        minLength: 2
+    });
+    $('#purchase_items_attributes_2_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    $('#purchase_items_attributes_3_product_name').autocomplete({
+        source: $('#purchase_items_attributes_3_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "3") },
+        minLength: 2
+    });
+    $('#purchase_items_attributes_3_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    // fim da gambis
+
     $("#new_purchase").on("keyup keypress", function(e) {
         var code;
         code = e.keyCode || e.which;
