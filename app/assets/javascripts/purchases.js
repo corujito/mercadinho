@@ -1,4 +1,7 @@
 //= require "jquery.maskMoney.min"
+// require "jquery.inputmask/inputmask/inputmask.min"
+// require "jquery.inputmask/inputmask/jquery.inputmask.min"
+// require "jquery.inputmask/inputmask/inputmask.numeric.extensions.min"
 
 var ready;
 ready = function() {
@@ -14,6 +17,7 @@ ready = function() {
     });
 
     $('#purchase_items_attributes_0_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    //$('#purchase_items_attributes_0_quantity').inputmask("decimal", {radixPoint: ","});
 
     $("#new_purchase").on("keyup keypress", function(e) {
         var code;
@@ -55,4 +59,5 @@ function add_fields(link, association, content) {
     });
     $('#purchase_items_attributes_'+new_id+'_product_name').focus();
     $('#purchase_items_attributes_'+new_id+'_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+    //$('#purchase_items_attributes_'+new_id+'_quantity').inputmask("decimal", {radixPoint: ","});
 }

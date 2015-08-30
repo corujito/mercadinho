@@ -6,6 +6,7 @@ class Item < ActiveRecord::Base
   belongs_to :purchase
 
   usar_como_dinheiro :unit_price
+  # usar_como_dinheiro :quantity
   accepts_nested_attributes_for :product, :reject_if => :all_blank, :allow_destroy => false
   validates :product, :quantity, :unit_price, :product_name, presence: true
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
