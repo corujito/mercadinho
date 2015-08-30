@@ -8,6 +8,13 @@ class PurchasesController < ApplicationController
     @purchases = Purchase.order(created_at: :desc).page params[:page]
   end
 
+  def find_product_by_full_name
+    @product = Product.find_by(full_name: params[:full_name])
+    respond_to do |format|
+      format.js   {}
+    end
+  end
+
   # GET /purchases/1
   # GET /purchases/1.json
   def show

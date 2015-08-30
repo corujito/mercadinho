@@ -26,7 +26,11 @@ Mercadinho::Application.routes.draw do
     end
   end
   resources :cards
-  resources :purchases
+  resources :purchases do
+    collection do
+      get 'find_product_by_full_name' => 'purchases#find_product_by_full_name'
+    end
+  end
   resources :orders
 
   root 'dashboard#index'

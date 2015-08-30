@@ -9,6 +9,7 @@ ready = function() {
 
     $('#purchase_items_attributes_0_product_name').autocomplete({
         source: $('#purchase_items_attributes_0_product_name').data('autocomplete-source'),
+        select: function( event, ui ) { get_product_info(ui.item.value, "0") },
         minLength: 2
     });
 
@@ -26,6 +27,16 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
+function get_product_info(full_name, input_id) {
+    return $.ajax({
+        type: "GET",
+        url: "/purchases/find_product_by_full_name",
+        data: {
+            full_name: full_name,
+            input_id: input_id
+        }
+    });
+}
 
 function remove_fields(link) {
     $(link).parent().parent().find('input[type=hidden]').val("1");
@@ -39,6 +50,7 @@ function add_fields(link, association, content) {
     $('#purchase_items_attributes_'+new_id+'_product_name').autocomplete({
         source: $('#purchase_items_attributes_'+new_id+'_product_name').data('autocomplete-source'),
         messages: {noResults: '',results: function() {}},
+        select: function( event, ui ) { get_product_info(ui.item.value, new_id) },
         minLength: 2
     });
     $('#purchase_items_attributes_'+new_id+'_product_name').focus();
