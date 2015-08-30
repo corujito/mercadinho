@@ -1,1 +1,1 @@
-$('#purchase_items_attributes_<%= params[:input_id] %>_unity').val('<%= @product.unity %>');
+$('#purchase_items_attributes_<%= params[:input_id] %>_quantity').parent().next().text('<%= @product.unity %>');
