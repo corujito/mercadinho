@@ -21,6 +21,10 @@ class OrderItem < ActiveRecord::Base
     self.product = Product.find_or_create_by(full_name: name) if name.present?
   end
 
+  def total_price
+    self.unit_price * self.quantity
+  end
+
   def update_stock
     if self.product_id_changed? and self.product_id_was
       old_p = Product.find(self.product_id_was)
