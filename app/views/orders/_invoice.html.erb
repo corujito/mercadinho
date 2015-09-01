@@ -15,7 +15,7 @@ PRODUTO
 Total:				<%= number_to_currency(@order.total_price) %>
 
 Cliente No.:			<%= @order.client.id %>
-Saldo Financeiro:		<%= number_to_currency(@order.client.balance + @order.total_price, negative_format: "%u %n", format: "(crédito) %u%n") %>
+Saldo Financeiro:		<%= number_to_currency(@order.client.balance + @order.total_price, negative_format: "%u %n", format: "%u %n (crédito)") %>
 Total do Pedido:		<%= number_to_currency(@order.total_price) %>
 TOTAL FINAL:			<%= number_to_currency(@order.client.balance, negative_format: "%u %n") %>
 
