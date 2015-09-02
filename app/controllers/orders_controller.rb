@@ -11,6 +11,9 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    if params[:html]
+      render template: "orders/show2", layout: false
+    end
   end
 
   # GET /orders/new

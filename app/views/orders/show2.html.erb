@@ -1,0 +1,25 @@
+
+<p>DATA: <%= l @order.created_at, format: "%d/%m/%Y" %>		No.: <%= @order.id %></p>
+<p>=======================================</p>
+<p>MERCADO REINALDO</p>
+<p></p>
+<p>=======================================</p>
+<p>PRODUTO</p>
+<p> QTDE UN	VL.UNIT		VL.ITEM</p>
+<p>---------------------------------------</p>
+<% @order.order_items.each do |item| %>
+<%= item.product.full_name if item.product %>
+<p> <%= item.quantity %> x <%= item.product.unity if item.product %>	<%= number_to_currency(item.unit_price) %> =	<%= number_to_currency(item.total_price) %></p>
+<% end %>
+<p></p>
+<p>=======================================</p>
+<p>Total:				<%= number_to_currency(@order.total_price) %></p>
+<p></p>
+<p>Cliente No.:			<%= @order.client.id %></p>
+<p>Saldo Financeiro:		<%= number_to_currency(@order.client.balance + @order.total_price, negative_format: "%u %n", format: "%u %n (crédito)") %></p>
+<p>Total do Pedido:		<%= number_to_currency(@order.total_price) %></p>
+<p><b>TOTAL FINAL:			<%= number_to_currency(@order.client.balance, negative_format: "%u %n") %></b></p>
+<p></p>
+<p>---------------------------------------</p>
+<p>Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %></p>
+<p>Por: <%= current_user.username %></p>
