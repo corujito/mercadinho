@@ -6,4 +6,5 @@ class Client < ActiveRecord::Base
   usar_como_dinheiro :balance
 
   has_many :orders
+  has_many :payments
 end

@@ -1,0 +1,8 @@
+<h1><%= @payment.client.full_name if @payment.client %></h1>
+Valor Pago: <%= number_to_currency(@payment.amount) %><br>
+Data: <%= l @payment.created_at, format: "%d/%m/%Y" %><br>
+
+<br>
+
+<%= link_to 'Editar', edit_payment_path(@payment), class: "btn btn-primary" %>
+<%= link_to 'Voltar', payments_path, class: "btn btn-default" %>

@@ -32,6 +32,7 @@ Mercadinho::Application.routes.draw do
     end
   end
   resources :orders
+  resources :payments
 
   root 'dashboard#index'
 

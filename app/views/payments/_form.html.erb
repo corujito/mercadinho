@@ -1,0 +1,19 @@
+<%= simple_form_for(@payment, html: { class: 'form-vertical' }) do |f| %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <%= f.input :client_name, :readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
+      </div>
+      <div id="client_info" class="col-xs-12 col-sm-6 col-md-8" style="display:none;">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-inputs col-xs-12 col-sm-6 col-md-4">
+        <%= f.input :amount, label: "Valor Pago", wrapper: :vertical_input_group do %>
+            <span class="input-group-addon">R$</span>
+            <%= f.text_field :amount, class: "form-control", value: f.object.amount.real %>
+        <% end %>
+      </div>
+    </div>
+    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= link_to "Cancelar", payments_url, {:class=>"btn btn-danger"} %>
+<% end %>
