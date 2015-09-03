@@ -2,6 +2,6 @@
     <%= f.input :full_name, label: 'Nome', autofocus: true %>
     <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
     <%= f.input :in_stock, label: 'Estoque Atual' %>
-    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
     <%= link_to "Cancelar", products_url, {:class=>"btn btn-danger"} %>
 <% end %>
