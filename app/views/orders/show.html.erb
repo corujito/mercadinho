@@ -38,7 +38,7 @@ Data: <%= l @order.created_at, format: "%d/%m/%Y" %><br>
       <div class="modal-body"><pre id="toPrint"><%= render "orders/invoice" %></pre></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary" onclick=$("#toPrint").print();>Imprimir</button>
+        <button type="button" class="btn btn-primary" onclick=$("#toPrint").print({timeout:3000});>Imprimir</button>
       </div>
     </div>
   </div>
