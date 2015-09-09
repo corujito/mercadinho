@@ -28,4 +28,8 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(\"table_#{f.object.id}\", \"#{association}\", \"#{escape_javascript(fields)}\")", "btn btn-default")
   end
+
+  def display_stock(number, unity)
+    "#{number_with_precision(number, precision: 2, separator: ",", strip_insignificant_zeros: true)} #{unity}"
+  end
 end

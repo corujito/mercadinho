@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-xs-5 col-sm-5 col-md-5">
         <div>
-          <b>Estoque Atual:</b> <%= @product.in_stock %>
+          <b>Estoque Atual:</b> <%= display_stock(@product.in_stock, @product.unity) %>
         </div>
         <div>
           <b>Última compra:</b> <%= number_to_currency(@product.items.last.unit_price) if @product.items.any? %>
