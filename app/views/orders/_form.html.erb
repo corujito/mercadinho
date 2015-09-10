@@ -1,40 +1,46 @@
 <%= simple_form_for(@order, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <%= f.input :client_name,:readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
-      </div>
-      <div id="client_info" class="col-xs-12 col-sm-6 col-md-8" style="display:none;">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="table-responsive col-xs-12 col-sm-8 col-md-8">
-        <table class="table table-striped" id="table_<%= f.object.id %>">
-          <thead>
-          <tr>
-            <th class="col-xs-4 col-sm-5 col-md-7">Produto</th>
-            <th class="col-xs-4 col-sm-3 col-md-2">Qtd</th>
-            <th class="col-xs-3 col-sm-3 col-md-2">Preço Unitário</th>
-            <th class="col-xs-1 col-sm-1 col-md-1"></th>
-          </tr>
-          </thead>
-
-          <tbody id="items">
-          <%= f.simple_fields_for :order_items do |item| %>
-              <%= render 'order_item_fields', f: item %>
-          <% end %>
-          </tbody>
-        </table>
-        <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
-      </div>
-      <div id="infos" class="col-xs-12 col-sm-4 col-md-4">
-        <div id="product_info" class="col-xs-12 col-sm-12 col-md-12" style="display:none;"></div>
-        <div id="ultimas_vendas_info" class="col-xs-12 col-sm-12 col-md-12">
-          <%= render "orders/ultimas_vendas_info" %>
+      <div class="col-xs-12 col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <%= f.input :client_name,:readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } %>
+          </div>
+          <div id="client_info" class="col-xs-12 col-sm-6 col-md-8" style="display:none;">
+          </div>
         </div>
+
+        <div class="row">
+          <div class="table-responsive col-xs-12 col-sm-8 col-md-8">
+            <table class="table table-striped" id="table_<%= f.object.id %>">
+              <thead>
+              <tr>
+                <th class="col-xs-4 col-sm-5 col-md-5">Produto</th>
+                <th class="col-xs-4 col-sm-3 col-md-3">Qtd</th>
+                <th class="col-xs-3 col-sm-3 col-md-3">Preço Unitário</th>
+                <th class="col-xs-1 col-sm-1 col-md-1"></th>
+              </tr>
+              </thead>
+
+              <tbody id="items">
+              <%= f.simple_fields_for :order_items do |item| %>
+                  <%= render 'order_item_fields', f: item %>
+              <% end %>
+              </tbody>
+            </table>
+            <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
+          </div>
+          <div id="infos" class="col-xs-12 col-sm-4 col-md-4">
+            <div id="product_info" class="" style="display:none;"></div>
+          </div>
+        </div>
+
+        <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
+        <%= link_to "Cancelar", orders_url, {:class=>"btn btn-danger"} %>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4">
+          <div id="ultimas_vendas_info" class="">
+            <%= render "orders/ultimas_vendas_info" %>
+          </div>
       </div>
     </div>
-
-    <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
-    <%= link_to "Cancelar", orders_url, {:class=>"btn btn-danger"} %>
 <% end %>

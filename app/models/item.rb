@@ -9,7 +9,7 @@ class Item < ActiveRecord::Base
   # usar_como_dinheiro :quantity
   accepts_nested_attributes_for :product, :reject_if => :all_blank, :allow_destroy => false
   validates :product, :quantity, :unit_price, :product_name, presence: true
-  validates :quantity, numericality: { greater_than_or_equal_to: 1 }
+  validates :quantity, numericality: { greater_than: 0 }
   validates :unit_price, numericality: { greater_than_or_equal_to: 0 }
 
   def product_name

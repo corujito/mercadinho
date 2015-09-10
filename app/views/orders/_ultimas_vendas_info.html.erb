@@ -1,20 +1,25 @@
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">ÚLTIMAS VENDAS</h3>
-  </div>
+<div class="panel panel-info collapse in" id="panel_estoque_atual">
+  <button type="button" class="close" data-toggle="collapse" data-target="#panel_estoque_atual" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <% if Order.last(5).any? %>
-            <ul>
-              <% Order.last(5).reverse.each do |order| %>
-                  <% order.order_items.each do |ordered_item| %>
-                      <li>
-                        <div class=""><%= ordered_item.product.full_name %> - <%= number_to_currency(ordered_item.unit_price) %></div>
-                      </li>
-                  <% end %>
+        <% if Product.all.any? %>
+            <table class="table-bordered">
+              <thead>
+              <tr>
+                <th class="col-xs-1 col-sm-1 col-md-1">Estoque</th>
+                <th class="col-xs-10 col-sm-10 col-md-9">Produto</th>
+                <th class="col-xs-1 col-sm-1 col-md-2">Preço Médio</th>
+              </tr>
+              </thead>
+              <% Product.order(:full_name).each do |product| %>
+                  <tr>
+                    <td class=""><%= display_stock(product.in_stock, product.unity) %></td>
+                    <td class=""><%= product.full_name %></td>
+                    <td class=""><%= "#{number_to_currency(product.avg_price_in_stock_with_discount)}/#{product.unity}" if product.avg_price_in_stock_with_discount %></td>
+                  </tr>
               <% end %>
-            </ul>
+            </table>
         <% else %>
             Nenhuma venda registrada.
         <% end %>
