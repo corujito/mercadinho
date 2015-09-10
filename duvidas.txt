@@ -1,0 +1,6 @@
+nao ficou bom o preco medio com desconto em estoque. 
+sugestao: preco medio com desconto das ultimas x compras
+
+tela de criacao de pedido. tabela de produtos com preço médio com desconto em estoque.
+- exibe qto foi pago pelo que esta em estoque no momento, qdo o estoque estiver negativo vai ficar sem informação
+- relatorio de qto lucrou por cliente eu terei que guardar qto foi o valor total do pedido usando o preco medio com desconto em estoque?
