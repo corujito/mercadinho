@@ -5,21 +5,20 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <div class="col-xs-5 col-sm-5 col-md-5">
+      <div class="col-xs-12 col-sm-12 col-md-12">
         <div>
           <b>Estoque Atual:</b> <%= display_stock(@product.in_stock, @product.unity) %>
         </div>
-        <div>
-          <b>Última compra:</b> <%= number_to_currency(@product.items.last.unit_price) if @product.items.any? %>
-        </div>
       </div>
-      <div class="col-xs-7 col-sm-7 col-md-7">
-        <% if @product.order_items.any? %>
-            <b>Últimos preços praticados:</b>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <% if @order_items.any? %>
+            <b>Últimos preços praticados para <%= @client.full_name %>:</b>
             <ul>
-              <% @product.order_items.last(5).reverse.each do |ordered_item| %>
+              <% @order_items.last(5).reverse.each do |ordered_item| %>
                   <li>
-                    <div class=""><%= number_to_currency(ordered_item.unit_price) %></div>
+                    <div class=""><%= number_to_currency(ordered_item.unit_price) %> - <%= l ordered_item.created_at, format: "%d/%m/%Y" %></div>
                   </li>
               <% end %>
             </ul>

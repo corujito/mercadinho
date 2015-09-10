@@ -68,7 +68,8 @@ function get_product_info(full_name, input_id) {
         url: "/products/find_product_by_full_name",
         data: {
             full_name: full_name,
-            input_id: input_id
+            input_id: input_id,
+            client_id: client_id
         }
     });
 }

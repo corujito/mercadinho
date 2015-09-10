@@ -15,6 +15,11 @@ class ProductsController < ApplicationController
 
   def find_product_by_full_name
     @product = Product.find_by(full_name: params[:full_name])
+    @order_items = []
+    if params[:client_id].present?
+      @client = Client.find(params[:client_id])
+      @order_items = @client.order_items.where(product_id: @product.id) if @client
+    end
     respond_to do |format|
       format.js   {}
     end
