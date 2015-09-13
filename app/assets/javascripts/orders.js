@@ -57,12 +57,15 @@ $(document).on('page:load', ready);
 function calcular_total() {
     var total = 0
     $( ".fields:visible" ).each(function( index ) {
+        total_parcial = 0;
         qtd_element = $(this).find('[id^=order_order_items_attributes_][id$=_quantity]')
         unit_price_element = $(this).find('[id^=order_order_items_attributes_][id$=_unit_price]')
         if(qtd_element.val()!="" && unit_price_element.val()!="") {
             qtd = qtd_element.val().replace('.', '').replace(',', '.');
             unit_price = unit_price_element.val().replace('.', '').replace(',', '.');
-            total += parseFloat(parseFloat(qtd) * parseFloat(unit_price));
+            total_parcial = parseFloat(parseFloat(qtd) * parseFloat(unit_price));
+            total += total_parcial;
+            $(this).find('[name=total_item]').html(total_parcial.toFixed(2).replace('.', ','));
         }
     });
     $('#total_pedido').html("R$ " + total.toFixed(2).replace('.', ','));
