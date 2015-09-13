@@ -56,7 +56,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def update_client_balance
-    if self.changed?
+    if self.changed? and self.order and self.order.client
       c = self.order.client
       if self.quantity_was and self.unit_price_was
         c.balance -= (self.quantity * self.unit_price) - (self.quantity_was * self.unit_price_was)
@@ -68,12 +68,18 @@ class OrderItem < ActiveRecord::Base
         c.balance -= self.quantity * self.unit_price
       end
       c.save
+    else
+      logger.warn "nao foi possivel executar update_client_balance"
     end
   end
 
   def update_client_balance_destroy
-    c = self.order.client
-    c.balance += self.quantity * self.unit_price
-    c.save
+    if self.order and self.order.client
+      c = self.order.client
+      c.balance += self.quantity * self.unit_price
+      c.save
+    else
+      logger.warn "nao foi possivel executar update_client_balance_destroy"
+    end
   end
 end
