@@ -1,3 +1,5 @@
 $('#client_info').hide();
 $('#client_info').html("<%= j (render 'clients/client_info') %>");
 $('#client_info').slideDown(350);
+$('#saldo_financeiro').html("<span style=\"<% if @client.balance and @client.balance < 0 then %>color:red<% end %>\"><%= number_to_currency(@client.balance) %></span>");
+calcular_total();

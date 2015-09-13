@@ -39,11 +39,14 @@ ready = function() {
     $('#order_order_items_attributes_3_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     // fim da gambis
 
+    aplica_onchange_para_campos();
+
     $("#new_order").on("keyup keypress", function(e) {
         var code;
         code = e.keyCode || e.which;
         if (code === 13) {
             e.preventDefault();
+            calcular_total();
             return false;
         }
     });
@@ -51,6 +54,21 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
+function calcular_total() {
+    var total = 0
+    $( ".fields:visible" ).each(function( index ) {
+        qtd_element = $(this).find('[id^=order_order_items_attributes_][id$=_quantity]')
+        unit_price_element = $(this).find('[id^=order_order_items_attributes_][id$=_unit_price]')
+        if(qtd_element.val()!="" && unit_price_element.val()!="") {
+            qtd = qtd_element.val().replace('.', '').replace(',', '.');
+            unit_price = unit_price_element.val().replace('.', '').replace(',', '.');
+            total += parseFloat(parseFloat(qtd) * parseFloat(unit_price));
+        }
+    });
+    $('#total_pedido').html("R$ " + total.toFixed(2).replace('.', ','));
+    var total_final = parseFloat(total - client_balance).toFixed(2);
+    $('#total_final').html("R$ " + parseFloat(Math.abs(total_final)).toFixed(2).replace('.', ','));
+}
 
 function get_client_info(full_name) {
     return $.ajax({
@@ -77,6 +95,7 @@ function get_product_info(full_name, input_id) {
 function remove_fields(link) {
     $(link).parent().parent().find('input[type=hidden]').val("1");
     $(link).parent().parent().hide();
+    calcular_total();
 }
 
 function add_fields(link, association, content) {
@@ -92,4 +111,15 @@ function add_fields(link, association, content) {
     $('#order_order_items_attributes_'+new_id+'_product_name').focus();
     $('#order_order_items_attributes_'+new_id+'_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     //$('#order_order_items_attributes_'+new_id+'_quantity').maskMoney({thousands:'.', decimal:',', allowNegative:false});
+
+    aplica_onchange_para_campos();
+}
+
+function aplica_onchange_para_campos() {
+    $('[id^=order_order_items_attributes_][id$=_unit_price]').change(function() {
+        calcular_total();
+    });
+    $('[id^=order_order_items_attributes_][id$=_quantity]').change(function() {
+        calcular_total();
+    });
 }

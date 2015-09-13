@@ -8,6 +8,7 @@
           <div id="client_info" class="col-xs-12 col-sm-6 col-md-8" style="display:none;">
             <script>
               var client_id = null;
+              var client_balance = 0;
             </script>
           </div>
         </div>
@@ -37,8 +38,30 @@
           </div>
         </div>
 
-        <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
-        <%= link_to "Cancelar", orders_url, {:class=>"btn btn-danger"} %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <table class="table table-condensed">
+              <tbody>
+              <tr>
+                <td><strong>Saldo Financeiro</strong></td>
+                <td id="saldo_financeiro">R$ 0,00</td>
+              </tr>
+              <tr>
+                <td><strong>Total deste Pedido</strong></td>
+                <td id="total_pedido">R$ 0,00</td>
+              </tr>
+              <tr>
+                <td><strong>Total Final</strong></td>
+                <td id="total_final">R$ 0,00</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
+            <%= link_to "Cancelar", orders_url, {:class=>"btn btn-danger"} %>
+          </div>
+        </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-4">
           <div id="ultimas_vendas_info" class="">
