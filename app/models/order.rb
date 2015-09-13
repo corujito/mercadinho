@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
   has_many :order_items, :dependent => :destroy
   accepts_nested_attributes_for :order_items, :reject_if => :all_blank, :allow_destroy => true
   validates :order_items, presence: true
+  validates :client, presence: true
   validates_associated :order_items
   validate :client_id_not_changed
 
