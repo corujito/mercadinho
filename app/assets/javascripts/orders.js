@@ -8,6 +8,13 @@ ready = function() {
         select: function( event, ui ) { get_client_info(ui.item.value) },
         minLength: 2
     });
+    $('#order_client_name').change(function() {
+        $('#client_info').hide();
+        client_id = null;
+        client_balance = 0;
+        $('#saldo_financeiro').html("R$ 0,00");
+        calcular_total();
+    });
 
     $('#order_order_items_attributes_0_product_name').autocomplete({
         source: $('#order_order_items_attributes_0_product_name').data('autocomplete-source'),
