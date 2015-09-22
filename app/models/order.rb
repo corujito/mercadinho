@@ -7,6 +7,8 @@ class Order < ActiveRecord::Base
   validates_associated :order_items
   validate :client_id_not_changed
 
+  enum status: [ :pending, :paid ]
+
   def total_price
     order_items.inject(0) { |sum, p| sum + p.unit_price * p.quantity }
   end
