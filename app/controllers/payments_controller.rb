@@ -15,6 +15,14 @@ class PaymentsController < ApplicationController
 
   # GET /payments/new
   def new
+    if params[:client_id]
+      @client = Client.find(params[:client_id])
+    elsif params[:full_name]
+      @client = Client.find_by(full_name: params[:full_name])
+    else
+      redirect_to payments_url
+      return
+    end
     @payment = Payment.new
   end
 
@@ -29,6 +37,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
+        Order.where(id: params[:pagar]).update_all(status: Order.statuses[:paid])
         format.html { redirect_to @payment, notice: 'Pagamento criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else

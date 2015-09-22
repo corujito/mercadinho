@@ -4,7 +4,7 @@ var ready;
 ready = function() {
     $('#payment_client_name').autocomplete({
         source: $('#payment_client_name').data('autocomplete-source'),
-        select: function( event, ui ) { get_client_info(ui.item.value) },
+        select: function( event, ui ) { new_payment(ui.item.value) },
         minLength: 2
     });
 
@@ -22,13 +22,6 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 
-
-function get_client_info(full_name) {
-    return $.ajax({
-        type: "GET",
-        url: "/clients/find_client_by_full_name",
-        data: {
-            full_name: full_name
-        }
-    });
+function new_payment(full_name) {
+    window.location.replace("/payments/new?full_name=" + full_name);
 }
