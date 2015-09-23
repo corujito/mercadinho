@@ -1,0 +1,16 @@
+DATA: <%= l @payment.created_at, format: "%d/%m/%Y" %>		No.: <%= @payment.id %>
+=======================================
+MERCADO REINALDO
+
+=======================================
+
+            RECIBO
+        -------------
+
+Recebi do Cliente <%= @payment.client.full_name %>,
+a quantia de <%= number_to_currency(@payment.amount) %> (<%= @payment.amount.to_extenso %>)
+
+---------------------------------------
+Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
+Por: <%= current_user.username %>
+

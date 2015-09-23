@@ -1,4 +1,5 @@
 //= require "jquery.maskMoney.min"
+//= require "jquery.print"
 
 var ready;
 ready = function() {
