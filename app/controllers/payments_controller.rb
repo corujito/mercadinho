@@ -23,7 +23,7 @@ class PaymentsController < ApplicationController
       redirect_to payments_url
       return
     end
-    @payment = Payment.new
+    @payment = @client.payments.build
   end
 
   # GET /payments/1/edit
@@ -37,7 +37,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        Order.where(id: params[:pagar]).update_all(status: Order.statuses[:paid])
+        Order.where(id: params[:pagar]).update_all(status: Order.statuses[:paid]) if params[:pagar]
         format.html { redirect_to @payment, notice: 'Pagamento criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else
@@ -52,6 +52,7 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
+        Order.where(id: params[:pagar]).update_all(status: Order.statuses[:paid]) if params[:pagar]
         format.html { redirect_to @payment, notice: 'Pagamento atualizado com sucesso.' }
         format.json { head :no_content }
       else

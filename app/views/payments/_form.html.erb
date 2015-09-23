@@ -1,44 +1,64 @@
+<br>
 <%= simple_form_for(@payment, html: { class: 'form-vertical' }) do |f| %>
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <strong>Cliente:</strong> <%= @client.full_name %>
-        <!-- f.input :client_name, :readonly => f.object.persisted?, label: "Cliente", autofocus: true, placeholder: 'Digite para buscar o cliente', input_html: { data: { autocomplete_source: find_clients_clients_path } } -->
-        <%= f.input :client_id, :as => :hidden, :input_html => { :value => @client.id } %>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div id="pending_orders" class="col-xs-12 col-sm-6 col-md-6 table-responsive">
-        <strong>Pedidos Pendentes</strong>
-          <table class="table table-striped table-condensed">
-            <tbody>
-            <% @client.orders.order(created_at: :desc).pending.each_with_index do |order, i| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><strong>Cliente:</strong> <%= @payment.client.full_name %></h3>
+          <%= f.input :client_id, :as => :hidden, :input_html => { :value => @payment.client.id } %>
+        </div>
+        <div class="panel-body">
+          <div id="pending_orders" class="col-xs-12 col-sm-6 col-md-8 table-responsive">
+            <table class="table table-condensed">
+              <caption>PEDIDOS EM ABERTO</caption>
+              <thead>
+              <tr>
+                <th></th>
+                <th>Status</th>
+                <th>Valor</th>
+                <th>Data</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @payment.client.orders.order(created_at: :desc).pending.each_with_index do |order, i| %>
+                  <tr>
+                    <td>
+                      <%= f.input :pagar, :label => false do %>
+                          <%= check_box_tag("pagar[]", order.id, (order.id.to_s == params[:order_id])) %>
+                      <% end %>
+                    </td>
+                    <td>Pendente</td>
+                    <td><%= number_to_currency(order.total_price) %></td>
+                    <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="">
+            <div class="form-inputs col-xs-12 col-sm-6 col-md-4">
+              <table class="table table-condensed">
+                <tbody>
                 <tr>
-                  <td>
-                    <%= f.input :pagar, :label => false do %>
-                        <%= check_box_tag("pagar[]", order.id, (order.id.to_s == params[:order_id])) %> Pagar
-                    <% end %>
-                  </td>
-                  <td><%= number_to_currency(order.total_price) %></td>
-                  <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+                  <td><strong>Saldo Financeiro</strong></td>
+                  <td id="saldo_financeiro" style="<% if @payment.client.balance and @payment.client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@payment.client.balance, negative_format: "%u %n") %></td>
                 </tr>
-            <% end %>
-            </tbody>
-          </table>
+                <tr>
+                  <td><strong>Pedidos em aberto</strong></td>
+                  <td id="total_pedidos">R$ <%= @payment.client.orders.any? ? @payment.client.orders.pending.inject(0) {|sum, e| sum + e.total_price} : "0,00" %></td>
+                </tr>
+                </tbody>
+              </table>
+              <%= f.input :amount, label: "Valor Pago", wrapper: :vertical_input_group do %>
+                  <span class="input-group-addon">R$</span>
+                  <%= f.text_field :amount, class: "form-control", value: f.object.amount.real %>
+              <% end %>
+              <div class="form-actions">
+                <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
+                <%= link_to "Cancelar", payments_url, {:class=>"btn btn-danger"} %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="form-inputs col-xs-12 col-sm-6 col-md-4">
-        <%= f.input :amount, label: "Valor Pago", wrapper: :vertical_input_group do %>
-            <span class="input-group-addon">R$</span>
-            <%= f.text_field :amount, class: "form-control", value: f.object.amount.real %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
-      <%= link_to "Cancelar", payments_url, {:class=>"btn btn-danger"} %>
     </div>
 <% end %>
