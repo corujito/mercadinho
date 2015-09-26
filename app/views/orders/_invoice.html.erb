@@ -14,10 +14,10 @@ PRODUTO
 =======================================
 Total:				<%= number_to_currency(@order.total_price) %>
 
-Cliente No.:			<%= @order.client.id %>
-Saldo Financeiro:		<%= number_to_currency(@order.client.balance + @order.total_price, negative_format: "%u %n", format: "%u %n (crédito)") %>
+Cliente No.:			<%=  if @order.client then @order.client.id else "-" end %>
+Saldo Financeiro:		<%= if @order.client then number_to_currency(@order.client.balance + @order.total_price, negative_format: "%u %n", format: "%u %n (crédito)") else "-" end %>
 Total do Pedido:		<%= number_to_currency(@order.total_price) %>
-TOTAL FINAL:			<%= number_to_currency(@order.client.balance, negative_format: "%u %n") %>
+TOTAL FINAL:			<%= if @order.client then number_to_currency(@order.client.balance, negative_format: "%u %n") else "-" end %>
 
 ---------------------------------------
 Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
