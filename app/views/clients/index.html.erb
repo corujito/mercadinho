@@ -23,6 +23,7 @@
     <tr>
       <th class="col-md-3">Nome</th>
       <th>Saldo</th>
+      <th></th>
       <th>Telefone</th>
       <th>Email</th>
       <!--<th>Endereço</th>-->
@@ -38,6 +39,7 @@
       <tr>
         <td><%= link_to client.full_name, client %></td>
         <td style="<% if client.balance and client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(client.balance, negative_format: "%u%n") %></td>
+        <td><%= link_to("Abrir Pagamento", new_payment_path(client_id: client.id), title: 'Abrir Pagamento') %></td>
         <td><%= client.phone %></td>
         <td><%= client.email %></td>
         <!--<td><%= client.address %></td>-->
