@@ -27,6 +27,7 @@
     </thead>
     <%
        compras = @purchases.inject(0) { |sum, p| sum + p.total_price }
+       compras_com_desconto = @purchases.inject(0) { |sum, p| sum + p.total_price_with_discount }
        pedidos = @orders.inject(0) { |sum, p| sum + p.total_price }
        faturamento = @payments.inject(0) { |sum, p| sum + p.amount }
        estoque = @products.inject(0) { |sum, p| sum + p.in_stock*p.avg_price_in_stock }
@@ -35,6 +36,10 @@
         <tr>
           <td>Compras</td>
           <td><%= number_to_currency(compras) %></td>
+        </tr>
+        <tr>
+          <td>Compras com Desconto</td>
+          <td><%= number_to_currency(compras_com_desconto) %></td>
         </tr>
         <tr>
           <td>Pedidos</td>
@@ -49,9 +54,13 @@
           <td><%= number_to_currency(estoque) %></td>
         </tr>
         <tr>
-          <td>Resumo (faturamento + estoque - compras)</td>
-          <td><%= number_to_currency(estoque+faturamento-compras) %></td>
+          <td>Resumo (faturamento - compras com desconto)</td>
+          <td><%= number_to_currency(faturamento-compras_com_desconto) %></td>
         </tr>
+        <!--<tr>-->
+          <!--<td>Resumo (faturamento + em estoque - compras com desconto)</td>-->
+          <!--<td><%= number_to_currency(estoque+faturamento-compras_com_desconto) %></td>-->
+        <!--</tr>-->
     </tbody>
   </table>
 </div>
