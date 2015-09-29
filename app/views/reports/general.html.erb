@@ -1,0 +1,59 @@
+<div class="page-header clearfix">
+  <div class="pull-right">
+    <div class="btn-group">
+    </div>
+  </div>
+  <div class="pull-left">
+    <h1>Relatório Geral<small></small></h1>
+    <%= form_tag(reports_general_url, {:method => "get", :class => "form-inline"}) do %>
+        <%= label_tag(:start_date, "Data Inicial") %>
+        <%= text_field_tag(:start_date, params[:start_date] || 1.month.ago.strftime("%d/%m/%Y"), :class => "datetimepicker") %>
+        <%= label_tag(:end_date, "Data Final") %>
+        <%= text_field_tag(:end_date, params[:end_date] || Time.now.strftime("%d/%m/%Y"), :class => "datetimepicker") %>
+        <%= submit_tag("Enviar", class: "button btn-report send-button radius small") %>
+    <% end %>
+  </div>
+</div>
+
+<% if @start_date and @end_date %>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+    </tr>
+    </thead>
+    <%
+       compras = @purchases.inject(0) { |sum, p| sum + p.total_price }
+       pedidos = @orders.inject(0) { |sum, p| sum + p.total_price }
+       faturamento = @payments.inject(0) { |sum, p| sum + p.amount }
+       estoque = @products.inject(0) { |sum, p| sum + p.in_stock*p.avg_price_in_stock }
+    %>
+    <tbody>
+        <tr>
+          <td>Compras</td>
+          <td><%= number_to_currency(compras) %></td>
+        </tr>
+        <tr>
+          <td>Pedidos</td>
+          <td><%= number_to_currency(pedidos) %></td>
+        </tr>
+        <tr>
+          <td>Faturamento</td>
+          <td><%= number_to_currency(faturamento) %></td>
+        </tr>
+        <tr>
+          <td>Em estoque</td>
+          <td><%= number_to_currency(estoque) %></td>
+        </tr>
+        <tr>
+          <td>Resumo (faturamento + estoque - compras)</td>
+          <td><%= number_to_currency(estoque+faturamento-compras) %></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<% end %>

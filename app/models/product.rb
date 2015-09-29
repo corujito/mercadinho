@@ -20,8 +20,9 @@ class Product < ActiveRecord::Base
         stock_aux -= quantity_aux
         break if stock_aux == 0
       end
-      sum/sum_quantity
+      return sum/sum_quantity
     end
+    return 0
   end
 
   def avg_price_in_stock
@@ -36,8 +37,9 @@ class Product < ActiveRecord::Base
         stock_aux -= quantity_aux
         break if stock_aux == 0
       end
-      sum/sum_quantity
+      return sum/sum_quantity
     end
+    return 0
   end
 
   def avg_price_with_discount
@@ -48,8 +50,9 @@ class Product < ActiveRecord::Base
         sum += item.unit_price * (1 - item.purchase.discount/100.to_f) * item.quantity
         sum_quantity += item.quantity
       end
-      sum/sum_quantity
+      return sum/sum_quantity
     end
+    return 0
   end
 
   def avg_price
@@ -60,7 +63,8 @@ class Product < ActiveRecord::Base
         sum += item.unit_price * item.quantity
         sum_quantity += item.quantity
       end
-      sum/sum_quantity
+      return sum/sum_quantity
     end
+    return 0
   end
 end

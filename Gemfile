@@ -14,6 +14,7 @@ gem 'pg'
 gem 'kaminari'
 
 gem 'brazilian-rails'
+gem 'bootstrap-datepicker-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
