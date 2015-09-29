@@ -21,6 +21,10 @@ class Order < ActiveRecord::Base
     self.client = Client.find_or_create_by(full_name: name) if name.present?
   end
 
+  def self.get_orders(start_date, end_date)
+    Order.where(:created_at => start_date..end_date)
+  end
+
   private
 
   def client_id_not_changed

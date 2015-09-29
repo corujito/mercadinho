@@ -1,0 +1,57 @@
+<div class="page-header clearfix">
+  <div class="pull-right">
+    <div class="btn-group">
+    </div>
+  </div>
+  <div class="pull-left">
+    <h1>Relatório por Cliente<small></small></h1>
+    <%= form_tag(reports_sales_url, {:method => "get", :class => "form-inline"}) do %>
+        <%= label_tag(:start_date, "Data Inicial") %>
+        <%= text_field_tag(:start_date, params[:start_date] || 1.month.ago.strftime("%d/%m/%Y"), :class => "datetimepicker") %>
+        <%= label_tag(:end_date, "Data Final") %>
+        <%= text_field_tag(:end_date, params[:end_date] || Time.now.strftime("%d/%m/%Y"), :class => "datetimepicker") %>
+        <%= submit_tag("Enviar", class: "button btn-report send-button radius small") %>
+    <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nome do Cliente</th>
+      <th>Pedidos</th>
+      <th>Recebido/Faturado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%
+       total_sales = total_payments = 0
+    %>
+    <% @orders.group_by{|o|o.client}.sort_by {|a,b| b.inject(0) { |sum, p| sum + p.total_price }}.reverse.each do |client, ords| %>
+        <%
+           client_total_sales = client_total_payments =  0
+           ords.each do |order|
+             client_total_sales += order.total_price || 0
+           end
+           client_payments = client.payments.where(:created_at => @start_date..@end_date)
+           client_total_payments = client_payments.inject(0) {|sum, pp| sum + pp.amount}
+
+           total_sales += client_total_sales
+           total_payments += client_total_payments
+        %>
+        <tr>
+          <td><%= client.full_name %></td>
+          <td><%= number_to_currency(client_total_sales) %></td>
+          <td><%= number_to_currency(client_total_payments) %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <td><b>TOTAL</b></td>
+      <td><b><%= number_to_currency(total_sales) %></b></td>
+      <td><b><%= number_to_currency(total_payments) %></b></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<br>

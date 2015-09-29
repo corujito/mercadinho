@@ -34,6 +34,8 @@ Mercadinho::Application.routes.draw do
   resources :orders
   resources :payments
 
+  get "reports/sales"
+  get "reports/general"
   root 'dashboard#index'
 
 end
