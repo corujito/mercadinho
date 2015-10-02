@@ -3,23 +3,3 @@ DATA: <%= l @order.created_at, format: "%d/%m/%Y" %>		No.: <%= @order.id %>
 MERCADO REINALDO
 
 =======================================
-PRODUTO
- QTDE UN	VL.UNIT		VL.ITEM
----------------------------------------
-<% @order.order_items.each do |item| %>
-<%= item.product.full_name if item.product %>
- <%= item.quantity %> x <%= item.product.unity if item.product %>	<%= number_to_currency(item.unit_price) %> =	<%= number_to_currency(item.total_price) %>
-<% end %>
-
-=======================================
-Total:				<%= number_to_currency(@order.total_price) %>
-
-Cliente No.:			<%=  if @order.client then @order.client.id else "-" end %>
-Saldo Financeiro:		<%= if @order.client then number_to_currency(@order.client.balance + @order.total_price, negative_format: "%u %n", format: "%u %n (crédito)") else "-" end %>
-Total do Pedido:		<%= number_to_currency(@order.total_price) %>
-TOTAL FINAL:			<%= if @order.client then number_to_currency(@order.client.balance, negative_format: "%u %n") else "-" end %>
-
----------------------------------------
-Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
-
-Faça seu pedido: (vivo) 99897-1117
