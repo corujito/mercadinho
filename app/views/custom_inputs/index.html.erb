@@ -1,0 +1,40 @@
+<div class="page-header clearfix">
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= link_to 'Nova Entrada Personalizada', new_custom_input_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="pull-left">
+    <h1>Lista de Entradas Personalizadas<small></small></h1>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Descrição</th>
+      <th>Valor</th>
+      <th>Tipo</th>
+      <th>Data</th>
+      <th class="col-md-1 text-center">Editar</th>
+      <th class="col-md-1 text-center">Remover</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @custom_inputs.each do |custom_input| %>
+        <tr>
+          <td><%= custom_input.description %></td>
+          <td style="<% if custom_input.despesa? then %>color:red<% end %>"><%= number_to_currency(custom_input.amount, negative_format: "%u%n") %></td>
+          <td><%= custom_input.input_type %></td>
+          <td><%= l custom_input.created_at, format: "%d/%m/%Y" %></td>
+          <td class="text-center"><%= link_to edit_custom_input_path(custom_input) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><%= link_to custom_input, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+<%= paginate @custom_inputs %>

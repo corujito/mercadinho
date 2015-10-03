@@ -1,0 +1,20 @@
+<h1><%= @custom_input.description %></h1>
+<hr>
+<style>
+    .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+        border: none;
+    }
+</style>
+<div class="table-responsive">
+  <table class='table borderless'>
+    <tbody>
+    <tr><td class="col-md-2"><b>Valor:</b></td><td style="<% if @client.balance and @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@custom_input.amount) %></td></tr>
+    <tr><td class="col-md-2"><b>Tipo:</b></td><td><%= @custom_input.type %></td></tr>
+    <tr><td class="col-md-2"><b>Data:</b></td><td><%= @custom_input.created_at %></td></tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'Editar', edit_custom_input_path(@custom_input), class: "btn btn-primary" %>
+<%= link_to 'Voltar', custom_inputs_path, class: "btn btn-default" %>

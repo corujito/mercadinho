@@ -218,3 +218,4 @@ pt-BR:
       order: Pedido
       order_item: Item de Pedido
       payment: Pagamento
+      custom_input: Entrada Personalizada

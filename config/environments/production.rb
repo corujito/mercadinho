@@ -60,7 +60,7 @@ Mercadinho::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile = config.assets.precompile + %w(reports.js payments.js payments.css clients.js clients.css orders.js orders.css purchases.js purchases.css *.png *.jpg *.jpeg *.gif *.woff *.ttf *.svg *.eot)
+  config.assets.precompile = config.assets.precompile + %w(custom_input.js reports.js payments.js payments.css clients.js clients.css orders.js orders.css purchases.js purchases.css *.png *.jpg *.jpeg *.gif *.woff *.ttf *.svg *.eot)
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -1,4 +1,5 @@
 Mercadinho::Application.routes.draw do
+  resources :custom_inputs
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, :skip => [:registrations]
@@ -33,6 +34,7 @@ Mercadinho::Application.routes.draw do
   end
   resources :orders
   resources :payments
+  resources :custom_inputs
 
   get "reports/sales"
   get "reports/general"

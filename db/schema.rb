@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902011825) do
+ActiveRecord::Schema.define(version: 20151003181716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 20150902011825) do
     t.string   "address"
     t.boolean  "active",     default: true
     t.decimal  "balance",    default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "custom_inputs", force: true do |t|
+    t.decimal  "amount",      precision: 14, scale: 2
+    t.string   "description"
+    t.integer  "input_type",                           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
