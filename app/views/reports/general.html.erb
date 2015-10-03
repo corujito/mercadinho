@@ -31,15 +31,17 @@
        pedidos = @orders.inject(0) { |sum, p| sum + p.total_price }
        faturamento = @payments.inject(0) { |sum, p| sum + p.amount }
        estoque = @products.inject(0) { |sum, p| sum + p.in_stock*p.avg_price_in_stock }
+       despesas_personalizadas = @custom_input_negative.inject(0) { |sum, p| sum + p.amount }
+       ganhos_personalizados = @custom_input_positive.inject(0) { |sum, p| sum + p.amount }
     %>
     <tbody>
         <tr>
           <td>Compras</td>
-          <td><%= number_to_currency(compras) %></td>
+          <td style="color:red"><%= number_to_currency(compras) %></td>
         </tr>
         <tr>
           <td>Compras com Desconto</td>
-          <td><%= number_to_currency(compras_com_desconto) %></td>
+          <td style="color:red"><%= number_to_currency(compras_com_desconto) %></td>
         </tr>
         <tr>
           <td>Pedidos</td>
@@ -54,8 +56,16 @@
           <td><%= number_to_currency(estoque) %></td>
         </tr>
         <tr>
-          <td>Resumo (faturamento - compras com desconto)</td>
-          <td><%= number_to_currency(faturamento-compras_com_desconto) %></td>
+          <td>Gastos Personalizados</td>
+          <td style="color:red"><%= number_to_currency(despesas_personalizadas) %></td>
+        </tr>
+        <tr>
+          <td>Ganhos Personalizados</td>
+          <td><%= number_to_currency(ganhos_personalizados) %></td>
+        </tr>
+        <tr>
+          <td><b>Resumo (faturamento + ganhos person. - compras com desconto - gastos person.)</b></td>
+          <td><b><%= number_to_currency(faturamento+ganhos_personalizados-compras_com_desconto-despesas_personalizadas) %></b></td>
         </tr>
         <!--<tr>-->
           <!--<td>Resumo (faturamento + em estoque - compras com desconto)</td>-->

@@ -22,6 +22,8 @@ class ReportsController < ApplicationController
       @purchases = Purchase.where(:created_at => @start_date..@end_date)
       @orders = Order.where(:created_at => @start_date..@end_date)
       @payments = Payment.where(:created_at => @start_date..@end_date)
+      @custom_input_negative = CustomInput.where(:created_at => @start_date..@end_date, input_type: CustomInput.input_types[:despesa])
+      @custom_input_positive = CustomInput.where(:created_at => @start_date..@end_date, input_type: CustomInput.input_types[:ganho])
       @products = Product.all
     end
   end
