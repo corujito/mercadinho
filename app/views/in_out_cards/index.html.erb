@@ -1,0 +1,65 @@
+<div class="page-header clearfix">
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= link_to 'Novo Registro de Cartão', new_in_out_card_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="pull-left">
+    <h1>Lista dos Registros de Cartão<small></small></h1>
+    <form class="" role="search">
+      <div class="input-group">
+        <%= text_field_tag "card_query", nil, {class: "form-control", autofocus: true, placeholder: "Localizar o cartão por nome ou identificador", data: { autocomplete_source: find_cards_in_out_cards_path }} %>
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Nome</th>
+      <th>Identificação</th>
+      <th>Data</th>
+      <th class="col-md-1 text-center">Remover</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @in_out_cards.each do |in_out_card| %>
+        <tr>
+          <td><%= link_to in_out_card.card.full_name, in_out_card.card %></td>
+          <td><%= in_out_card.card.identification %></td>
+          <td><%= l in_out_card.created_at, format: "%d/%m/%Y" %></td>
+          <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+<%= paginate @in_out_cards %>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Registros de Cartão</h4>
+      </div>
+      <div class="modal-body"><pre id="toPrint"><%= render "in_out_cards/in_out_cards" %></pre></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" onclick=$("#toPrint").print();>Imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Imprimir
+</button>

@@ -1,0 +1,18 @@
+<%= simple_form_for(@in_out_card, html: { class: 'form-vertical' }) do |f| %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :card_name, :readonly => f.object.card != nil, label: "Nome", autofocus: true, placeholder: 'Digite nome no cartão', value: f.object.card_name if f.object %>
+        <%= f.input :card_identification, :readonly => f.object.card != nil, label: "Identificação", value: f.object.card_identification if f.object %>
+        <%= f.input :card_id, :as => :hidden, :input_html => { :value => @in_out_card.card.id } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4 col-sm-4 col-md-2">
+        <%= f.input :inout_type, label: 'Tipo', :as => :select, :collection => InOutCard.inout_types.keys.to_a %>
+      </div>
+    </div>
+
+    <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
+    <%= link_to "Cancelar", in_out_cards_url, {:class=>"btn btn-danger"} %>
+<% end %>

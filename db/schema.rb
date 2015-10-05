@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003181716) do
+ActiveRecord::Schema.define(version: 20151004002154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20151003181716) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "in_out_cards", force: true do |t|
+    t.integer  "card_id"
+    t.integer  "inout_type", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "in_out_cards", ["card_id"], name: "index_in_out_cards_on_card_id", using: :btree
 
   create_table "items", force: true do |t|
     t.decimal  "quantity"

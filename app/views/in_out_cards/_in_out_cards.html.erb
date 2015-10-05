@@ -1,0 +1,10 @@
+=========================================
+      REGISTRO DE SAÍDA DE CARTÕES
+=========================================
+
+<% @out_cards.each_with_index do |out_card, i| %>
+<%= i+1 %>. <%= out_card.card.full_name %> - <%= out_card.card.identification %>
+<% end %>
+
+-----------------------------------------
+Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>

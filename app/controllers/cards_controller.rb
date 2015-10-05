@@ -8,6 +8,18 @@ class CardsController < ApplicationController
     @cards = Card.order(:full_name).page params[:page]
   end
 
+  def find_cards
+    @cards = Card.order(:full_name).where("lower(full_name) like ? or lower(identification) like ?", "%#{params[:term].downcase}%", "%#{params[:term].downcase}%")
+    render json: @cards.map{ |c| "#{c.id}. #{c.full_name} - #{c.identification}" }
+  end
+
+  def find_cards_by_identification
+    @card = Card.find_by(identification: params[:identification])
+    respond_to do |format|
+      format.js   {}
+    end
+  end
+
   # GET /cards/1
   # GET /cards/1.json
   def show

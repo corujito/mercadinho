@@ -1,0 +1,2 @@
+module InOutCardsHelper
+end
