@@ -8,6 +8,8 @@ DATA: <%= l @payment.created_at, format: "%d/%m/%Y" %>          Pagamento: <%= @
 
 Recebi do(a) cliente <%=  if @payment.client then @payment.client.full_name else "-" end %>, a quantia de <%= number_to_currency(@payment.amount) %> (<%= @payment.amount.to_extenso.upcase %>)
 
+Saldo Financeiro Restante: <%= number_to_currency(@payment.client.balance, format: "%u %n") if @payment.client %>
+
 -----------------------------------------
 Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
 Faça seu pedido: (vivo) 9-9897-1117
