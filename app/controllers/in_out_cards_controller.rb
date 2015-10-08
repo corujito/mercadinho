@@ -81,6 +81,6 @@ class InOutCardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def in_out_card_params
-      params.require(:in_out_card).permit(:card_id, :inout_type)
+      params.require(:in_out_card).permit(:card_id)
     end
 end
