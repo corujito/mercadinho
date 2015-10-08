@@ -6,7 +6,7 @@
   </div>
   <div class="pull-left">
     <h1>Lista dos Registros de Cartão<small></small></h1>
-    <form class="" role="search">
+    <form action="<%= new_in_out_card_path %>" class="" role="search">
       <div class="input-group">
         <%= text_field_tag "card_query", nil, {class: "form-control", autofocus: true, placeholder: "Localizar o cartão por nome ou identificador", data: { autocomplete_source: find_cards_in_out_cards_path }} %>
         <div class="input-group-btn">

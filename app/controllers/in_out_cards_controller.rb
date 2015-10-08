@@ -18,15 +18,17 @@ class InOutCardsController < ApplicationController
   def new
     if params[:card_id]
       @card = Card.find(params[:card_id])
-    elsif params[:identification]
-      @card = Card.find_by(identification: params[:identification])
-    elsif params[:full_name]
-      @card = Card.find_by(full_name: params[:full_name])
+      @in_out_card = @card.in_out_cards.build
+      @in_out_card.save
+      redirect_to in_out_cards_url
+      return
+    elsif params[:card_query]
+      @card = Card.new({full_name: params[:card_query]})
+      @in_out_card = @card.in_out_cards.build
     else
       redirect_to in_out_cards_url
       return
     end
-    @in_out_card = @card.in_out_cards.build
   end
 
   # GET /in_out_cards/1/edit
