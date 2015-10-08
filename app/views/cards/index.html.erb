@@ -23,6 +23,7 @@
     <tr>
       <th class="col-md-3">Nome</th>
       <th>Identificação</th>
+      <th>Tipo</th>
       <th>CPF</th>
       <th class="col-md-1 text-center">Editar</th>
       <th class="col-md-1 text-center">Remover</th>
@@ -34,6 +35,7 @@
         <tr>
           <td><%= link_to card.full_name, card %></td>
           <td><%= card.identification %></td>
+          <td><%= card.card_type %></td>
           <td><%= card.cpf %></td>
           <td class="text-center"><%= link_to edit_card_path(card) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
           <td class="text-center"><%= link_to card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>

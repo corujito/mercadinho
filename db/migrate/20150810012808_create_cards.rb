@@ -7,6 +7,7 @@ class CreateCards < ActiveRecord::Migration
       t.string :cpf
       t.string :email
       t.string :phone
+      t.integer :card_type, default: 0
 
       t.timestamps
     end

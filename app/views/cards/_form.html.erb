@@ -7,6 +7,7 @@
     <%= f.input :email %>
     <%= f.input :identification, label: "Identificação" %>
     <%= f.input :password, label: "Senha", as: :string %>
+    <%= f.input :card_type, label: 'Bandeira', :as => :select, :collection => Card.card_types.keys.to_a %>
   </div>
 
   <div class="form-actions">

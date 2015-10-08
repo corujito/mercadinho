@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20151004002154) do
     t.string   "cpf"
     t.string   "email"
     t.string   "phone"
+    t.integer  "card_type",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,7 +83,6 @@ ActiveRecord::Schema.define(version: 20151004002154) do
 
   create_table "in_out_cards", force: true do |t|
     t.integer  "card_id"
-    t.integer  "inout_type", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

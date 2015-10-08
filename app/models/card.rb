@@ -3,4 +3,6 @@ class Card < ActiveRecord::Base
   paginates_per 20
 
   has_many :in_out_cards
+
+  enum card_type: [ :outros, :visa, :master, :alelo ]
 end

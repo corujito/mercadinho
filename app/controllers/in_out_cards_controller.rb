@@ -6,7 +6,6 @@ class InOutCardsController < ApplicationController
   # GET /in_out_cards.json
   def index
     @in_out_cards = InOutCard.order(created_at: :desc).page params[:page]
-    @out_cards = InOutCard.all
   end
 
   # GET /in_out_cards/1
