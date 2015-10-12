@@ -1,4 +1,4 @@
-DATA: <%= l @order.created_at, format: "%d/%m/%Y" %>             Pedido: <%= @order.id %>
+DATA: <%= l @order.created_at, format: "%d/%m/%Y" %>             <%= "Pedido: #{@order.id}".rjust(12) %>
 =========================================
 <%=  if @order.client then @order.client.full_name.upcase.center(42) else "-" end %>
 =========================================
@@ -8,7 +8,7 @@ PRODUTO
 -----------------------------------------
 <% @order.order_items.each do |item| %>
 <%= item.product.full_name if item.product %>
- <%= item.quantity %> x <%= item.product.unity if item.product %>	<%= number_to_currency(item.unit_price) %> =	<%= number_to_currency(item.total_price) %>
+ <%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true).ljust(4) %> x <%= item.product.unity if item.product %>	<%= number_to_currency(item.unit_price) %> =	<%= number_to_currency(item.total_price) %>
 <% end %>
 
 =========================================

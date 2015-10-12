@@ -18,7 +18,7 @@ Data: <%= l @order.created_at, format: "%d/%m/%Y" %><br>
         <tr>
           <td class="col-md-2"><b><%= index+1 %></b></td>
           <td><%= item.product.full_name if item.product %></td>
-          <td><%= item.quantity %></td>
+          <td><%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true) %></td>
           <td><%= number_to_currency(item.unit_price) %></td>
         </tr>
     <% end %>

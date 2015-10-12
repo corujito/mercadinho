@@ -57,6 +57,8 @@ ready = function() {
             return false;
         }
     });
+
+    //calcular_total();
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);
@@ -65,7 +67,7 @@ function calcular_total() {
     var total = 0
     $( ".fields:visible" ).each(function( index ) {
         total_parcial = 0;
-        qtd_element = $(this).find('[id^=order_order_items_attributes_][id$=_quantity]')
+        qtd_element = $(this).find('[id^=order_order_items_attributes_][id$=_quantity_formatted]')
         unit_price_element = $(this).find('[id^=order_order_items_attributes_][id$=_unit_price]')
         if(qtd_element.val()!="" && unit_price_element.val()!="") {
             qtd = qtd_element.val().replace('.', '').replace(',', '.');
@@ -129,7 +131,7 @@ function aplica_onchange_para_campos() {
     $('[id^=order_order_items_attributes_][id$=_unit_price]').change(function() {
         calcular_total();
     });
-    $('[id^=order_order_items_attributes_][id$=_quantity]').change(function() {
+    $('[id^=order_order_items_attributes_][id$=_quantity_formatted]').change(function() {
         calcular_total();
     });
 }
