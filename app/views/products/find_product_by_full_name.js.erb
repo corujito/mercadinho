@@ -1,4 +1,4 @@
-$('#order_order_items_attributes_<%= params[:input_id] %>_quantity').next().text('<%= @product.unity %>');
+$('#order_order_items_attributes_<%= params[:input_id] %>_quantity_formatted').next().text('<%= @product.unity %>');
 $('#product_info').hide();
 $('#product_info').html("<%= j (render 'products/product_info') %>");
 $('#product_info').slideDown(350);
