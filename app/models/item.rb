@@ -20,6 +20,14 @@ class Item < ActiveRecord::Base
     self.product = Product.find_or_create_by(full_name: name) if name.present?
   end
 
+  def quantity_formatted
+    self.try(:quantity)
+  end
+
+  def quantity_formatted=(qtd)
+    self.quantity = qtd.to_s.gsub('.', '').gsub(',', '.') if qtd.present?
+  end
+
   def unit_price_with_discount
     self.unit_price * (1 - self.purchase.discount/100.to_f)
   end
