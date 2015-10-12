@@ -8,6 +8,14 @@ class Product < ActiveRecord::Base
 
   enum unity: [ :UN, :CX, :PCT, :KG, :LATA, :LT, :METRO, :PAR, :PEÇA ]
 
+  def in_stock_formatted
+    self.try(:in_stock)
+  end
+
+  def in_stock_formatted=(qtd)
+    self.in_stock = qtd.to_s.gsub('.', '').gsub(',', '.') if qtd.present?
+  end
+
   def avg_price_in_stock_with_discount
     if self.items.any? and self.in_stock > 0
       sum = 0

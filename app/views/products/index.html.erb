@@ -34,7 +34,7 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= link_to product.full_name, product %></td>
-        <td style="<% if product.in_stock and product.in_stock < 0 then %>color:red<% end %>"><%= number_with_precision(product.in_stock, precision: 2, separator: ",", strip_insignificant_zeros: true) %></td>
+        <td style="<% if product.in_stock and product.in_stock < 0 then %>color:red<% end %>"><%= number_with_precision(product.in_stock, precision: 3, separator: ",", strip_insignificant_zeros: true) %></td>
         <td><%= product.unity %></td>
         <!--<td><%= link_to 'Exibir', product %></td>-->
         <td class="text-center"><%= link_to edit_product_path(product) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>

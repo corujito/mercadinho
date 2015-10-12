@@ -1,7 +1,9 @@
 <%= simple_form_for(@product, html: { class: 'form-vertical' }) do |f| %>
     <%= f.input :full_name, label: 'Nome', autofocus: true %>
     <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
-    <%= f.input :in_stock, label: 'Estoque Atual' %>
+    <%= f.input :in_stock, label: 'Estoque Atual' do %>
+        <%= f.text_field :in_stock_formatted, value: number_with_precision(f.object.in_stock, precision: 3, separator: ",", strip_insignificant_zeros: true), class: "form-control" %>
+    <% end %>
     <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
     <%= link_to "Cancelar", products_url, {:class=>"btn btn-danger"} %>
 <% end %>

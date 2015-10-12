@@ -9,6 +9,7 @@
   <table class='table borderless'>
     <tbody>
     <tr><td class="col-md-2"><b>Unidade:</b></td><td><%= @product.unity %></td></tr>
+    <tr><td class="col-md-2"><b>Em estoque:</b></td><td><%= number_with_precision(@product.in_stock, precision: 3, separator: ",", strip_insignificant_zeros: true) %></td></tr>
     </tbody>
   </table>
 </div>
