@@ -18,6 +18,10 @@ Saldo Financeiro:           <%= if @order.client then number_to_currency(@order.
 Total do Pedido:            <%= number_to_currency(@order.total_price) %>
 TOTAL FINAL:                <%= if @order.client then number_to_currency(@order.client.balance, negative_format: "%u %n") else "-" end %>
 
+<% if @order.comments.present? %>
+Obs.: <%= @order.comments %>
+
+<% end %>
 -----------------------------------------
 Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
 Faça seu pedido: (vivo) 9-9897-1117

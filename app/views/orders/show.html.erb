@@ -1,7 +1,8 @@
 
 <h1><%= @order.client.full_name if @order.client %></h1>
-Total: <%= number_to_currency(@order.total_price) %><br>
-Data: <%= l @order.created_at, format: "%d/%m/%Y" %><br>
+<b>Total:</b> <%= number_to_currency(@order.total_price) %><br>
+<b>Data:</b> <%= l @order.created_at, format: "%d/%m/%Y" %><br>
+<b>Observações:</b> <%= @order.comments %><br>
 <hr>
 <div class="table-responsive">
   <table class="table table-striped">
