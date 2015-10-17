@@ -58,7 +58,11 @@ class Item < ActiveRecord::Base
 
   def update_stock_destroy
     p = self.product
-    p.in_stock -= self.quantity
-    p.save
+    if p
+      p.in_stock -= self.quantity
+      p.save
+    else
+      logger.warn "nao foi possivel executar update_stock_destroy no item"
+    end
   end
 end

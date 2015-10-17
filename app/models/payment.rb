@@ -30,7 +30,11 @@ class Payment < ActiveRecord::Base
 
   def update_client_balance_destroy
     c = self.client
-    c.balance -= self.amount
-    c.save
+    if c
+      c.balance -= self.amount
+      c.save
+    else
+      logger.warn "nao foi possivel executar update_client_balance_destroy"
+    end
   end
 end

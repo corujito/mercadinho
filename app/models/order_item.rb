@@ -60,8 +60,12 @@ class OrderItem < ActiveRecord::Base
 
   def update_stock_destroy
     p = self.product
-    p.in_stock += self.quantity
-    p.save
+    if p
+      p.in_stock += self.quantity
+      p.save
+    else
+      logger.warn "nao foi possivel executar update_stock_destroy no order_item"
+    end
   end
 
   def update_client_balance
