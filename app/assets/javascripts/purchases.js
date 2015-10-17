@@ -81,4 +81,6 @@ function add_fields(link, association, content) {
     $('#purchase_items_attributes_'+new_id+'_product_name').focus();
     $('#purchase_items_attributes_'+new_id+'_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     //$('#purchase_items_attributes_'+new_id+'_quantity').inputmask("decimal", {radixPoint: ","});
+
+    substituir_enter_por_tab();
 }

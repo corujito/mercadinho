@@ -52,9 +52,10 @@ ready = function() {
         var code;
         code = e.keyCode || e.which;
         if (code === 13) {
-            e.preventDefault();
+            // tive que comentar para o campo de observacoes quebrar linha
+            //e.preventDefault();
             calcular_total();
-            return false;
+            //return false;
         }
     });
 
@@ -125,6 +126,7 @@ function add_fields(link, association, content) {
     //$('#order_order_items_attributes_'+new_id+'_quantity').maskMoney({thousands:'.', decimal:',', allowNegative:false});
 
     aplica_onchange_para_campos();
+    substituir_enter_por_tab();
 }
 
 function aplica_onchange_para_campos() {
