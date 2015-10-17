@@ -29,6 +29,7 @@
        total_sales = total_payments = 0
     %>
     <% @orders.group_by{|o|o.client}.sort_by {|a,b| b.inject(0) { |sum, p| sum + p.total_price }}.reverse.each do |client, ords| %>
+        <% if client %>
         <%
            client_total_sales = client_total_payments =  0
            ords.each do |order|
@@ -45,6 +46,7 @@
           <td><%= number_to_currency(client_total_sales) %></td>
           <td><%= number_to_currency(client_total_payments) %></td>
         </tr>
+        <% end %>
     <% end %>
     <tr>
       <td><b>TOTAL</b></td>
