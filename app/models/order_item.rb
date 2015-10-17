@@ -3,6 +3,7 @@ class OrderItem < ActiveRecord::Base
   after_save :update_client_balance
   after_destroy :update_stock_destroy
   after_destroy :update_client_balance_destroy
+  after_create :update_product_last_order_at
 
   belongs_to :product
   belongs_to :order
@@ -89,5 +90,9 @@ class OrderItem < ActiveRecord::Base
     else
       logger.warn "nao foi possivel executar update_client_balance_destroy"
     end
+  end
+
+  def update_product_last_order_at
+    self.product.touch(:last_order_at) if self.product
   end
 end

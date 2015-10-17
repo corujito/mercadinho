@@ -12,7 +12,7 @@
                 <th class="col-xs-1 col-sm-1 col-md-2">Preço Médio</th>
               </tr>
               </thead>
-              <% Product.order(:full_name).each do |product| %>
+              <% Product.order(last_order_at: :desc).each do |product| %>
                   <tr>
                     <td class=""><%= display_stock(product.in_stock, product.unity) %></td>
                     <td class=""><%= product.full_name %></td>
