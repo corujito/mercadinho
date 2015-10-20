@@ -1,8 +1,25 @@
 <%= simple_form_for(@vendor, html: { class: 'form-vertical' }) do |f| %>
-    <%= f.input :full_name, label: 'Nome', autofocus: true %>
-    <%= f.input :email, label: 'Email' %>
-    <%= f.input :phone, label: 'Telefone' %>
-    <%= f.input :address, label: 'Endereço' %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :full_name, label: 'Nome', autofocus: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :email, label: 'Email' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :phone, label: 'Telefone' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :address, label: 'Endereço' %>
+      </div>
+    </div>
+
     <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
     <%= link_to "Cancelar", vendors_url, {:class=>"btn btn-danger"} %>
 <% end %>

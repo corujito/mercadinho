@@ -1,9 +1,20 @@
 <%= simple_form_for(@product, html: { class: 'form-vertical' }) do |f| %>
-    <%= f.input :full_name, label: 'Nome', autofocus: true %>
-    <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
-    <%= f.input :in_stock, label: 'Estoque Atual' do %>
-        <%= f.text_field :in_stock_formatted, value: number_with_precision(f.object.in_stock, precision: 3, separator: ",", strip_insignificant_zeros: true), class: "form-control" %>
-    <% end %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :full_name, label: 'Nome', autofocus: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-3">
+        <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-3">
+        <%= f.input :in_stock, label: 'Estoque Atual' do %>
+            <%= f.text_field :in_stock_formatted, value: number_with_precision(f.object.in_stock, precision: 3, separator: ",", strip_insignificant_zeros: true), class: "form-control" %>
+        <% end %>
+      </div>
+    </div>
+
     <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
     <%= link_to "Cancelar", products_url, {:class=>"btn btn-danger"} %>
 <% end %>
