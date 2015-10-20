@@ -1,14 +1,36 @@
 <%= simple_form_for(@card, html: { class: 'form-vertical' }) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :full_name, label: 'Nome', autofocus: true %>
-    <%= f.input :cpf, label: "CPF" %>
-    <%= f.input :phone, label: "Telefone" %>
-    <%= f.input :email %>
-    <%= f.input :identification, label: "Identificação" %>
-    <%= f.input :password, label: "Senha", as: :string %>
-    <%= f.input :card_type, label: 'Bandeira', :as => :select, :collection => Card.card_types.keys.to_a %>
-  </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :full_name, label: 'Nome', autofocus: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :identification, label: "Identificação" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 col-sm-8 col-md-4">
+        <%= f.input :password, label: "Senha", as: :string %>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-2">
+        <%= f.input :card_type, label: 'Bandeira', :as => :select, :collection => Card.card_types.keys.to_a %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <%= f.input :cpf, label: "CPF" %>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <%= f.input :phone, label: "Telefone" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <%= f.input :email %>
+      </div>
+    </div>
 
   <div class="form-actions">
     <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
