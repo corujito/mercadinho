@@ -11,6 +11,7 @@ class InOutCardsController < ApplicationController
   # GET /in_out_cards/1
   # GET /in_out_cards/1.json
   def show
+    redirect_to in_out_cards_url
   end
 
   # GET /in_out_cards/new
@@ -22,7 +23,7 @@ class InOutCardsController < ApplicationController
       redirect_to in_out_cards_url
       return
     elsif params[:card_query]
-      @card = Card.new({full_name: params[:card_query]})
+      @card = Card.new({full_name: params[:card_query], identification: params[:card_query]})
       @in_out_card = @card.in_out_cards.build
     else
       redirect_to in_out_cards_url
@@ -32,6 +33,7 @@ class InOutCardsController < ApplicationController
 
   # GET /in_out_cards/1/edit
   def edit
+    redirect_to in_out_cards_url
   end
 
   # POST /in_out_cards
@@ -82,6 +84,6 @@ class InOutCardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def in_out_card_params
-      params.require(:in_out_card).permit(:card_id)
+      params.require(:in_out_card).permit(:card_id, card_attributes: [:full_name, :identification, :password, :cpf, :email, :phone, :card_type])
     end
 end
