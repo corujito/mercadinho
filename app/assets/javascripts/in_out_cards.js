@@ -1,4 +1,5 @@
 //= require "jquery.print"
+//= require bootstrap-datepicker
 
 var ready;
 ready = function() {
@@ -6,6 +7,12 @@ ready = function() {
         source: $('#card_query').data('autocomplete-source'),
         select: function( event, ui ) { new_in_out_card(ui.item.value) },
         minLength: 2
+    });
+
+    $('.datetimepicker').datepicker({
+        orientation: "top",
+        language: "pt-BR",
+        format: "dd/mm/yyyy"
     });
 };
 $(document).ready(ready);

@@ -5,7 +5,15 @@ class InOutCardsController < ApplicationController
   # GET /in_out_cards
   # GET /in_out_cards.json
   def index
-    @in_out_cards = InOutCard.order(created_at: :desc).page params[:page]
+    @in_out_cards = []
+    if !params[:start_date].blank? and !params[:end_date].blank?
+      @start_date = Time.zone.parse(params[:start_date]).beginning_of_day
+      @end_date = Time.zone.parse(params[:end_date]).end_of_day
+
+      @in_out_cards = InOutCard.where(:created_at => @start_date..@end_date).order(created_at: :desc).page(1).per(1000)
+    else
+      @in_out_cards = InOutCard.order(created_at: :desc).page params[:page]
+    end
   end
 
   # GET /in_out_cards/1
@@ -19,7 +27,11 @@ class InOutCardsController < ApplicationController
     if params[:card_id]
       @card = Card.find(params[:card_id])
       @in_out_card = @card.in_out_cards.build
-      @in_out_card.save
+      if @in_out_card.save
+        flash[:notice] = 'Registro de cartão criado com sucesso.'
+      else
+        flash[:error] = 'Não foi possível registrar saída de cartão. Verificar se falta campos obrigatórios no cadastro do cartão.'
+      end
       redirect_to in_out_cards_url
       return
     elsif params[:card_query]

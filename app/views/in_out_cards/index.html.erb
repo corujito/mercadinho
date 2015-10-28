@@ -1,4 +1,30 @@
 <div class="page-header clearfix">
+  <div class="pull-right">
+    <div class="btn-group">
+      <%= form_tag(in_out_cards_url, {:method => "get", :class => "form-inline"}) do %>
+          <div class="row">
+            <div class="col-xs-12 col-sm-2 col-md-2">
+              <%= label_tag(:start_date, "Data Inicial") %>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3">
+              <%= text_field_tag(:start_date, params[:start_date] || Time.now.strftime("%d/%m/%Y"), :class => "datetimepicker") %>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+              <%= label_tag(:end_date, "Data Final") %>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3">
+              <%= text_field_tag(:end_date, params[:end_date] || Time.now.strftime("%d/%m/%Y"), :class => "datetimepicker") %>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+              <%= submit_tag("Buscar", class: "btn btn-primary") %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Imprimir
+    </button>
+  </div>
   <div class="pull-left">
     <h1>Lista dos Registros de Cartão<small></small></h1>
     <form action="<%= new_in_out_card_path %>" class="" role="search">
@@ -54,7 +80,3 @@
     </div>
   </div>
 </div>
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Imprimir
-</button>
