@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
 
   def estimate_profit_per_product
     order_items.inject(0) do |sum, p|
-      if p.product.in_stock > 0
+      if p.product and p.product.in_stock > 0
         sum + (p.unit_price * p.quantity) - (p.product.avg_price_in_stock_with_discount * p.quantity)
       else
         sum
