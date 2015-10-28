@@ -34,6 +34,14 @@ class OrderItem < ActiveRecord::Base
     self.unit_price * self.quantity
   end
 
+  def total_price_custo_real_aproximado
+    self.product.avg_price_in_stock_with_discount * self.quantity
+  end
+
+  def estimate_profit
+    self.total_price - self.total_price_custo_real_aproximado
+  end
+
   def update_stock
     if self.product_id_changed? and self.product_id_was
       old_p = Product.find(self.product_id_was)
