@@ -52,8 +52,8 @@
     <tbody>
     <% @in_out_cards.each do |in_out_card| %>
         <tr>
-          <td><%= link_to in_out_card.card.full_name, in_out_card.card %></td>
-          <td><%= in_out_card.card.identification %></td>
+          <td><%= link_to(in_out_card.card.full_name, in_out_card.card) if in_out_card.card %></td>
+          <td><%= in_out_card.card.identification if in_out_card.card %></td>
           <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
           <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
