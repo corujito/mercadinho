@@ -2,9 +2,8 @@
       REGISTRO DE SAÍDA DE CARTÕES
 =========================================
 
-<% @in_out_cards.each_with_index do |out_card, i| %>
-<%= i+1 %>. <%= out_card.card.full_name %> - <%= out_card.card.password %>
-    <%= out_card.card.card_type %> - <%= out_card.card.identification %>
+<% @in_out_cards.reverse.each_with_index do |out_card, i| %>
+<%= l out_card.created_at, format: "%d/%m/%Y %H:%M" %>	<%= out_card.card.full_name %>
 <% end %>
 
 -----------------------------------------

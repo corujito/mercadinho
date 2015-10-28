@@ -1,9 +1,4 @@
 <div class="page-header clearfix">
-  <div class="pull-right">
-    <div class="btn-group">
-      <%= link_to 'Novo Registro de Cartão', new_in_out_card_path, class: "btn btn-primary" %>
-    </div>
-  </div>
   <div class="pull-left">
     <h1>Lista dos Registros de Cartão<small></small></h1>
     <form action="<%= new_in_out_card_path %>" class="" role="search">
@@ -33,7 +28,7 @@
         <tr>
           <td><%= link_to in_out_card.card.full_name, in_out_card.card %></td>
           <td><%= in_out_card.card.identification %></td>
-          <td><%= l in_out_card.created_at, format: "%d/%m/%Y" %></td>
+          <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
           <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
     <% end %>
