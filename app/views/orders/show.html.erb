@@ -13,7 +13,8 @@
       <th>Quantidade</th>
       <th>Preço Unitário</th>
       <th>Valor Total</th>
-      <th>Lucro Aprox.</th>
+      <th class="small">Preço Médio</th>
+      <th class="small">Lucro Aprox.</th>
     </tr>
     </thead>
     <tbody>
@@ -24,7 +25,8 @@
           <td><%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true) %></td>
           <td><%= number_to_currency(item.unit_price) %></td>
           <td><%= number_to_currency(item.total_price) %></td>
-          <td><%= (item.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(item.estimate_profit) %></td>
+          <td class="small"><%= number_to_currency(item.product.avg_price_in_stock_with_discount) %></td>
+          <td class="small" style="<% if item.estimate_profit and item.estimate_profit < 0 then %>color:red<% end %>"><%= (item.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(item.estimate_profit) %></td>
         </tr>
     <% end %>
     </tbody>
