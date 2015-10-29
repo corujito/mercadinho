@@ -1,23 +1,85 @@
-
 <h1><%= @client.full_name %></h1>
+<b>Saldo:</b> <span style="<% if @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@client.balance) %></span><br>
+<b>Lucro Aprox.:</b> <span style="<% if @client.estimate_profit < 0 then %>color:red<% end %>"><%= number_to_currency(@client.estimate_profit) %></span><br>
+<b>Email:</b> <%= @client.email %><br>
+<b>Telefone:</b> <%= @client.phone %><br>
+<b>Endereço:</b> <%= @client.address %><br>
+<b>Ativo:</b> <%= @client.active %><br>
 <hr>
-<style>
-    .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
-        border: none;
-    }
-</style>
-<div class="table-responsive">
-  <table class='table borderless'>
-    <tbody>
-    <tr><td class="col-md-2"><b>Saldo:</b></td><td style="<% if @client.balance and @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@client.balance) %></td></tr>
-    <tr><td class="col-md-2"><b>Email:</b></td><td><%= @client.email %></td></tr>
-    <tr><td class="col-md-2"><b>Telefone:</b></td><td><%= @client.phone %></td></tr>
-    <tr><td class="col-md-2"><b>Endereço:</b></td><td><%= @client.address %></td></tr>
-    <tr><td class="col-md-2"><b>Ativo:</b></td><td><%= @client.active %></td></tr>
-    </tbody>
-  </table>
+
+<div class="panel panel-info collapse in" id="panel_estoque_atual">
+  <div class="panel-heading">Compras</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <% if @client.orders.any? %>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Preço Total</th>
+                  <th>Lucro Aprox.</th>
+                  <th>Status</th>
+                  <th>Data</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <% @client.orders.each do |order| %>
+                    <tr>
+                      <td><%= link_to order.id, order %></td>
+                      <td><%= number_to_currency(order.total_price) %></td>
+                      <td style="<% if order.estimate_profit_per_product and order.estimate_profit_per_product < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(order.estimate_profit_per_product) %></td>
+                      <td><%= if order.pending? then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else "Pago" end %></td>
+                      <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+        <% else %>
+            Nenhuma venda registrada.
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-<br>
+
+<div class="panel panel-info collapse in" id="panel_estoque_atual">
+  <div class="panel-heading">Pagamentos</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <% if @client.payments.any? %>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="col-md-3">Id</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <% @payments.each do |payment| %>
+                    <tr>
+                      <td><%= link_to payment.id, payment %></td>
+                      <td><%= number_to_currency(payment.amount) %></td>
+                      <td><%= l payment.created_at, format: "%d/%m/%Y" %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+        <% else %>
+            Nenhum pagamento registrada.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Editar', edit_client_path(@client), class: "btn btn-primary" %>
 <%= link_to 'Voltar', clients_path, class: "btn btn-default" %>
