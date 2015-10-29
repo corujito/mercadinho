@@ -1,6 +1,7 @@
 <h1><%= @client.full_name %></h1>
-<b>Saldo:</b> <span style="<% if @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@client.balance) %></span><br>
-<b>Lucro Aprox.:</b> <span style="<% if @client.estimate_profit < 0 then %>color:red<% end %>"><%= number_to_currency(@client.estimate_profit) %></span><br>
+<b>Saldo Financeiro Atual:</b> <span style="<% if @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@client.balance) %></span><br>
+<b>Total de Pagamentos:</b> <span style="<% if @client.total_paid < 0 then %>color:red<% end %>"><%= number_to_currency(@client.total_paid) %></span><br>
+<b>Lucro Aprox. (considerando apenas compras):</b> <span style="<% if @client.estimate_profit < 0 then %>color:red<% end %>"><%= number_to_currency(@client.estimate_profit) %></span><br>
 <b>Email:</b> <%= @client.email %><br>
 <b>Telefone:</b> <%= @client.phone %><br>
 <b>Endereço:</b> <%= @client.address %><br>

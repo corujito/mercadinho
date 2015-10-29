@@ -12,4 +12,8 @@ class Client < ActiveRecord::Base
   def estimate_profit
     self.orders.inject(0) { |sum, o| sum + o.estimate_profit_per_product }
   end
+
+  def total_paid
+    self.payments.inject(0) {|sum, pp| sum + pp.amount}
+  end
 end
