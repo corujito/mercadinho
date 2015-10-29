@@ -63,7 +63,7 @@
                 </thead>
 
                 <tbody>
-                <% @payments.each do |payment| %>
+                <% @client.payments.each do |payment| %>
                     <tr>
                       <td><%= link_to payment.id, payment %></td>
                       <td><%= number_to_currency(payment.amount) %></td>
