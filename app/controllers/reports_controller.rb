@@ -6,8 +6,6 @@ class ReportsController < ApplicationController
     if !params[:start_date].blank? and !params[:end_date].blank?
       @start_date = Time.zone.parse(params[:start_date]).beginning_of_day
       @end_date = Time.zone.parse(params[:end_date]).end_of_day
-
-      @orders = Order.get_orders(@start_date, @end_date).includes(:client)
     end
   end
 

@@ -14,7 +14,13 @@ class Order < ActiveRecord::Base
   end
 
   def total_price_custo_real_aproximado
-    order_items.inject(0) { |sum, p| sum + p.product.avg_price_in_stock_with_discount * p.quantity }
+    order_items.inject(0) do |sum, p|
+      if p.product
+        sum + p.product.avg_price_in_stock_with_discount * p.quantity
+      else
+        sum
+      end
+    end
   end
 
   def estimate_profit
@@ -23,7 +29,7 @@ class Order < ActiveRecord::Base
 
   def estimate_profit_per_product
     order_items.inject(0) do |sum, p|
-      if p.product.in_stock > 0
+      if p.product and p.product.in_stock > 0
         sum + (p.unit_price * p.quantity) - (p.product.avg_price_in_stock_with_discount * p.quantity)
       else
         sum

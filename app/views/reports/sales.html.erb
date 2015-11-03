@@ -33,29 +33,34 @@
     <tr>
       <th>Nome do Cliente</th>
       <th>Pedidos</th>
+      <th>Lucro Aprox.</th>
       <th>Recebido/Faturado</th>
     </tr>
     </thead>
     <tbody>
     <%
-       total_sales = total_payments = 0
+       total_sales = total_payments = total_lucro = 0
     %>
-    <% @orders.group_by{|o|o.client}.sort_by {|a,b| b.inject(0) { |sum, p| sum + p.total_price }}.reverse.each do |client, ords| %>
-        <% if client %>
+    <% if @start_date and @end_date %>
+        <% Client.all.sort_by {|c| c.orders.inject(0) { |sum, o| sum + o.total_price }}.reverse.each do |client| %>
         <%
-           client_total_sales = client_total_payments =  0
-           ords.each do |order|
-             client_total_sales += order.total_price || 0
-           end
+           client_total_sales = client_total_payments =  client_total_lucro = 0
+           client_orders = client.orders.where(:created_at => @start_date..@end_date)
            client_payments = client.payments.where(:created_at => @start_date..@end_date)
+           client_orders.each do |order|
+             client_total_sales += order.total_price || 0
+             client_total_lucro += order.estimate_profit_per_product
+           end
            client_total_payments = client_payments.inject(0) {|sum, pp| sum + pp.amount}
 
            total_sales += client_total_sales
            total_payments += client_total_payments
+           total_lucro += client_total_lucro
         %>
         <tr>
           <td><%= client.full_name %></td>
           <td><%= number_to_currency(client_total_sales) %></td>
+          <td style="<% if client_total_lucro < 0 then %>color:red<% end %>"><%= number_to_currency(client_total_lucro) %></td>
           <td><%= number_to_currency(client_total_payments) %></td>
         </tr>
         <% end %>
@@ -63,6 +68,7 @@
     <tr>
       <td><b>TOTAL</b></td>
       <td><b><%= number_to_currency(total_sales) %></b></td>
+      <td style="<% if total_lucro < 0 then %>color:red<% end %>"><b><%= number_to_currency(total_lucro) %></b></td>
       <td><b><%= number_to_currency(total_payments) %></b></td>
     </tr>
     </tbody>

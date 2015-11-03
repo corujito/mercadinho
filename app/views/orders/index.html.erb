@@ -16,7 +16,7 @@
       <th>Id</th>
       <th class="col-md-3">Cliente</th>
       <th>Preço Total</th>
-      <th>Lucro Aprox.</th>
+      <!--<th>Lucro Aprox.</th>-->
       <th>Status</th>
       <th>Data</th>
       <th class="col-md-1 text-center">Editar</th>
@@ -28,9 +28,9 @@
     <% @orders.each do |order| %>
         <tr>
           <td><%= link_to order.id, order %></td>
-          <td><%= order.client.full_name if order.client %></td>
+          <td><%= link_to(order.client.full_name, order.client) if order.client %></td>
           <td><%= number_to_currency(order.total_price) %></td>
-          <td style="<% if order.estimate_profit_per_product and order.estimate_profit_per_product < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(order.estimate_profit_per_product) %></td>
+          <!--<td style="<% if order.estimate_profit_per_product and order.estimate_profit_per_product < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(order.estimate_profit_per_product) %></td>-->
           <td><%= if (order.pending? and order.client) then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else (order.paid? ? "Pago" : "-") end %></td>
           <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
           <td class="text-center"><%= link_to edit_order_path(order) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
