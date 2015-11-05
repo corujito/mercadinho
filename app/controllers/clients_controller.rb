@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.order(:balance).page params[:page]
+    @clients = Client.includes({orders: [{order_items: [:product]}]}).order(:balance).page params[:page]
   end
 
   def find_clients
