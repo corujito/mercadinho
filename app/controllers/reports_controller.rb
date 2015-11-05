@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
+  authorize_resource :class => false
 
   def sales
     @orders = []

@@ -1,5 +1,6 @@
 class InOutCardsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_in_out_card, only: [:show, :edit, :update, :destroy]
 
   # GET /in_out_cards

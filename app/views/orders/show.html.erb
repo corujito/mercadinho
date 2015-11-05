@@ -13,8 +13,10 @@
       <th>Quantidade</th>
       <th>Preço Unitário</th>
       <th>Valor Total</th>
-      <!--<th class="small">Preço Médio</th>-->
-      <!--<th class="small">Lucro Aprox.</th>-->
+      <% if can? :manage, :all %>
+          <!--<th class="small">Preço Médio</th>-->
+          <!--<th class="small">Lucro Aprox.</th>-->
+      <% end %>
     </tr>
     </thead>
     <tbody>
@@ -25,8 +27,10 @@
           <td><%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true) %></td>
           <td><%= number_to_currency(item.unit_price) %></td>
           <td><%= number_to_currency(item.total_price) %></td>
-          <!--<td class="small"><%= number_to_currency(item.product.avg_price_in_stock_with_discount) %></td>-->
-          <!--<td class="small" style="<% if item.estimate_profit and item.estimate_profit < 0 then %>color:red<% end %>"><%= (item.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(item.estimate_profit) %></td>-->
+          <% if can? :manage, :all %>
+              <!--<td class="small"><%= number_to_currency(item.product.avg_price_in_stock_with_discount) %></td>-->
+              <!--<td class="small" style="<% if item.estimate_profit and item.estimate_profit < 0 then %>color:red<% end %>"><%= (item.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(item.estimate_profit) %></td>-->
+          <% end %>
         </tr>
     <% end %>
     </tbody>

@@ -100,6 +100,7 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
+    cancancan (1.13.1)
     choice (0.2.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -242,6 +243,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.1)
   brazilian-rails
   bullet
+  cancancan (~> 1.10)
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 1.2)

@@ -12,6 +12,7 @@ gem 'rails_12factor', group: :production
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'kaminari'
+gem 'cancancan', '~> 1.10'
 
 gem 'brazilian-rails'
 gem 'bootstrap-datepicker-rails'
