@@ -50,11 +50,12 @@ class Product < ActiveRecord::Base
     return 0
   end
 
-  def avg_price_with_discount
-    if self.items.any?
+  def avg_price_with_discount(days_ago=45)
+    recent_items = days_ago ? self.items.where(created_at: days_ago.to_i.days.ago..Time.current) : self.items
+    if recent_items.any?
       sum = 0
       sum_quantity = 0
-      self.items.each do |item|
+      recent_items.each do |item|
         sum += item.unit_price * (1 - item.purchase.discount/100.to_f) * item.quantity
         sum_quantity += item.quantity
       end

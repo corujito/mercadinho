@@ -35,7 +35,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def total_price_custo_real_aproximado
-    self.product.avg_price_in_stock_with_discount * self.quantity
+    self.product.avg_price_with_discount * self.quantity
   end
 
   def estimate_profit
