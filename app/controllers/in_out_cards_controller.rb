@@ -11,9 +11,9 @@ class InOutCardsController < ApplicationController
       @start_date = Time.zone.parse(params[:start_date]).beginning_of_day
       @end_date = Time.zone.parse(params[:end_date]).end_of_day
 
-      @in_out_cards = InOutCard.where(:created_at => @start_date..@end_date).order(created_at: :desc).page(1).per(1000)
+      @in_out_cards = InOutCard.includes(:card).where(:created_at => @start_date..@end_date).order(created_at: :desc).page(1).per(1000)
     else
-      @in_out_cards = InOutCard.order(created_at: :desc).page params[:page]
+      @in_out_cards = InOutCard.includes(:card).order(created_at: :desc).page params[:page]
     end
   end
 

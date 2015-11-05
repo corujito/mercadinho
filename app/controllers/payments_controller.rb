@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.order(created_at: :desc).page params[:page]
+    @payments = Payment.includes(:client).order(created_at: :desc).page params[:page]
   end
 
   # GET /payments/1

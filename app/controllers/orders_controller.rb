@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.includes([:client, {order_items: [:product]}]).order(created_at: :desc).page params[:page]
+    @orders = Order.includes([:client, :order_items]).order(created_at: :desc).page params[:page]
   end
 
   # GET /orders/1

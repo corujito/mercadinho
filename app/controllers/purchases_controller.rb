@@ -6,7 +6,7 @@ class PurchasesController < ApplicationController
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.order(created_at: :desc).page params[:page]
+    @purchases = Purchase.includes([:vendor, :items]).order(created_at: :desc).page params[:page]
   end
 
   def find_product_by_full_name

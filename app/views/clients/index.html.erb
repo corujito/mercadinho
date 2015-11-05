@@ -25,7 +25,6 @@
       <th>Saldo</th>
       <th></th>
       <th>Telefone</th>
-      <% if can? :manage, :all %><th>Lucro Aprox.</th><% end %>
       <!--<th>Endereço</th>-->
       <th>Ativo</th>
       <!--<th class="col-md-1"></th>-->
@@ -41,7 +40,6 @@
         <td style="<% if client.balance and client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(client.balance, negative_format: "%u%n") %></td>
         <td><%= link_to("Abrir Pagamento", new_payment_path(client_id: client.id), title: 'Abrir Pagamento') %></td>
         <td><%= client.phone %></td>
-        <% if can? :manage, :all %><td style="<% if client.estimate_profit < 0 then %>color:red<% end %>"><%= number_to_currency(client.estimate_profit) %></td><% end %>
         <!--<td><%= client.address %></td>-->
         <td><%= client.active %></td>
         <!--<td><%= link_to 'Exibir', client %></td>-->
