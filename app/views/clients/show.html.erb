@@ -29,7 +29,7 @@
                 </thead>
 
                 <tbody>
-                <% @client.orders.each do |order| %>
+                <% @client.orders.reverse.each do |order| %>
                     <tr>
                       <td><%= link_to order.id, order %></td>
                       <td><%= number_to_currency(order.total_price) %></td>
@@ -66,7 +66,7 @@
                 </thead>
 
                 <tbody>
-                <% @client.payments.each do |payment| %>
+                <% @client.payments.reverse.each do |payment| %>
                     <tr>
                       <td><%= link_to payment.id, payment %></td>
                       <td><%= number_to_currency(payment.amount) %></td>
