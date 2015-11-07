@@ -1,7 +1,8 @@
 class ClientsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:edit, :update, :destroy]
+  before_action :set_client_with_includes, only: [:show]
 
   # GET /clients
   # GET /clients.json
@@ -79,6 +80,10 @@ class ClientsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = Client.find(params[:id])
+    end
+
+    def set_client_with_includes
+      @client = Client.includes({orders: [ order_items: [:product] ]}).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
