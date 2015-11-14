@@ -50,8 +50,14 @@ class Product < ActiveRecord::Base
     return 0
   end
 
-  def avg_price_with_discount(days_ago=45)
-    recent_items = days_ago ? self.items.where(created_at: days_ago.to_i.days.ago..Time.current) : self.items
+  def avg_price_with_discount(days_ago=7)
+    if days_ago
+      recent_items = self.items.includes(:purchase).where(created_at: days_ago.to_i.days.ago..Time.current)
+      recent_items = [self.items.includes(:purchase).last] if recent_items.empty?
+    else
+      recent_items = self.items.includes(:purchase)
+    end
+    # recent_items = days_ago ? self.items.where(created_at: days_ago.to_i.days.ago..Time.current) : self.items
     if recent_items.any?
       sum = 0
       sum_quantity = 0
