@@ -59,7 +59,8 @@ ready = function() {
         }
     });
 
-    //calcular_total();
+    calcular_total();
+    numera_items();
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);
@@ -109,6 +110,7 @@ function remove_fields(link) {
     $(link).parent().parent().find('input[type=hidden]').val("1");
     $(link).parent().parent().hide();
     calcular_total();
+    numera_items();
 }
 
 function add_fields(link, association, content) {
@@ -127,6 +129,7 @@ function add_fields(link, association, content) {
 
     aplica_onchange_para_campos();
     substituir_enter_por_tab();
+    numera_items();
 }
 
 function aplica_onchange_para_campos() {
@@ -135,5 +138,11 @@ function aplica_onchange_para_campos() {
     });
     $('[id^=order_order_items_attributes_][id$=_quantity_formatted]').change(function() {
         calcular_total();
+    });
+}
+
+function numera_items() {
+    $('[name=nro_item]:visible').each(function( index ) {
+        $(this).html(index+1);
     });
 }

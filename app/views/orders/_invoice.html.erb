@@ -3,11 +3,11 @@ DATA: <%= l @order.created_at, format: "%d/%m/%Y" %>             <%= "Pedido: #{
 <%=  if @order.client then @order.client.full_name.upcase.center(42) else "-" end %>
 =========================================
 
-PRODUTO
+ITEM PRODUTO
  QTDE UN	VL.UNIT		VL.ITEM
 -----------------------------------------
-<% @order.order_items.each do |item| %>
-<%= item.product.full_name if item.product %>
+<% @order.order_items.each_with_index do |item, index| %>
+<%= index+1 %>. <%= item.product.full_name if item.product %>
  <%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true).ljust(4) %> x <%= item.product.unity if item.product %>	<%= number_to_currency(item.unit_price) %> =	<%= number_to_currency(item.total_price) %>
 <% end %>
 
