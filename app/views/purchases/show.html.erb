@@ -32,4 +32,4 @@ Data: <%= l @purchase.created_at, format: "%d/%m/%Y" %><br>
 <br>
 
 <%= link_to 'Editar', edit_purchase_path(@purchase), class: "btn btn-primary" %>
-<%= link_to 'Voltar', purchases_path, class: "btn btn-default" %>
+<%= link_to 'Voltar', :back, class: "btn btn-default" %>
