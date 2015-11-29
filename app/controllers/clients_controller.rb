@@ -7,6 +7,13 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
+    if params[:full_name]
+      @client = Client.find_by(full_name: params[:full_name])
+      if @client
+        redirect_to client_url(@client)
+        return
+      end
+    end
     @clients = Client.order(:balance).page params[:page]
   end
 
