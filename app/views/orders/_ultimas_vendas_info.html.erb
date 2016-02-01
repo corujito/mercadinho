@@ -9,14 +9,14 @@
               <tr>
                 <th class="col-xs-1 col-sm-1 col-md-1">Estoque</th>
                 <th class="col-xs-10 col-sm-10 col-md-9">Produto</th>
-                <th class="col-xs-1 col-sm-1 col-md-2">Preço Médio</th>
+                <th class="col-xs-1 col-sm-1 col-md-2">Último Preço com desconto</th>
               </tr>
               </thead>
               <% Product.order(last_order_at: :desc).each do |product| %>
                   <tr>
                     <td class=""><%= display_stock(product.in_stock, product.unity) %></td>
                     <td class=""><%= product.full_name %></td>
-                    <td class=""><%= "#{number_to_currency(product.avg_price_with_discount)}/#{product.unity}" if product.avg_price_with_discount %></td>
+                    <td class=""><%= "#{number_to_currency(product.last_price_with_discount)}/#{product.unity}" if product.last_price_with_discount %></td>
                   </tr>
               <% end %>
             </table>

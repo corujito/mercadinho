@@ -82,4 +82,12 @@ class Product < ActiveRecord::Base
     end
     return 0
   end
+
+  def last_price_with_discount
+    item = self.items.last
+    if item
+      return item.unit_price * (1 - item.purchase.discount/100.to_f)
+    end
+    return 0
+  end
 end
