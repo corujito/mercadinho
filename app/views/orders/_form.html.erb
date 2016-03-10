@@ -19,16 +19,18 @@
         </div>
 
         <div class="row">
-          <div class="table-responsive col-xs-12 col-sm-8 col-md-8">
+          <div class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <table class="table table-striped" id="table_<%= f.object.id %>">
               <thead>
               <tr>
-                <th class="col-xs-0 col-sm-0 col-md-0"></th>
-                <th class="col-xs-4 col-sm-4 col-md-4">Produto</th>
-                <th class="col-xs-4 col-sm-3 col-md-3">Qtd</th>
-                <th class="col-xs-3 col-sm-3 col-md-3">Preço Unitário</th>
-                <th class="col-xs-1 col-sm-1 col-md-1"></th>
-                <th class="col-xs-1 col-sm-1 col-md-1"></th>
+                <th class="col-xs-0 col-sm-0 col-md-0 col-lg-0"></th>
+                <th class="hidden-xs col-sm-4 col-md-4 col-lg-4">Produto</th>
+                <th class="visible-xs col-xs-4">Prod</th>
+                <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Qtd</th>
+                <th class="hidden-xs col-sm-4 col-md-4 col-lg-4">Preço Unitário</th>
+                <th class="visible-xs col-xs-4">R$/Un</th>
+                <th class="col-xs-0 col-sm-0 col-md-0 col-lg-0"></th>
+                <th class="col-xs-0 col-sm-0 col-md-0 col-lg-0"></th>
               </tr>
               </thead>
 
@@ -40,7 +42,7 @@
             </table>
             <p class="pull-right"><%= link_to_add_fields "+", f, :order_items %></p>
           </div>
-          <div id="infos" class="col-xs-12 col-sm-4 col-md-4">
+          <div id="infos" class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <div id="product_info" class="" style="display:none;"></div>
           </div>
         </div>
