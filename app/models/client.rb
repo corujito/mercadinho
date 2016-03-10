@@ -9,8 +9,8 @@ class Client < ActiveRecord::Base
   has_many :payments
   has_many :order_items, through: :orders
 
-  def estimate_profit
-    self.orders.inject(0) { |sum, o| sum + o.estimate_profit_per_product }
+  def estimate_profit(time=Time.current)
+    self.orders.inject(0) { |sum, o| sum + o.estimate_profit_per_product(time) }
   end
 
   def total_paid

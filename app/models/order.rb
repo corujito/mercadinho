@@ -13,10 +13,10 @@ class Order < ActiveRecord::Base
     order_items.inject(0) { |sum, p| sum + p.unit_price * p.quantity }
   end
 
-  def total_price_custo_real_aproximado
+  def total_price_custo_real_aproximado(time=Time.current)
     order_items.inject(0) do |sum, p|
       if p.product
-        sum + p.product.avg_price_with_discount * p.quantity
+        sum + p.product.avg_price_with_discount(time) * p.quantity
       else
         sum
       end
@@ -27,10 +27,10 @@ class Order < ActiveRecord::Base
     self.total_price - self.total_price_custo_real_aproximado
   end
 
-  def estimate_profit_per_product
+  def estimate_profit_per_product(time=Time.current)
     order_items.inject(0) do |sum, p|
-      if p.product and p.product.avg_price_with_discount > 0
-        sum + (p.unit_price * p.quantity) - (p.product.avg_price_with_discount * p.quantity)
+      if p.product and p.product.avg_price_with_discount(time) > 0
+        sum + (p.unit_price * p.quantity) - (p.product.avg_price_with_discount(time) * p.quantity)
       else
         sum
       end

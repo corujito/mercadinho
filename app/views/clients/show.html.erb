@@ -1,8 +1,9 @@
+<% time = Time.current %>
 <h1><%= @client.full_name %></h1>
 <b>Saldo Financeiro Atual:</b> <span style="<% if @client.balance < 0 then %>color:red<% end %>"><%= number_to_currency(@client.balance) %></span><br>
 <b>Total de Pagamentos:</b> <span style="<% if @client.total_paid < 0 then %>color:red<% end %>"><%= number_to_currency(@client.total_paid) %></span><br>
 <% if can? :manage, :all %>
-    <b>Lucro Aprox. (considerando apenas compras):</b> <span style="<% if @client.estimate_profit < 0 then %>color:red<% end %>"><%= number_to_currency(@client.estimate_profit) %></span><br>
+    <b>Lucro Aprox. (considerando apenas compras):</b> <span style="<% if @client.estimate_profit(time) < 0 then %>color:red<% end %>"><%= number_to_currency(@client.estimate_profit(time)) %></span><br>
 <% end %>
 <b>Email:</b> <%= @client.email %><br>
 <b>Telefone:</b> <%= @client.phone %><br>
@@ -33,7 +34,9 @@
                     <tr>
                       <td><%= link_to order.id, order %></td>
                       <td><%= number_to_currency(order.total_price) %></td>
-                      <% if can? :manage, :all %><td style="<% if order.estimate_profit_per_product and order.estimate_profit_per_product < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(order.estimate_profit_per_product) %></td><% end %>
+                      <% if can? :manage, :all %>
+                          <td style="<% if order.estimate_profit_per_product(time) and order.estimate_profit_per_product(time) < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado(time) == 0) ? "-" : number_to_currency(order.estimate_profit_per_product(time)) %></td>
+                      <% end %>
                       <td><%= if order.pending? then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else "Pago" end %></td>
                       <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
                     </tr>
