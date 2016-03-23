@@ -1,5 +1,5 @@
-<%= simple_form_for(@order, html: { class: 'form-vertical' }) do |f| %>
-    <div class="row">
+<div class="row">
+  <%= simple_form_for(@order, html: { class: 'form-vertical' }) do |f| %>
       <div class="col-xs-12 col-sm-12 col-md-8">
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-4">
@@ -81,10 +81,41 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-4">
+  <% end %>
+  <div class="col-xs-12 col-sm-12 col-md-4">
           <div id="ultimas_vendas_info" class="">
             <%= render "orders/ultimas_vendas_info" %>
           </div>
+    <!-- coloquei os modals fora do ajax.. nao estava funcionando depios de atualizar -->
+    <% Product.order(last_order_at: :desc).each do |product| %>
+        <div id="myModal<%= product.id %>" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edição de Estoque: <%= product.full_name %></h4>
+              </div>
+              <%= simple_form_for(product, html: {class: 'form-vertical'}, remote: true) do |f| %>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-6 col-md-3">
+                        <%= f.input :unity, label: 'Unidade', :as => :select, :collection => Product.unities.keys.to_a %>
+                      </div>
+                      <div class="col-xs-6 col-sm-6 col-md-3">
+                        <%= f.input :in_stock, label: 'Estoque Atual' do %>
+                            <%= f.text_field :in_stock_formatted, value: number_with_precision(f.object.in_stock, precision: 3, separator: ",", strip_insignificant_zeros: true), class: "form-control" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
+                    <%= link_to "Cancelar", products_url, {class: "btn btn-danger", data: {dismiss: "modal"}}%>
+                  </div>
+              <% end %>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    <% end %>
       </div>
-    </div>
-<% end %>
+</div>

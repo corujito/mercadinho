@@ -14,7 +14,7 @@
               </thead>
               <% Product.order(last_order_at: :desc).each do |product| %>
                   <tr>
-                    <td class=""><%= display_stock(product.in_stock, product.unity) %></td>
+                    <td class=""><%= link_to(display_stock(product.in_stock, product.unity), "", role: "button", data: { target: "#myModal#{product.id}", toggle: "modal"}) %></td>
                     <td class=""><%= product.full_name %></td>
                     <td class=""><%= "#{number_to_currency(product.last_price_with_discount)}/#{product.unity}" if product.last_price_with_discount %></td>
                   </tr>
