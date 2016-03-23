@@ -6,6 +6,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    if params[:full_name]
+      @product = Product.find_by(full_name: params[:full_name])
+      if @product
+        redirect_to product_url(@product)
+        return
+      end
+    end
     @products = Product.order(:full_name).page params[:page]
   end
 
