@@ -18,6 +18,7 @@
       <th>Preço Total</th>
       <th>Status</th>
       <th>Data</th>
+      <th class="col-md-1 text-center"></th>
       <th class="col-md-1 text-center">Editar</th>
       <th class="col-md-1 text-center">Remover</th>
     </tr>
@@ -31,9 +32,25 @@
           <td><%= number_to_currency(order.total_price) %></td>
           <td><%= if (order.pending? and order.client) then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else (order.paid? ? "Pago" : "-") end %></td>
           <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+          <td class="text-center"><%= link_to("Gerar Nota", "", role: "button", data: { target: "#myModal#{order.id}", toggle: "modal"}) %></td>
           <td class="text-center"><%= link_to edit_order_path(order) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
           <td class="text-center"><%= link_to order, method: :delete, data: { confirm: 'Tem certeza que deseja remover?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
+        <div class="modal fade" id="myModal<%= order.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Pedido</h4>
+              </div>
+              <div class="modal-body"><pre id="toPrint"><%= render partial: "orders/invoice", locals: {order: order} %></pre></div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick=$("#toPrint").print();>Imprimir</button>
+              </div>
+            </div>
+          </div>
+        </div>
     <% end %>
     </tbody>
   </table>
