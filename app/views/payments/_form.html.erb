@@ -16,6 +16,7 @@
                 <th>Status</th>
                 <th>Valor</th>
                 <th>Data</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
@@ -29,7 +30,23 @@
                     <td>Pendente</td>
                     <td><%= number_to_currency(order.total_price) %></td>
                     <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+                    <td class="text-center"><%= link_to("Gerar Nota", "", role: "button", data: { target: "#myModal#{order.id}", toggle: "modal"}) %></td>
                   </tr>
+                  <div class="modal fade" id="myModal<%= order.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Pedido</h4>
+                        </div>
+                        <div class="modal-body"><pre id="toPrint"><%= render partial: "orders/invoice", locals: {order: order} %></pre></div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                          <button type="button" class="btn btn-primary" onclick=$("#toPrint").print();>Imprimir</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               <% end %>
               </tbody>
             </table>
