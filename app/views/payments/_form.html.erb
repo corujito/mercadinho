@@ -39,10 +39,10 @@
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <h4 class="modal-title" id="myModalLabel">Pedido</h4>
                         </div>
-                        <div class="modal-body"><pre id="toPrint"><%= render partial: "orders/invoice", locals: {order: order} %></pre></div>
+                        <div class="modal-body"><pre id="toPrint<%= order.id %>"><%= render partial: "orders/invoice", locals: {order: order} %></pre></div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                          <button type="button" class="btn btn-primary" onclick=$("#toPrint").print();>Imprimir</button>
+                          <button type="button" class="btn btn-primary" onclick=$("#toPrint<%= order.id %>").print();>Imprimir</button>
                         </div>
                       </div>
                     </div>
