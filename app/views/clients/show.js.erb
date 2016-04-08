@@ -1,0 +1,4 @@
+$('#compras_pagamentos_cliente_tabela').html("<%= j (render partial: 'compras_pagamentos_cliente_tabela', locals: {time: Time.current}) %>");
+<% if params[:tab] %>
+$("#<%= params[:tab] %>_tab").tab('show');
+<% end %>

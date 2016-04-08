@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_client, only: [:edit, :update, :destroy]
-  before_action :set_client_with_includes, only: [:show]
+  # before_action :set_client_with_includes, only: [:show]
 
   # GET /clients
   # GET /clients.json
@@ -32,10 +32,19 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
-    #@orders = Order.order(created_at: :desc).where(client_id: @client.id).page params[:orders_page]
-    #@payments = Payment.order(created_at: :desc).where(client_id: @client.id).page params[:payments_page]
-    @orders = @client.orders.order(created_at: :desc).page(params[:orders_page]).per(10)
-    @payments = @client.payments.order(created_at: :desc).page(params[:payments_page]).per(10)
+    per_page = 10
+    respond_to do |format|
+      format.html {
+        set_client_with_includes
+        @orders = @client.orders.order(created_at: :desc).page(params[:orders_page]).per(per_page)
+        @payments = @client.payments.order(created_at: :desc).page(params[:payments_page]).per(per_page)
+      }
+      format.js {
+        # set_client
+        @orders = Order.order(created_at: :desc).where(client_id: params[:id]).page(params[:orders_page]).per(per_page)
+        @payments = Payment.order(created_at: :desc).where(client_id: params[:id]).page(params[:payments_page]).per(per_page)
+      }
+    end
   end
 
   # GET /clients/new
