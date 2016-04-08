@@ -32,6 +32,10 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
+    #@orders = Order.order(created_at: :desc).where(client_id: @client.id).page params[:orders_page]
+    #@payments = Payment.order(created_at: :desc).where(client_id: @client.id).page params[:payments_page]
+    @orders = @client.orders.order(created_at: :desc).page(params[:orders_page]).per(7)
+    @payments = @client.payments.order(created_at: :desc).page(params[:payments_page]).per(7)
   end
 
   # GET /clients/new

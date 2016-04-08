@@ -11,77 +11,89 @@
 <b>Ativo:</b> <%= @client.active %><br>
 <hr>
 
-<div class="panel panel-info collapse in" id="panel_estoque_atual">
-  <div class="panel-heading">Compras</div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <% if @client.orders.any? %>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Preço Total</th>
-                  <% if can? :manage, :all %><th>Lucro Aprox.</th><% end %>
-                  <th>Status</th>
-                  <th>Data</th>
-                </tr>
-                </thead>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Compras</a></li>
+  <li><a data-toggle="tab" href="#menu1">Pagamentos</a></li>
+</ul>
 
-                <tbody>
-                <% @client.orders.reverse.each do |order| %>
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <div class="panel panel-info collapse in" id="panel_estoque_atual">
+      <div class="panel-heading">Compras</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <% if @orders.any? %>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
                     <tr>
-                      <td><%= link_to order.id, order %></td>
-                      <td><%= number_to_currency(order.total_price) %></td>
-                      <% if can? :manage, :all %>
-                          <td style="<% if order.estimate_profit_per_product(time) and order.estimate_profit_per_product(time) < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado(time) == 0) ? "-" : number_to_currency(order.estimate_profit_per_product(time)) %></td>
-                      <% end %>
-                      <td><%= if order.pending? then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else "Pago" end %></td>
-                      <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+                      <th>Id</th>
+                      <th>Preço Total</th>
+                      <% if can? :manage, :all %><th>Lucro Aprox.</th><% end %>
+                      <th>Status</th>
+                      <th>Data</th>
                     </tr>
-                <% end %>
-                </tbody>
-              </table>
-            </div>
-        <% else %>
-            Nenhuma venda registrada.
-        <% end %>
+                    </thead>
+
+                    <tbody>
+                    <% @orders.each do |order| %>
+                        <tr>
+                          <td><%= link_to order.id, order %></td>
+                          <td><%= number_to_currency(order.total_price) %></td>
+                          <% if can? :manage, :all %>
+                              <td style="<% if order.estimate_profit_per_product(time) and order.estimate_profit_per_product(time) < 0 then %>color:red<% end %>"><%= (order.total_price_custo_real_aproximado(time) == 0) ? "-" : number_to_currency(order.estimate_profit_per_product(time)) %></td>
+                          <% end %>
+                          <td><%= if order.pending? then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else "Pago" end %></td>
+                          <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+            <% else %>
+                Nenhuma venda registrada.
+            <% end %>
+          </div>
+        </div>
+        <%= paginate @orders, param_name: "orders_page" %>
       </div>
     </div>
   </div>
-</div>
-
-<div class="panel panel-info collapse in" id="panel_estoque_atual">
-  <div class="panel-heading">Pagamentos</div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <% if @client.payments.any? %>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th class="col-md-3">Id</th>
-                  <th>Valor</th>
-                  <th>Data</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <% @client.payments.reverse.each do |payment| %>
+  <div id="menu1" class="tab-pane fade">
+    <div class="panel panel-info collapse in" id="panel_estoque_atual">
+      <div class="panel-heading">Pagamentos</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <% if @payments.any? %>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
                     <tr>
-                      <td><%= link_to payment.id, payment %></td>
-                      <td><%= number_to_currency(payment.amount) %></td>
-                      <td><%= l payment.created_at, format: "%d/%m/%Y" %></td>
+                      <th class="col-md-3">Id</th>
+                      <th>Valor</th>
+                      <th>Data</th>
                     </tr>
-                <% end %>
-                </tbody>
-              </table>
-            </div>
-        <% else %>
-            Nenhum pagamento registrada.
-        <% end %>
+                    </thead>
+
+                    <tbody>
+                    <% @payments.reverse.each do |payment| %>
+                        <tr>
+                          <td><%= link_to payment.id, payment %></td>
+                          <td><%= number_to_currency(payment.amount) %></td>
+                          <td><%= l payment.created_at, format: "%d/%m/%Y" %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+            <% else %>
+                Nenhum pagamento registrada.
+            <% end %>
+          </div>
+        </div>
+        <%= paginate @payments, param_name: "payments_page" %>
       </div>
     </div>
   </div>
