@@ -3,22 +3,37 @@
 CPF: <%= @card.cpf %><br>
 Telefone: <%= @card.phone %><br>
 Email: <%= @card.email %><br>
+Identificação: <%= @card.identification %><br>
+Senha: <%= @card.password %><br>
+Tipo: <%= @card.card_type %><br>
+<br>
+<%= link_to 'Editar', edit_card_path(@card), class: "btn btn-primary" %>
+<%= link_to 'Voltar', :back, class: "btn btn-default" %>
 <hr>
-<style>
-    .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
-        border: none;
-    }
-</style>
+
+<% if @card.in_out_cards.any? %>
+REGISTROS DO CARTÃO
 <div class="table-responsive">
-  <table class='table borderless'>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col-md-3">Nome</th>
+      <th>Identificação</th>
+      <th>Data</th>
+    </tr>
+    </thead>
+
     <tbody>
-    <tr><td class="col-md-2"><b>Identificação:</b></td><td><%= @card.identification %></td></tr>
-    <tr><td class="col-md-2"><b>Senha:</b></td><td><%= @card.password %></td></tr>
-    <tr><td class="col-md-2"><b>Tipo:</b></td><td><%= @card.card_type %></td></tr>
+    <% @card.in_out_cards.order(created_at: :desc).each do |in_out_card| %>
+        <tr>
+          <td><%= link_to(in_out_card.card.full_name, in_out_card.card) if in_out_card.card %></td>
+          <td><%= in_out_card.card.identification if in_out_card.card %></td>
+          <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
+        </tr>
+    <% end %>
     </tbody>
   </table>
 </div>
-<br>
-
-<%= link_to 'Editar', edit_card_path(@card), class: "btn btn-primary" %>
-<%= link_to 'Voltar', :back, class: "btn btn-default" %>
+<% else %>
+    NENHUM REGISTRO DO CARTÃO
+<% end %>
