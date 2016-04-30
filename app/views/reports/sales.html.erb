@@ -42,7 +42,7 @@
        total_sales = total_payments = total_lucro = 0
     %>
     <% if @start_date and @end_date %>
-        <% Client.includes({orders: [{order_items: [:product]}]}).all.sort_by {|c| c.orders.inject(0) { |sum, o| sum + o.total_price }}.reverse.each do |client| %>
+        <% Client.includes({orders: [{order_items: [:product]}]}).all.sort_by {|c| c.orders.where(:created_at => @start_date..@end_date).inject(0) { |sum, o| sum + o.total_price }}.reverse.each do |client| %>
         <%
            client_total_sales = client_total_payments =  client_total_lucro = 0
            client_orders = client.orders.where(:created_at => @start_date..@end_date)
