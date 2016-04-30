@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-#ruby=ruby-2.1.4
+#ruby=ruby-2.1.10
 #ruby-gemset=mercadinho
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.12'
