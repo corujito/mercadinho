@@ -15,6 +15,9 @@ ready = function() {
         select: function( event, ui ) { get_product_info(ui.item.value, "0") },
         minLength: 2
     });
+    $('#purchase_items_attributes_0_product_name').on("change", function(e) {
+        $(this).parent().parent().next().find(".small").text('');
+    });
 
     $('#purchase_items_attributes_0_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     //$('#purchase_items_attributes_0_quantity').inputmask("decimal", {radixPoint: ","});
@@ -25,17 +28,26 @@ ready = function() {
         select: function( event, ui ) { get_product_info(ui.item.value, "1") },
         minLength: 2
     });
+    $('#purchase_items_attributes_1_product_name').on("change", function(e) {
+        $(this).parent().parent().next().find(".small").text('');
+    });
     $('#purchase_items_attributes_1_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     $('#purchase_items_attributes_2_product_name').autocomplete({
         source: $('#purchase_items_attributes_2_product_name').data('autocomplete-source'),
         select: function( event, ui ) { get_product_info(ui.item.value, "2") },
         minLength: 2
     });
+    $('#purchase_items_attributes_2_product_name').on("change", function(e) {
+        $(this).parent().parent().next().find(".small").text('');
+    });
     $('#purchase_items_attributes_2_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     $('#purchase_items_attributes_3_product_name').autocomplete({
         source: $('#purchase_items_attributes_3_product_name').data('autocomplete-source'),
         select: function( event, ui ) { get_product_info(ui.item.value, "3") },
         minLength: 2
+    });
+    $('#purchase_items_attributes_3_product_name').on("change", function(e) {
+        $(this).parent().parent().next().find(".small").text('');
     });
     $('#purchase_items_attributes_3_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     // fim da gambis
@@ -77,6 +89,9 @@ function add_fields(link, association, content) {
         messages: {noResults: '',results: function() {}},
         select: function( event, ui ) { get_product_info(ui.item.value, new_id) },
         minLength: 2
+    });
+    $('#purchase_items_attributes_'+new_id+'_product_name').on("change", function(e) {
+        $(this).parent().parent().next().find(".small").text('');
     });
     $('#purchase_items_attributes_'+new_id+'_product_name').focus();
     $('#purchase_items_attributes_'+new_id+'_unit_price').maskMoney({thousands:'.', decimal:',', allowNegative:false});

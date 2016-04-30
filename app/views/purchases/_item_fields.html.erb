@@ -1,5 +1,6 @@
 <tr class="fields">
   <td><%= f.input :product_name, label: false, placeholder: 'Digite para buscar o produto', input_html: { data: { autocomplete_source: find_products_products_path } } %></td>
+  <td class="hidden-xs small"><div class="small"></div></td>
   <td>
     <div class="input-inputs">
       <%= f.input :quantity, label: false, input_html: {min: 1}, wrapper: :vertical_input_group do %>
