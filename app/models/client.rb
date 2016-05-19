@@ -16,4 +16,13 @@ class Client < ActiveRecord::Base
   def total_paid
     self.payments.inject(0) {|sum, pp| sum + pp.amount}
   end
+
+  def self.pending_payments
+    clients = Client.where("balance < ?", 0)
+    if clients.any?
+      sum = clients.inject(0){|sum,e| sum += e.balance }
+    else
+      return 0
+    end
+  end
 end

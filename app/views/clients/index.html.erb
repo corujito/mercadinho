@@ -1,4 +1,12 @@
 <div class="page-header clearfix">
+  <% total_pending = Client.pending_payments %>
+  <% if total_pending and total_pending < 0 %>
+  <div class="pull-left">
+    <div class="btn-group">
+      <b>Total a receber:</b> <span style="color:red"><%= number_to_currency(total_pending, negative_format: "%u%n") %></span>
+    </div>
+  </div>
+  <% end %>
   <div class="pull-right">
     <div class="btn-group">
       <%= link_to 'Novo Cliente', new_client_path, class: "btn btn-primary" %>
