@@ -6,4 +6,10 @@ class CustomInput < ActiveRecord::Base
   paginates_per 20
 
   enum input_type: [ :despesa, :ganho ]
+
+  def self.purge(months_ago)
+    puts "Total custominputs: #{CustomInput.count}"
+    CustomInput.where("created_at < ?", months_ago.to_i.months.ago).delete_all
+    puts "Total custominputs left: #{CustomInput.count}"
+  end
 end

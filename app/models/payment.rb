@@ -37,4 +37,11 @@ class Payment < ActiveRecord::Base
       logger.warn "nao foi possivel executar update_client_balance_destroy"
     end
   end
+
+  def self.purge(months_ago)
+    puts "Purging payments..."
+    puts "Total payments: #{Payment.count}"
+    Payment.where("created_at < ?", months_ago.to_i.months.ago).delete_all
+    puts "Total payments left: #{Payment.count}"
+  end
 end

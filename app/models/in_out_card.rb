@@ -13,4 +13,10 @@ class InOutCard < ActiveRecord::Base
   def card_identification
     card.try(:identification)
   end
+
+  def self.purge(months_ago)
+    puts "Total inoutcards: #{InOutCard.count}"
+    InOutCard.where("created_at < ?", months_ago.to_i.months.ago).delete_all
+    puts "Total inoutcards left: #{InOutCard.count}"
+  end
 end

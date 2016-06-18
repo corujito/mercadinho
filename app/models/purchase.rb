@@ -21,4 +21,15 @@ class Purchase < ActiveRecord::Base
   def vendor_name=(name)
     self.vendor = Vendor.find_or_create_by(full_name: name) if name.present?
   end
+
+  def self.purge(months_ago)
+    puts "Purging purchases..."
+    puts "Total purchases: #{Purchase.count}"
+    puts "Total items: #{Item.count}"
+    Item.skip_callback(:destroy, :after, :update_stock_destroy)
+    Purchase.where("created_at < ?", months_ago.to_i.months.ago).destroy_all
+    puts "Total purchases left: #{Purchase.count}"
+    puts "Total items left: #{Item.count}"
+  end
+
 end

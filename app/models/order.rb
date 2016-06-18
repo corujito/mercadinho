@@ -59,6 +59,17 @@ class Order < ActiveRecord::Base
     Order.where(:created_at => start_date..end_date)
   end
 
+  def self.purge(months_ago)
+    puts "Purging orders..."
+    puts "Total orders: #{Order.count}"
+    puts "Total orderitems: #{OrderItem.count}"
+    OrderItem.skip_callback(:destroy, :after, :update_stock_destroy)
+    OrderItem.skip_callback(:destroy, :after, :update_client_balance_destroy)
+    Order.paid.where("created_at < ?", months_ago.to_i.months.ago).destroy_all
+    puts "Total orders left: #{Order.count}"
+    puts "Total orderitems left: #{OrderItem.count}"
+  end
+
   private
 
   def client_id_not_changed
