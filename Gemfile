@@ -6,6 +6,7 @@ ruby "2.1.10"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.12'
 
+gem 'puma'
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'simple_form'
