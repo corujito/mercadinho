@@ -8,11 +8,11 @@ task purge_db: :environment do
   puts "Total cards: #{Card.count}"
   puts "Total vendors: #{Vendor.count}"
 
-  #Purchase.purge(months_ago.to_i)
-  #Order.purge(months_ago.to_i)
-  #Payment.purge(months_ago.to_i)
-  #InOutCard.purge(months_ago.to_i)
-  #CustomInput.purge(months_ago.to_i)
+  Purchase.purge(months_ago.to_i)
+  Order.purge(months_ago.to_i)
+  Payment.purge(months_ago.to_i)
+  InOutCard.purge(months_ago.to_i)
+  CustomInput.purge(months_ago.to_i)
 
   puts "done."
 end
