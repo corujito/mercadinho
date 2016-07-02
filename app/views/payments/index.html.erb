@@ -37,7 +37,7 @@
           <td><%= payment.client.full_name if payment.client %></td>
           <td><%= number_to_currency(payment.amount) %></td>
           <td><%= l payment.created_at, format: "%d/%m/%Y" %></td>
-          <td class="text-center"><%= link_to edit_payment_path(payment) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><% if payment.client %><%= link_to edit_payment_path(payment) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %><% end %></td>
           <td class="text-center"><%= link_to payment, method: :delete, data: { confirm: 'Tem certeza que deseja remover?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
     <% end %>
