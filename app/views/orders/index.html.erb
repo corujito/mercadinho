@@ -28,7 +28,7 @@
         <tr>
           <td><%= link_to order.id, order %></td>
           <td><%= link_to(order.client.full_name, order.client) if order.client %></td>
-          <td><%= number_to_currency(order.total_price) %></td>
+          <td><%= link_to(number_to_currency(order.total_price), "", data: { target: "#myModal#{order.id}", toggle: "modal"}) %></td>
           <td><%= if (order.pending? and order.client) then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else (order.paid? ? "Pago" : "-") end %></td>
           <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
           <td class="text-center"><%= link_to edit_order_path(order) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
@@ -37,6 +37,61 @@
     <% end %>
     </tbody>
   </table>
+</div>
+
+<div>
+  <% @orders.each do |order| %>
+      <div id="myModal<%= order.id %>" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">
+                <p>Detalhes do Pedido: <%= order.id %>  -  <%= order.client.full_name if order.client %></p>
+                <p>Total do Pedido: <%= number_to_currency(order.total_price) %></p>
+              </h4>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Items</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Valor Total</th>
+                    <% if can? :manage, :all %>
+                        <th class="small">Preço Médio</th>
+                        <th class="small">Lucro Aprox.</th>
+                    <% end %>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% order.order_items.each_with_index do |item, index| %>
+                      <tr>
+                        <td class="col-md-2"><b><%= index+1 %></b></td>
+                        <td><%= item.product.full_name if item.product %></td>
+                        <td><%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true) %></td>
+                        <td><%= number_to_currency(item.unit_price) %></td>
+                        <td><%= number_to_currency(item.total_price) %></td>
+                        <% if can? :manage, :all %>
+                            <td class="small"><%= number_to_currency(item.product.avg_price_with_discount) %></td>
+                            <td class="small" style="<% if item.estimate_profit and item.estimate_profit < 0 then %>color:red<% end %>"><%= (item.total_price_custo_real_aproximado == 0) ? "-" : number_to_currency(item.estimate_profit) %></td>
+                        <% end %>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+  <% end %>
 </div>
 
 <br/>
