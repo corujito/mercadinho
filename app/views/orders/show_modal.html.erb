@@ -24,6 +24,7 @@
       </thead>
       <tbody>
       <% @order.order_items.each_with_index do |item, index| %>
+        <% if item.product %>
           <tr>
             <td class="col-md-2"><b><%= index+1 %></b></td>
             <td><%= item.product.full_name if item.product %></td>
@@ -36,6 +37,7 @@
                 <td class="small" style="<% if item.estimate_profit and item.estimate_profit < 0 then %>color:red<% end %>"><%= (item.total_price_custo_real_aproximado == 0) ? "-" : number_to_percentage(item.estimate_profit.to_f*100/item.total_price_custo_real_aproximado.to_f, precision: 2, strip_insignificant_zeros: true) %></td>
             <% end %>
           </tr>
+        <% end %>
       <% end %>
       </tbody>
     </table>
