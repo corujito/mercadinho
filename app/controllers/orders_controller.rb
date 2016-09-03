@@ -12,7 +12,9 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    if params[:html]
+    if params[:html] == "modal"
+      render template: "orders/show_modal", layout: false
+    elsif params[:html]
       render template: "orders/show2", layout: false
     end
   end

@@ -28,7 +28,7 @@
         <tr>
           <td><%= link_to order.id, order %></td>
           <td><%= link_to(order.client.full_name, order.client) if order.client %></td>
-          <td><%= link_to(number_to_currency(order.total_price), "", data: { target: "#myModal#{order.id}", toggle: "modal"}) %></td>
+          <td><%= link_to(number_to_currency(order.total_price), order_path(order, html: "modal"), data: { target: "#myModal#{order.id}", toggle: "modal"}) %></td>
           <td><%= if (order.pending? and order.client) then link_to("Pendente", new_payment_path(client_id: order.client.id, order_id: order.id), title: 'Abrir Pagamento') else (order.paid? ? "Pago" : "-") end %></td>
           <td><%= l order.created_at, format: "%d/%m/%Y" %></td>
           <td class="text-center"><%= link_to edit_order_path(order) do %><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><% end %></td>
@@ -37,6 +37,17 @@
     <% end %>
     </tbody>
   </table>
+</div>
+
+<div>
+  <% @orders.each do |order| %>
+      <div id="myModal<%= order.id %>" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+  <% end %>
 </div>
 
 <br/>
