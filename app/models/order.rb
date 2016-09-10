@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   enum status: [ :pending, :paid ]
 
   def total_price
-    order_items.inject(0) { |sum, p| sum + p.unit_price * p.quantity }
+    order_items.inject(0) { |sum, p| sum + p.unit_price * (p.quantity || 0) }
   end
 
   def total_price_custo_real_aproximado(time=Time.current)
