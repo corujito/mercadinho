@@ -1,8 +1,13 @@
+<script>
+    var card_owner_id = "";
+    <% if @card_owner %>card_owner_id = <%= @card_owner.id %>;<% end %>
+</script>
 <div class="page-header clearfix">
   <div class="pull-right">
     <div class="btn-group">
       <%= form_tag(in_out_cards_url, {:method => "get", :class => "form-inline"}) do %>
           <div class="row">
+            <%= hidden_field_tag :card_owner, @card_owner.id if @card_owner %>
             <div class="col-xs-12 col-sm-2 col-md-2">
               <%= label_tag(:start_date, "Data Inicial") %>
             </div>
@@ -26,8 +31,9 @@
     </button>
   </div>
   <div class="pull-left">
-    <h1>Lista dos Registros de Cartão<small></small></h1>
+    <h1>Lista dos Registros de Cartão - <%= @card_owner.name if @card_owner %><small></small></h1>
     <form action="<%= new_in_out_card_path %>" class="" role="search">
+      <%= hidden_field_tag :card_owner, @card_owner.id if @card_owner %>
       <div class="input-group">
         <%= text_field_tag "card_query", nil, {class: "form-control", autofocus: true, placeholder: "Localizar o cartão por nome ou identificador", data: { autocomplete_source: find_cards_in_out_cards_path }} %>
         <div class="input-group-btn">
@@ -44,8 +50,9 @@
     <tr>
       <th class="col-md-3">Nome</th>
       <th>Identificação</th>
+      <th>Responsável</th>
       <th>Data</th>
-      <th class="col-md-1 text-center">Remover</th>
+      <th class="text-center">Remover</th>
     </tr>
     </thead>
 
@@ -54,8 +61,9 @@
         <tr>
           <td><%= link_to(in_out_card.card.full_name, in_out_card.card) if in_out_card.card %></td>
           <td><%= in_out_card.card.identification if in_out_card.card %></td>
+          <td><%= in_out_card.card_owner.name if in_out_card.card_owner %></td>
           <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
-          <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' } do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' }, card_owner: @card_owner do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>
     <% end %>
     </tbody>

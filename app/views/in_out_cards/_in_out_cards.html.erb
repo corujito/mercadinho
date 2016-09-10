@@ -1,5 +1,6 @@
 =========================================
       REGISTRO DE SAÍDA DE CARTÕES
+<%=  if @card_owner then @card_owner.name.upcase.center(42) else "-".center(42) end %>
 =========================================
 
 <% @in_out_cards.reverse.each_with_index do |out_card, i| %>

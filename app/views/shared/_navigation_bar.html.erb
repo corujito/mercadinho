@@ -26,7 +26,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entradas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-submenu data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entradas <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if can? :read, Purchase %><li><%= link_to "Compras", purchases_url %></li><% end %>
             <% if can? :read, Order %><li><%= link_to "Pedidos", orders_url %></li><% end %>
@@ -34,7 +34,16 @@
             <% if can?(:read, CustomInput) or can?(:read, InOutCard) %>
                 <li role="separator" class="divider"></li>
                 <% if can? :read, CustomInput %><li><%= link_to "Personalizada", custom_inputs_url %></li><% end %>
-                <% if can? :read, InOutCard %><li><%= link_to "Registro de Cartão", in_out_cards_url %></li><% end %>
+                <% if can? :read, InOutCard %>
+                    <li class="dropdown-submenu">
+                      <a href="#" tabindex="0">Registro de Cartão</a>
+                      <ul class="dropdown-menu">
+                        <% CardOwner.all.each do |card_owner| %>
+                            <li><%= link_to card_owner.name, in_out_cards_url(card_owner: card_owner) %></li>
+                        <% end %>
+                      </ul>
+                    </li>
+                <% end %>
             <% end %>
           </ul>
         </li>

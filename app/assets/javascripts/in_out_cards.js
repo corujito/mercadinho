@@ -20,5 +20,5 @@ $(document).on('page:load', ready);
 
 function new_in_out_card(id_name_identification) {
     id= id_name_identification.substring(0,id_name_identification.indexOf("."));
-    window.location.replace("/in_out_cards/new?card_id=" + id);
+    window.location.replace("/in_out_cards/new?card_id=" + id + "&card_owner=" + card_owner_id);
 }

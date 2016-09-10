@@ -2,6 +2,8 @@ class InOutCard < ActiveRecord::Base
   belongs_to :card
   validates :card, presence: true
 
+  belongs_to :card_owner
+
   accepts_nested_attributes_for :card
 
   paginates_per 20

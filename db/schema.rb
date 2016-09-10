@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102134520) do
+ActiveRecord::Schema.define(version: 20160907235659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(version: 20151102134520) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   add_index "admin_users", ["username"], name: "index_admin_users_on_username", unique: true, using: :btree
 
+  create_table "card_owners", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "cards", force: true do |t|
     t.string   "full_name"
     t.string   "identification"
@@ -85,9 +91,11 @@ ActiveRecord::Schema.define(version: 20151102134520) do
     t.integer  "card_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "card_owner_id"
   end
 
   add_index "in_out_cards", ["card_id"], name: "index_in_out_cards_on_card_id", using: :btree
+  add_index "in_out_cards", ["card_owner_id"], name: "index_in_out_cards_on_card_owner_id", using: :btree
 
   create_table "items", force: true do |t|
     t.decimal  "quantity"
