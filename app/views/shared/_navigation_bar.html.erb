@@ -38,7 +38,13 @@
                     <li class="dropdown-submenu">
                       <a href="#" tabindex="0">Registro de Cartão</a>
                       <ul class="dropdown-menu">
-                        <% CardOwner.all.order(created_at: :asc).each do |card_owner| %>
+                        <li class="dropdown-header">Entrada</li>
+                        <% CardOwner.in.order(name: :asc).each do |card_owner| %>
+                            <li><%= link_to card_owner.name, in_out_cards_url(card_owner: card_owner) %></li>
+                        <% end %>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Saída</li>
+                        <% CardOwner.out.order(name: :asc).each do |card_owner| %>
                             <li><%= link_to card_owner.name, in_out_cards_url(card_owner: card_owner) %></li>
                         <% end %>
                       </ul>

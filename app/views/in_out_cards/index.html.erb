@@ -31,7 +31,7 @@
     </button>
   </div>
   <div class="pull-left">
-    <h1>Lista dos Registros de Cartão - <%= @card_owner.name if @card_owner %><small></small></h1>
+    <h1>Lista dos Registros de Cartão - <%= @card_owner.name if @card_owner %><small> <% if @card_owner and @card_owner.out? %>Saída<% else %>Entrada<% end %></small></h1>
     <form action="<%= new_in_out_card_path %>" class="" role="search">
       <%= hidden_field_tag :card_owner, @card_owner.id if @card_owner %>
       <div class="input-group">

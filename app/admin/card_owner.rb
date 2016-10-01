@@ -1,6 +1,6 @@
 ActiveAdmin.register CardOwner do
 
-  permit_params :name
+  permit_params :name, :in_out_type
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -15,5 +15,13 @@ ActiveAdmin.register CardOwner do
 #   permitted
 # end
 
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :in_out_type, as: :select, collection: CardOwner.in_out_types.keys
+      f.actions
+    end
+
+  end
 
 end
