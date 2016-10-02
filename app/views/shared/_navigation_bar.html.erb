@@ -36,14 +36,16 @@
                 <% if can? :read, CustomInput %><li><%= link_to "Personalizada", custom_inputs_url %></li><% end %>
                 <% if can? :read, InOutCard %>
                     <li class="dropdown-submenu">
-                      <a href="#" tabindex="0">Registro de Cartão</a>
+                      <a href="#" tabindex="0">Registro de Cartão - Entrada</a>
                       <ul class="dropdown-menu">
-                        <li class="dropdown-header">Entrada</li>
                         <% CardOwner.in.order(name: :asc).each do |card_owner| %>
                             <li><%= link_to card_owner.name, in_out_cards_url(card_owner: card_owner) %></li>
                         <% end %>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Saída</li>
+                      </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                      <a href="#" tabindex="0">Registro de Cartão - Saída</a>
+                      <ul class="dropdown-menu">
                         <% CardOwner.out.order(name: :asc).each do |card_owner| %>
                             <li><%= link_to card_owner.name, in_out_cards_url(card_owner: card_owner) %></li>
                         <% end %>
