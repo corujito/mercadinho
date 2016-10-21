@@ -15,12 +15,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require bootstrap-submenu
 
 var ready;
 ready = function() {
     substituir_enter_por_tab();
-    $('[data-submenu]').submenupicker();
+    //$('[data-submenu]').submenupicker();
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);
