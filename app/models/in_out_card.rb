@@ -6,6 +6,8 @@ class InOutCard < ActiveRecord::Base
 
   accepts_nested_attributes_for :card
 
+  usar_como_dinheiro :value
+
   paginates_per 20
 
   def card_name

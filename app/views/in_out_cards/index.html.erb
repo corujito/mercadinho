@@ -2,6 +2,38 @@
     var card_owner_id = "";
     <% if @card_owner %>card_owner_id = <%= @card_owner.id %>;<% end %>
 </script>
+
+<div>
+  <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Crédito Atual do Cartão</h4>
+        </div>
+        <%= form_tag(new_in_out_card_url, {:method => "get", :class => "form-inline"}) do |f| %>
+            <div class="modal-body">
+              <div class="row">
+                <%= hidden_field_tag :card_id %>
+                <%= hidden_field_tag :card_owner %>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">R$</span>
+                    <%= text_field_tag :value, "", class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit">Gravar</button>
+              <%= link_to "Cancelar", products_url, {class: "btn btn-danger", data: {dismiss: "modal"}} %>
+            </div>
+        <% end %>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>
+
 <div class="page-header clearfix">
   <div class="pull-right">
     <div class="btn-group">
@@ -51,6 +83,7 @@
       <th class="col-md-3">Nome</th>
       <th>Identificação</th>
       <th>Responsável</th>
+      <th>Valor</th>
       <th>Data</th>
       <th class="text-center">Remover</th>
     </tr>
@@ -62,6 +95,7 @@
           <td><%= link_to(in_out_card.card.full_name, in_out_card.card) if in_out_card.card %></td>
           <td><%= in_out_card.card.identification if in_out_card.card %></td>
           <td><%= in_out_card.card_owner.name if in_out_card.card_owner %></td>
+          <td><%= number_to_currency(in_out_card.value) if in_out_card.value %></td>
           <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
           <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' }, card_owner: @card_owner do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
         </tr>

@@ -35,6 +35,17 @@
         </div>
     <% end %>
 
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6">
+        <div class="form-inputs">
+          <%= f.input :value, label: 'Crédito Atual do Cartão', wrapper: :vertical_input_group do %>
+              <span class="input-group-addon hidden-xs">R$</span>
+              <%= f.text_field :value, class: "form-control", value: (f.object.value ? f.object.value.real : nil) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
     <%= f.button :submit, "Gravar", class: 'btn btn-primary' %>
     <%= link_to "Cancelar", in_out_cards_url(card_owner: @card_owner), {:class=>"btn btn-danger"} %>
 <% end %>

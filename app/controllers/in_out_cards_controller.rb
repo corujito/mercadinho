@@ -31,6 +31,7 @@ class InOutCardsController < ApplicationController
       @card = Card.find(params[:card_id])
       @in_out_card = @card.in_out_cards.build
       @in_out_card.card_owner = @card_owner
+      @in_out_card.value = params[:value] if params[:value] and !params[:value].blank?
       if @in_out_card.save
         flash[:notice] = 'Registro de cartão criado com sucesso.'
       else
@@ -42,6 +43,7 @@ class InOutCardsController < ApplicationController
       @card = Card.new({full_name: params[:card_query], identification: params[:card_query]})
       @in_out_card = @card.in_out_cards.build
       @in_out_card.card_owner = @card_owner
+      @in_out_card.value = params[:value] if params[:value] and !params[:value].blank?
     else
       redirect_to in_out_cards_url(card_owner: @card_owner)
       return
@@ -56,6 +58,7 @@ class InOutCardsController < ApplicationController
   # POST /in_out_cards
   # POST /in_out_cards.json
   def create
+    params[:in_out_card][:value] = nil if params[:in_out_card] and params[:in_out_card][:value] and params[:in_out_card][:value].blank? #evitar que grave R$ 0,00
     @in_out_card = InOutCard.new(in_out_card_params)
 
     respond_to do |format|
@@ -102,6 +105,6 @@ class InOutCardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def in_out_card_params
-      params.require(:in_out_card).permit(:card_id, :card_owner_id, card_attributes: [:full_name, :identification, :password, :cpf, :email, :phone, :card_type])
+      params.require(:in_out_card).permit(:card_id, :card_owner_id, :value, card_attributes: [:full_name, :identification, :password, :cpf, :email, :phone, :card_type])
     end
 end
