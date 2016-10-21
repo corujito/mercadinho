@@ -44,7 +44,7 @@
                       </ul>
                     </li>
                     <li class="dropdown-submenu">
-                      <a href="#" tabindex="0">Registro de Cartão - Saída</a>
+                      <a href="#" tabindex="1">Registro de Cartão - Saída</a>
                       <ul class="dropdown-menu">
                         <% CardOwner.out.order(name: :asc).each do |card_owner| %>
                             <li><%= link_to card_owner.name, in_out_cards_url(card_owner: card_owner) %></li>
