@@ -19,7 +19,7 @@ ready = function() {
     $('#value').maskMoney({thousands:'.', decimal:',', allowNegative:false});
     $('#in_out_card_value').maskMoney({thousands:'.', decimal:',', allowNegative:false});
 
-    $('#myModal').on('shown.bs.modal', function () {
+    $('#cardValueModal').on('shown.bs.modal', function () {
         $('#value').focus();
         //    var button = $(event.relatedTarget) // Button that triggered the modal
         //    var id = button.data('id') // Extract info from data-* attributes
@@ -30,7 +30,7 @@ ready = function() {
         //    modal.find('.modal-body input').val(id)
     })
 
-    $('#myModal').on('hidden.bs.modal', function (e) {
+    $('#cardValueModal').on('hidden.bs.modal', function (e) {
         $('#card_id').val("");
         $('#card_query').val("");
     })
@@ -42,6 +42,6 @@ function new_in_out_card(id_name_identification) {
     id= id_name_identification.substring(0,id_name_identification.indexOf("."));
     $('#card_id').val(id);
     $('#card_owner').val(card_owner_id);
-    $('#myModal').modal('show');
+    $('#cardValueModal').modal('show');
     //window.location.replace("/in_out_cards/new?card_id=" + id + "&card_owner=" + card_owner_id);
 }
