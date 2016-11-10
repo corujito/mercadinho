@@ -20,6 +20,7 @@ REGISTROS DO CARTÃO
       <th class="col-md-3">Nome</th>
       <th>Identificação</th>
       <th>Responsável</th>
+      <th>Valor</th>
       <th>Data</th>
     </tr>
     </thead>
@@ -30,6 +31,7 @@ REGISTROS DO CARTÃO
           <td><%= link_to(in_out_card.card.full_name, in_out_card.card) if in_out_card.card %></td>
           <td><%= in_out_card.card.identification if in_out_card.card %></td>
           <td><%= in_out_card.card_owner.name if in_out_card.card_owner %></td>
+          <td><%= number_to_currency(in_out_card.value) if in_out_card.value %></td>
           <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
         </tr>
     <% end %>
