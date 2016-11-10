@@ -2,10 +2,13 @@
       REGISTRO DE SAÍDA DE CARTÕES
 <%=  if @card_owner then @card_owner.name.upcase.center(42) else "-".center(42) end %>
 =========================================
-
+<%total=0%>
 <% @in_out_cards.reverse.each_with_index do |out_card, i| %>
-<%= l out_card.created_at, format: "%d/%m/%Y %H:%M" %>	<%= out_card.card.full_name if out_card.card %>
+<%= if out_card.value then number_to_currency(out_card.value) else "   --   " end %>	<%= out_card.card.full_name if out_card.card %>
+<% total += out_card.value if out_card.value %>
 <% end %>
+----------
+<%= number_to_currency(total) %> (total)
 
 -----------------------------------------
 Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
