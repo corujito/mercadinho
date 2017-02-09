@@ -3,6 +3,9 @@
   <h4 class="modal-title">
     <p>Detalhes do Pedido: <%= @order.id %>  -  <%= @order.client.full_name if @order.client %></p>
     <p>Total do Pedido: <%= number_to_currency(@order.total_price) %></p>
+    <% if can? :manage, :all %>
+        <p>Lucro Estimado: <%= number_to_currency(@order.estimate_profit_per_product) %></p>
+    <% end %>
   </h4>
 </div>
 <div class="modal-body">
