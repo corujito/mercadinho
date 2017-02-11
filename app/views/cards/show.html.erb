@@ -9,6 +9,7 @@ Tipo: <%= @card.card_type %><br>
 <br>
 <%= link_to 'Editar', edit_card_path(@card), class: "btn btn-primary" %>
 <%= link_to 'Voltar', :back, class: "btn btn-default" %>
+<%= link_to "Remover", @card, method: :delete, class: "btn btn-danger", data: { confirm: 'Tem certeza que deseja remover?' } %>
 <hr>
 
 <% if @card.in_out_cards.any? %>
