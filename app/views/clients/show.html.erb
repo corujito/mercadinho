@@ -17,3 +17,4 @@
 
 <%= link_to 'Editar', edit_client_path(@client), class: "btn btn-primary" %>
 <%= link_to 'Voltar', :back, class: "btn btn-default" %>
+<%= link_to "Remover", @client, method: :delete, class: "btn btn-danger", data: { confirm: 'Tem certeza que deseja remover?' } %>
