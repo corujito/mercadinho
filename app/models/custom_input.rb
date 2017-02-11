@@ -3,7 +3,7 @@ class CustomInput < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
   usar_como_dinheiro :amount
-  paginates_per 20
+  paginates_per 50
 
   enum input_type: [ :despesa, :ganho ]
 

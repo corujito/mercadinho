@@ -8,7 +8,7 @@ class InOutCard < ActiveRecord::Base
 
   usar_como_dinheiro :value
 
-  paginates_per 20
+  paginates_per 50
 
   def card_name
     card.try(:full_name)
