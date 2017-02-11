@@ -12,6 +12,7 @@ Mercadinho::Application.routes.draw do
     collection do
       get 'find_products' => 'products#find_products'
       get 'find_product_by_full_name' => 'products#find_product_by_full_name'
+      delete 'destroy_multiple'
     end
   end
   resources :vendors do
@@ -23,6 +24,7 @@ Mercadinho::Application.routes.draw do
     collection do
       get 'find_clients' => 'clients#find_clients'
       get 'find_client_by_full_name' => 'clients#find_client_by_full_name'
+      delete 'destroy_multiple'
     end
   end
   resources :cards

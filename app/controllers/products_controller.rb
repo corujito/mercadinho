@@ -89,6 +89,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Product.destroy(params[:product_ids]) if params[:product_ids]
+    respond_to do |format|
+      format.html { redirect_to products_url }
+      format.json { head :no_content }
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_product

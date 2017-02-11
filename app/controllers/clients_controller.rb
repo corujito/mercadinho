@@ -96,6 +96,14 @@ class ClientsController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Client.destroy(params[:client_ids]) if params[:client_ids]
+    respond_to do |format|
+      format.html { redirect_to clients_url }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
