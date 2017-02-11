@@ -86,9 +86,11 @@
       <th>Valor</th>
       <th>Data</th>
       <th class="text-center">Remover</th>
+      <th class="text-center"></th>
     </tr>
     </thead>
 
+    <%= form_tag destroy_multiple_in_out_cards_path, method: :delete, data: { confirm: "Tem certeza que deseja remover todos os selecionados ?" } do %>
     <tbody>
     <% @in_out_cards.each do |in_out_card| %>
         <tr>
@@ -98,9 +100,15 @@
           <td><%= number_to_currency(in_out_card.value) if in_out_card.value %></td>
           <td><%= l in_out_card.created_at, format: "%d/%m/%Y %H:%M" %></td>
           <td class="text-center"><%= link_to in_out_card, method: :delete, data: { confirm: 'Tem certeza?' }, card_owner: @card_owner do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+          <td class="text-center"><%= check_box_tag "in_out_card_ids[]", in_out_card.id %></td>
         </tr>
     <% end %>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td class="text-center"><%= button_tag(type: 'submit') do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+    </tr>
     </tbody>
+    <% end %>
   </table>
 </div>
 <br>

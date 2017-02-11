@@ -39,6 +39,7 @@ Mercadinho::Application.routes.draw do
   resources :in_out_cards do
     collection do
       get 'find_cards' => 'cards#find_cards'
+      delete 'destroy_multiple'
     end
   end
 
