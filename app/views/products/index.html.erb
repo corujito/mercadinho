@@ -46,7 +46,7 @@
     <% end %>
     <tr>
       <td></td><td></td><td></td><td></td><td></td>
-      <td class="text-center"><%= button_tag(type: 'submit') do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %></td>
+      <td class="text-center"><% if @products.any? %><%= button_tag(type: 'submit') do %><span class="glyphicon glyphicon-trash" aria-hidden="true"></span><% end %><% end %></td>
     </tr>
   </tbody>
   <% end %>
