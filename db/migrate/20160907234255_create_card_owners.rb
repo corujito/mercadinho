@@ -3,9 +3,9 @@ class CreateCardOwners < ActiveRecord::Migration
     super
     # Create a default card owner
     if direction == :up
-      CardOwner.create!(name: 'responsável1')
-      CardOwner.create!(name: 'responsável2')
-      CardOwner.create!(name: 'responsável3')
+      #CardOwner.create!(name: 'responsável1')
+      #CardOwner.create!(name: 'responsável2')
+      #CardOwner.create!(name: 'responsável3')
     end
   end
 

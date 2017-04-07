@@ -7,7 +7,7 @@ class AddCardOwnerRefToInOutCards < ActiveRecord::Migration
     super
     # Set default card owner
     if direction == :up
-      InOutCard.where(card_owner_id: nil).update_all(card_owner_id: CardOwner.first.id)
+      #InOutCard.where(card_owner_id: nil).update_all(card_owner_id: CardOwner.first.id)
     end
   end
 end
