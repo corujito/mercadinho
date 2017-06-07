@@ -4,9 +4,9 @@ development:
   reconnect: false
   database: mercadinho_development
   pool: 5
-  username: kminfan
+  username: postgres
   password:
-  host: localhost
+  host: db
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,9 +17,9 @@ test:
   reconnect: false
   database: mercadinho_test
   pool: 5
-  username: kminfan
+  username: postgres
   password:
-  host: localhost
+  host: db
 
 production:
   adapter: postgresql
@@ -27,6 +27,6 @@ production:
   reconnect: false
   database: mercadinho_production
   pool: 5
-  username: kminfan
+  username: postgres
   password:
-  host: localhost
+  host: db
