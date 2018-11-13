@@ -1,5 +1,7 @@
 # MERCADINHO RAILS APP
 
+Rails app to manage a simple store (clients, products, stock, orders, payments and reports)
+
 ## Requirements
 
 * [Git](https://git-scm.com/)
