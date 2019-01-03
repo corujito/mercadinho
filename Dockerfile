@@ -21,7 +21,7 @@ COPY Gemfile.lock Gemfile.lock
 RUN apk --update add --virtual build-dependencies build-base libc-dev linux-headers git && \ 
 	apk --update add nodejs postgresql-dev tzdata && \
 	mkdir -p $RAILS_ROOT/tmp/pids && \
-    gem install bundler --no-ri --no-rdoc && \
+    gem install bundler -v 1.14.6 --no-ri --no-rdoc && \
     bundle install --without development test && \
     apk del build-dependencies
 
