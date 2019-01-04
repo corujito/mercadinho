@@ -28,6 +28,10 @@ class Item < ActiveRecord::Base
     self.quantity = qtd.to_s.gsub('.', '').gsub(',', '.') if qtd.present?
   end
 
+  def total_price
+    self.unit_price * self.quantity
+  end
+
   def unit_price_with_discount
     self.unit_price * (1 - self.purchase.discount/100.to_f)
   end

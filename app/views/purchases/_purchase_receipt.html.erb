@@ -1,0 +1,19 @@
+DATA: <%= l purchase.created_at, format: "%d/%m/%Y" %>       <%= "Compra: #{purchase.id}".rjust(12) %>
+====================================
+<%=  if purchase.vendor then purchase.vendor.full_name.upcase.center(39) else "-" end %>
+====================================
+
+PRODUTO
+ QTDE UN	VL.UNIT	     VL.ITEM
+------------------------------------
+<% purchase.items.each_with_index do |item, index| %>
+<%= item.product.full_name if item.product %>
+<%= number_with_precision(item.quantity, precision: 3, separator: ",", strip_insignificant_zeros: true).ljust(4) %> x <%= item.product.unity if item.product %>	<%= number_to_currency(item.unit_price, unit: "") %> = <%= number_to_currency(item.total_price) %>
+<% end %>
+
+====================================
+Total:                 <%= number_to_currency(purchase.total_price) %>
+
+------------------------------------
+Gerado em: <%= l Time.current, format: "%d/%m/%Y %T" %>
+Faça seu pedido: (vivo) 9-9897-1117
