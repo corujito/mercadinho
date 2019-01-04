@@ -1,4 +1,5 @@
 //= require "jquery.maskMoney.min"
+//= require "jquery.print"
 // require "jquery.inputmask/inputmask/inputmask.min"
 // require "jquery.inputmask/inputmask/jquery.inputmask.min"
 // require "jquery.inputmask/inputmask/inputmask.numeric.extensions.min"
